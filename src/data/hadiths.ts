@@ -3,13 +3,12 @@ export interface Stage {
   title: string;
   icon: string;
   tagline: string;
-  color: string;
   badge: string;
 }
 
 export interface HadithItem {
   id: string;
-  stageId: 'pra-nikah' | 'akad' | 'domestik' | 'finansial' | 'keintiman' | 'konflik' | 'pengasuhan';
+  stageId: 'pra-nikah' | 'akad' | 'domestik' | 'finansial' | 'keintiman' | 'konflik' | 'perceraian' | 'pengasuhan';
   theme: string;
   pertemuan?: number;
   title: string;
@@ -36,81 +35,83 @@ export interface HadithItem {
 export const STAGES: Stage[] = [
   {
     id: 'pra-nikah',
-    title: '1. Pra-Nikah & Ta\'aruf',
+    title: '1. Pra-Nikah & Khithbah',
     icon: 'Sparkles',
-    tagline: 'Memilih Pasangan atas Dasar Akhlak & Kesepadanan Takwa',
-    color: '#845EC2',
+    tagline: 'Memilih Pasangan atas Dasar Akhlak, Kafa\'ah Takwa & Persetujuan Sukarela',
     badge: 'Fondasi Awal'
   },
   {
     id: 'akad',
-    title: '2. Akad & Perjanjian',
+    title: '2. Akad, Mahar & Perjanjian',
     icon: 'ScrollText',
-    tagline: 'Mitsaqan Ghalizhan: Komitmen Janji Setara di Hadapan Allah',
-    color: '#2C73D2',
+    tagline: 'Mitsaqan Ghalizhan: Komitmen Janji Setara, Mahar Berkah & Syarat Perkawinan',
     badge: 'Ikatan Suci'
   },
   {
     id: 'domestik',
-    title: '3. Keseharian & Domestik',
+    title: '3. Keseharian & Kerja Domestik',
     icon: 'Home',
-    tagline: 'Khidmah al-Bayt: Meneladani Nabi Bekerjasama di Rumah',
-    color: '#008F7A',
+    tagline: 'Khidmah al-Bayt: Meneladani Nabi Bekerjasama Mengurus Rumah Tangga',
     badge: 'Keseharian Pasutri'
   },
   {
     id: 'finansial',
-    title: '4. Finansial & Nafkah',
+    title: '4. Finansial, Nafkah & Harta',
     icon: 'Wallet',
-    tagline: 'Kemitraan Ekonomi: Nafkah Layak & Apresiasi Istri Bekerja',
-    color: '#C86D51',
+    tagline: 'Kemitraan Ekonomi: Nafkah Layak, Apresiasi Istri Bekerja & Larangan Menahan Harta',
     badge: 'Dapur & Rezeki'
   },
   {
     id: 'keintiman',
-    title: '5. Keintiman & Seksualitas',
+    title: '5. Keintiman & Hak Reproduksi',
     icon: 'HeartHandshake',
-    tagline: 'Mula\'abah: Saling Membahagiakan Tanpa Pemaksaan (Consent)',
-    color: '#D65DB1',
+    tagline: 'Mula\'abah: Saling Membahagiakan Tanpa Pemaksaan (Consent) & Hak Reproduksi',
     badge: 'Relasi Ranjang'
   },
   {
     id: 'konflik',
     title: '6. Resolusi Konflik & Anti-KDRT',
     icon: 'ShieldAlert',
-    tagline: 'Mengelola Marah & Menolak Segala Bentuk Kekerasan Fisik/Psikis',
-    color: '#FF6F91',
+    tagline: 'Mengendalikan Marah, Mediasi Hakam & Menolak Segala Bentuk Kekerasan',
     badge: 'Manajemen Krisis'
   },
   {
+    id: 'perceraian',
+    title: '7. Perceraian & Gugat Khulu\'',
+    icon: 'Scale',
+    tagline: 'Tasrihun bi Ihsan: Gugat Cerai Istri yang Dilindungi, Larangan Talak Bida\'i & Masa Iddah',
+    badge: 'Pascaperkawinan'
+  },
+  {
     id: 'pengasuhan',
-    title: '7. Pengasuhan Anak',
+    title: '8. Pengasuhan Anak & Hadhanah',
     icon: 'Users',
-    tagline: 'Tarbiyah & Kehangatan: Kemitraan Ayah-Ibu Menjaga Generasi',
-    color: '#4B7BEC',
-    badge: 'Amanah Anak'
+    tagline: 'Tarbiyah & Hadhanah: Hak Asuh Ibu, Kehangatan Ayah & Keadilan Antaranak',
+    badge: 'Amanah Generasi'
   }
 ];
 
 export const HADITHS_DATA: HadithItem[] = [
-  // --- PRA NIKAH ---
+  // ==========================================
+  // KLASTER 1: PRA-NIKAH & KHITHBAH
+  // ==========================================
   {
     id: 'hadis-empat-kriteria',
     stageId: 'pra-nikah',
     theme: 'Kriteria Memilih Pasangan',
     pertemuan: 5,
-    title: 'Empat Kriteria Memilih Pasangan: Prioritaskan Akhlak Relasi',
+    title: 'Empat Kriteria Memilih Pasangan: Menjadikan Karakter Agama Sebagai Fondasi',
     rawi: 'Abu Hurairah ra',
     kitab: 'Sahih al-Bukhari',
     noHadis: 'No. 5146',
     matnArab: 'تُنْكَحُ الْمَرْأَةُ لِأَرْبَعٍ: لِمَالِهَا، وَلِحَسَبِهَا، وَجَمَالِهَا، وَلِدِينِهَا، فَاظْفَرْ بِذَاتِ الدِّينِ تَرِبَتْ يَدَاكَ',
     terjemahan: 'Seorang perempuan biasanya dinikahi karena empat hal: karena hartanya, karena garis keturunannya (status sosial), karena parasnya yang rupawan, dan karena komitmen agamanya. Maka pilihlah yang memiliki komitmen agama (akhlak), niscaya kamu akan beruntung.',
     pemaknaanKonvensional: {
-      ringkasan: 'Dipahami satu arah hanya sebagai instruksi bagi laki-laki dalam memilih istri. Kata "din" sering disempitkan sekadar performa ibadah ritual formal lahiriah (pakaian, shalat, hafalan).',
+      ringkasan: 'Dipahami satu arah hanya sebagai instruksi bagi laki-laki dalam menilai calon istri. Kata "din" sering disempitkan sekadar performa ibadah ritual lahiriah (busana, hafalan, kesalehan simbolik).',
       poin: [
-        'Laki-laki sebagai subjek pemilih, perempuan sebagai objek yang diperiksa.',
-        'Mengesankan harta, nasab, kecantikan sebagai hal yang dianjurkan padahal redaksinya hanya deskriptif tentang kebiasaan manusia.',
-        'Perempuan tidak dibahas mengenai haknya untuk memilih calon suami atas kriteria serupa.'
+        'Laki-laki diposisikan sebagai subjek yang memilih, perempuan sebagai objek yang diperiksa.',
+        'Mengesankan harta dan nasab sebagai anjuran, padahal redaksinya deskriptif tentang kebiasaan umum manusia.',
+        'Jarang ditarik sebagai hak setara bagi perempuan dalam memilih calon suami.'
       ]
     },
     pemaknaanMubadalah: {
@@ -122,13 +123,115 @@ export const HADITHS_DATA: HadithItem[] = [
         'Keluarga berperan sebagai ruang tasyawur (musyawarah), bukan pemaksa kehendak.'
       ],
       aplikasiHariIni: [
-        'Periksa bagaimana calon pasangan memperlakukan ibunya, pekerja rumah tangga, dan orang yang lebih lemah darinya.',
+        'Periksa bagaimana calon pasangan memperlakukan ibunya, pekerja rumah tangga, dan orang yang tidak berkuasa atas dirinya.',
         'Lakukan pertukaran informasi dua arah secara jujur: riwayat kesehatan, visi keluarga, dan rencana pembagian peran.'
       ]
     },
     pilarTerkait: ['Zawaj', 'Taradhin', 'Tasyawur'],
-    tags: ['Taaruf', 'Kriteria Pasangan', 'Kesepadanan Takwa', 'Pra-Nikah'],
+    tags: ['Kriteria Pasangan', 'Pra-Nikah', 'Kesepadanan Takwa', 'Taaruf'],
     quoteSnippet: 'Agama yang sejati dalam pernikahan bukan sekadar simbol kesalehan lahiriah, melainkan kematangan akhlak dalam memperlakukan pasangan hidup secara bermartabat.'
+  },
+  {
+    id: 'hadis-khansa-tolak-nikah-paksa',
+    stageId: 'pra-nikah',
+    theme: 'Hak Persetujuan Perempuan & Menolak Kawin Paksa',
+    pertemuan: 5,
+    title: 'Pembatalan Nikah Paksa Khansa binti Khidzam: Hak Prerogatif Persetujuan Mempelai',
+    rawi: 'Khansa binti Khidzam al-Anshariyyah ra',
+    kitab: 'Sahih al-Bukhari',
+    noHadis: 'No. 5138',
+    matnArab: 'أَنَّ أَبَاهَا زَوَّجَهَا وَهِيَ ثَيِّبٌ فَكَرِهَتْ ذَلِكَ، فَأَتَتْ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَرَدَّ نِكَاحَهُ',
+    terjemahan: 'Bahwa ayahnya telah menikahkan dirinya (dengan seorang laki-laki), padahal ia berstatus janda dan ia tidak menyukai pernikahan tersebut. Maka ia mendatangi Rasulullah ﷺ, lalu beliau membatalkan (memfasakh) akad pernikahan tersebut.',
+    pemaknaanKonvensional: {
+      ringkasan: 'Sebagian ulama membatasi hak penolakan ini hanya untuk janda (tsayyib), sementara perawan (bikr) dianggap masih boleh dipaksa oleh wali mujbir (ayah/kakek).',
+      poin: [
+        'Mempertahankan konsep hak paksa wali (ijbar) atas anak gadis.',
+        'Memandang perempuan muda belum cakap menentukan masa depannya sendiri.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Preseden pembatalan nikah oleh Nabi ﷺ menegaskan bahwa akad nikah adalah perjanjian suci (mitsaqan ghalizhan) yang menuntut kerelaan penuh (taradhin) dari kedua mempelai yang akan menjalaninya. Pemaksaan dari siapa pun, termasuk orang tua, membatalkan esensi kerelaan akad.',
+      illatHukum: 'Pernikahan yang dibangun di atas paksaan bertentangan dengan tujuan mawaddah wa rahmah.',
+      poinKesalingan: [
+        'Hak menentukan pasangan hidup berada di tangan yang bersangkutan, baik laki-laki maupun perempuan, janda maupun perawan.',
+        'Wali bertindak sebagai pelindung dan pendamping musyawarah, bukan pemilik tubuh anak.',
+        'Dalam hukum Indonesia, persetujuan kedua mempelai adalah syarat sah perkawinan (UU Perkawinan No. 1/1974 & KHI).'
+      ],
+      aplikasiHariIni: [
+        'Hentikan segala bentuk perjodohan paksa atau pernikahan di bawah tekanan keluarga.',
+        'Dengarkan secara saksama suara dan kerelaan anak perempuan sebelum menetapkan lamaran.'
+      ]
+    },
+    pilarTerkait: ['Taradhin', 'Mitsaqan Ghalizhan', 'Tasyawur'],
+    tags: ['Nikah Paksa', 'Hak Perempuan', 'Wali Mujbir', 'Persetujuan Mempelai'],
+    quoteSnippet: 'Rasulullah ﷺ membatalkan pernikahan yang dipaksakan orang tua, menegaskan bahwa kerelaan mempelai adalah kunci sahnya ikatan perkawinan.'
+  },
+  {
+    id: 'hadis-izin-gadis-janda',
+    stageId: 'pra-nikah',
+    theme: 'Izin dan Konfirmasi Persetujuan Calon Mempelai',
+    title: 'Konfirmasi Persetujuan Calon Mempelai: Larangan Menikahkan Tanpa Izin Terbuka',
+    rawi: 'Abu Hurairah ra',
+    kitab: 'Sahih al-Bukhari & Sahih Muslim',
+    noHadis: 'Bukhari No. 5136, Muslim No. 1419',
+    matnArab: 'لَا تُنْكَحُ الأَيِّمُ حَتَّى تُسْتَأْمَرَ، وَلَا تُنْكَحُ البِكْرُ حَتَّى تُسْتَأْذَنَ. قَالُوا: يَا رَسُولَ اللَّهِ، وَكَيْفَ إِذْنُهَا؟ قَالَ: أَنْ تَسْكُتَ',
+    terjemahan: 'Janganlah seorang janda dinikahkan sampai ia dimintai perintahnya (persetujuan tegasnya), dan janganlah seorang gadis dinikahkan sampai dimintai izinnya. Para sahabat bertanya: "Wahai Rasulullah, bagaimana bentuk izinnya?" Beliau menjawab: "Jika ia diam (karena malu, namun tidak menolak)."',
+    pemaknaanKonvensional: {
+      ringkasan: 'Diamnya gadis dipahami sebagai persetujuan otomatis, sehingga jika seorang gadis menangis atau diam karena tertekan, tetap dianggap telah menyetujui.',
+      poin: [
+        'Mengabaikan tekanan psikologis di mana gadis diam karena rasa takut pada keluarga.',
+        'Menempatkan persetujuan sebatas formalitas tanpa dialog mendalam.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Nabi ﷺ mengajarkan kehati-hatian tertinggi agar perempuan tidak dikorbankan. Diam hanya menjadi tanda izin jika suasana bebas dari intimidasi dan keterpaksaan. Jika ada keraguan atau penolakan lisan, diam tersebut gugur dan tidak dapat dijadikan dasar akad.',
+      illatHukum: 'Kepastian persetujuan sukarela (taradhin) sebelum ikatan suci diresmikan.',
+      poinKesalingan: [
+        'Mempelai laki-laki dan perempuan sama-sama harus menyatakan kesediaannya secara merdeka.',
+        'Masyarakat modern menuntut izin yang lugas, tertulis, dan bebas manipulasi di hadapan penghulu/KUA.'
+      ],
+      aplikasiHariIni: [
+        'Pastikan calon pengantin perempuan ditanya secara privat tanpa intervensi pihak luar yang menekannya.',
+        'Bangun keterbukaan sejak dini antara orang tua dan anak dalam mendiskusikan calon pasangan.'
+      ]
+    },
+    pilarTerkait: ['Taradhin', 'Tasyawur'],
+    tags: ['Izin Menikah', 'Persetujuan Mempelai', 'Hak Perempuan'],
+    quoteSnippet: 'Tidak sah menikahkan seseorang sebelum meminta kerelaannya; pernikahan suci berdiri di atas persetujuan yang merdeka, bukan kepatuhan yang dipaksakan.'
+  },
+  {
+    id: 'hadis-barirah-mughits',
+    stageId: 'pra-nikah',
+    theme: 'Hak Otonomi Memilih & Menolak Cinta Pasangan',
+    title: 'Kisah Barirah & Mughits: Nabi ﷺ Tidak Memaksakan Cinta yang Tidak Diridhai',
+    rawi: 'Ibnu Abbas ra',
+    kitab: 'Sahih al-Bukhari',
+    noHadis: 'No. 5283',
+    matnArab: 'فَقَالَ لَهَا النَّبِيُّ ﷺ: لَوْ رَاجَعْتِهِ؟ قَالَتْ: يَا رَسُولَ اللَّهِ، تَأْمُرُنِي؟ قَالَ: إِنَّمَا أَنَا أَشْفَعُ. قَالَتْ: لَا حَاجَةَ لِي فِيهِ',
+    terjemahan: 'Nabi ﷺ berkata kepada Barirah (yang memilih berpisah setelah merdeka, sementara suaminya Mughits menangis memohon): "Seandainya engkau mau rujuk kepadanya?" Barirah bertanya: "Wahai Rasulullah, apakah engkau memerintahkanku (sebagai wahyu)?" Nabi menjawab: "Aku hanya memberi syafaat (anjuran/saran)." Barirah menjawab tegas: "Aku tidak membutuhkan dirinya lagi."',
+    pemaknaanKonvensional: {
+      ringkasan: 'Kerap dikaji sebatas bab fiqh khiyar kemerdekaan budak (khiyarul \'itq) tanpa melihat dimensi hak otonomi cinta seorang perempuan.',
+      poin: [
+        'Dianggap sebagai kasus khusus budak perempuan yang dimerdekakan.',
+        'Jarang ditarik sebagai prinsip bahwa cinta dan kelangsungan pernikahan tidak boleh dipaksakan.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Nabi ﷺ membedakan secara tegas antara perintah syariat yang mengikat dan anjuran empati manusiawi. Ketika Barirah menolak rujuk karena sudah tidak memiliki kecocokan rasa hati, Nabi ﷺ menghormati keputusannya dan tidak memaksakannya.',
+      illatHukum: 'Pernikahan tidak dapat dipaksakan berjalan jika salah satu pihak mengalami ketidaknyamanan batin yang mendalam.',
+      poinKesalingan: [
+        'Hak menolak dan hak memilih pasangan adalah hak asasi perempuan yang diakui syariat.',
+        'Rasa cinta dan kenyamanan psikologis tidak bisa dituntut dengan ancaman dosa.',
+        'Bahkan seorang Nabi tidak memaksakan hak asasi perempuan dalam urusan jodoh.'
+      ],
+      aplikasiHariIni: [
+        'Hormati hak seseorang untuk mengakhiri ta\'aruf atau menolak lamaran tanpa perlu menyudutkan atau mempermalukannya.',
+        'Sadari bahwa ikatan rumah tangga tanpa kenyamanan rasa hati berpotensi melahirkan kezaliman harian.'
+      ]
+    },
+    pilarTerkait: ['Taradhin', 'Zawaj'],
+    tags: ['Barirah', 'Hak Menolak', 'Otonomi Perempuan', 'Khiyar'],
+    quoteSnippet: 'Ketika Barirah menolak kembali kepada suaminya, Rasulullah ﷺ menghormati keputusannya, menegaskan bahwa cinta dan pernikahan tidak boleh dipaksakan.'
   },
   {
     id: 'hadis-mulaabah-jabir',
@@ -153,20 +256,21 @@ export const HADITHS_DATA: HadithItem[] = [
       illatHukum: 'Tujuan pernikahan adalah mewujudkan kebahagiaan bersama (mula\'abah) dan sakinah, bukan hierarki status sosial.',
       poinKesalingan: [
         'Nabi ﷺ sendiri menikahi Khadijah ra yang berstatus janda dan lebih tua 15 tahun sebagai cinta paling mendalam sepanjang hayat beliau.',
-        'Status perawan/janda atau perjaka/duda bukan penentu kemuliaan seseorang; yang utama adalah kapasitas membangun cinta dan kemaslahatan rumah tangga.',
-        'Hak atas kenyamanan emosional dan seksual adalah hak timbal balik kedua belah pihak.'
+        'Status perawan/janda atau perjaka/duda bukan penentu kemuliaan seseorang; yang utama adalah kapasitas membangun cinta dan kemaslahatan rumah tangga.'
       ],
       aplikasiHariIni: [
         'Menghilangkan stigma terhadap perempuan atau laki-laki yang berstatus janda atau duda.',
         'Fokus menilai kecocokan visi hidup, selera humor yang tidak merendahkan, dan kesiapan saling mendukung.'
       ]
     },
-    pilarTerkait: ['Mu\'asyarah bi al-Ma\'ruf', 'Zawaj', 'Taradhin'],
+    pilarTerkait: ["Mu'asyarah bi al-Ma'ruf", 'Zawaj', 'Taradhin'],
     tags: ['Mulaabah', 'Kesetaraan Pasangan', 'Status Pernikahan'],
     quoteSnippet: 'Kebahagiaan pernikahan terwujud saat kedua insan saling berikhtiar membahagiakan satu sama lain: ia bersenang-senang denganmu, dan kamu pun bersenang-senang dengannya.'
   },
 
-  // --- AKAD ---
+  // ==========================================
+  // KLASTER 2: AKAD, MAHAR & PERJANJIAN
+  // ==========================================
   {
     id: 'hadis-syarat-akad',
     stageId: 'akad',
@@ -189,7 +293,7 @@ export const HADITHS_DATA: HadithItem[] = [
       ringkasan: 'Hadis ini adalah dasar legal syariat bagi keabsahan perjanjian perkawinan (syuruth an-nikah). Syarat yang disepakati bersama bersifat mengikat secara hukum bagi kedua mempelai.',
       illatHukum: 'Menjaga kepastian komitmen dan melindungi hak-hak rentan agar tidak terzalimi setelah berlangsungnya ikatan akad.',
       poinKesalingan: [
-        'Calon istri dan calon suami sama-sama berhak merumuskan poin perjanjian pra-nikah (misal: komitmen tidak berpoligami, izin melanjutkan studi/karier, model pembagian nafkah).',
+        'Calon istri dan calon suami sama-sama berhak merumuskan poin perjanjian pra-nikah (komitmen tidak poligami, izin studi/karier, pembagian harta).',
         'Pelanggaran atas syarat pernikahan adalah pengkhianatan atas nama Allah yang dengannya hubungan itu dihalalkan.',
         'Mazhab Hanbali mewajibkan seluruh syarat yang disepakati untuk dipenuhi selama tidak menghalalkan yang haram.'
       ],
@@ -202,8 +306,77 @@ export const HADITHS_DATA: HadithItem[] = [
     tags: ['Perjanjian Kawin', 'Akad Nikah', 'Syarat Sah', 'Komitmen'],
     quoteSnippet: 'Perjanjian yang paling suci dan wajib ditepati adalah janji yang diucapkan saat menghalalkan ikatan cinta perkawinan.'
   },
+  {
+    id: 'hadis-mahar-berkah',
+    stageId: 'akad',
+    theme: 'Filosofi Mahar Memudahkan Perkawinan',
+    title: 'Mahar yang Membawa Berkah: Larangan Memberatkan & Mengomersialisasikan Perkawinan',
+    rawi: 'Aisyah ra',
+    kitab: 'Musnad Ahmad',
+    noHadis: 'No. 24595',
+    matnArab: 'إِنَّ أَعْظَمَ النِّكَاحِ بَرَكَةً أَيْسَرُهُ مَئُونَةً',
+    terjemahan: 'Sesungguhnya pernikahan yang paling agung keberkahannya adalah yang paling mudah (ringan) biayanya (maharnya).',
+    pemaknaanKonvensional: {
+      ringkasan: 'Sering dipakai untuk menekan pihak perempuan agar menerima mahar serendah mungkin tanpa menimbang hak perlindungan ekonominya.',
+      poin: [
+        'Membaca hadis hanya sebagai tuntutan kepada calon istri.',
+        'Tidak mengimbangi dengan anjuran bagi calon suami untuk bersikap dermawan sesuai kelapangan hartanya.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Esensi hadis ini adalah penolakan atas budaya gengsi, komersialisasi jodoh, dan adat yang memberatkan anak muda untuk menikah. Mahar adalah simbol penghormatan cinta, bukan harga beli (*tsaman*) atas tubuh perempuan.',
+      illatHukum: 'Menghilangkan hambatan sosial-finansial agar pernikahan yang sah dan sehat mudah terlaksana.',
+      poinKesalingan: [
+        'Pihak keluarga tidak boleh membebankan mahar/hantaran yang melampaui kemampuan calon pengantin.',
+        'Pria yang berkecukupan tetap dianjurkan memberi mahar yang pantas dan memuliakan calon istrinya.',
+        'Mahar adalah hak milik mutlak istri, bukan milik orang tua atau keluarga.'
+      ],
+      aplikasiHariIni: [
+        'Sepakati mahar yang bermakna dan terjangkau tanpa terjebak persaingan gengsi adat atau status sosial.',
+        'Fokuskan dana pernikahan pada tabungan kehidupan nyata setelah perkawinan, bukan kemewahan sehari.'
+      ]
+    },
+    pilarTerkait: ['Taradhin', "Mu'asyarah bi al-Ma'ruf"],
+    tags: ['Mahar Berkah', 'Akad Nikah', 'Pernikahan Sederhana', 'Kemudahan Syariat'],
+    quoteSnippet: 'Keberkahan pernikahan tidak diukur dari mahalnya pesta, melainkan dari kemudahan dan ketulusan komitmen untuk saling memuliakan.'
+  },
+  {
+    id: 'hadis-mahar-cincin-besi-quran',
+    stageId: 'akad',
+    theme: 'Mahar Non-Materiil & Edukatif',
+    title: 'Mahar Cincin Besi & Hafalan Surah: Menghargai Nilai Pengetahuan & Integritas',
+    rawi: 'Sahl bin Sa\'ad ra',
+    kitab: 'Sahih al-Bukhari & Sahih Muslim',
+    noHadis: 'Bukhari No. 5087, Muslim No. 1425',
+    matnArab: 'فَقَالَ: الْتَمِسْ وَلَوْ خَاتَمًا مِنْ حَدِيدٍ... قَالَ: مَعِي سُورَةُ كَذَا وَسُورَةُ كَذَا، قَالَ: قَدْ مَلَّكْتُكَهَا بِمَا مَعَكَ مِنَ القُرْآنِ',
+    terjemahan: 'Nabi ﷺ bersabda kepada pria yang hendak menikah namun miskin: "Carilah mahar walau hanya cincin dari besi." Ketika ia tetap tidak memilikinya, Nabi bertanya: "Surah apa yang kau hafal?" Ia menjawab: "Surah ini dan itu." Nabi bersabda: "Aku nikahkan engkau dengannya dengan mahar mengajarkan surah Al-Qur\'an yang kau miliki."',
+    pemaknaanKonvensional: {
+      ringkasan: 'Dijadikan dalil fiqh tentang bolehnya mahar berupa jasa pengajaran Al-Qur\'an ketika uang tidak tersedia.',
+      poin: [
+        'Fokus pada hukum sah/batalnya mahar non-materi.',
+        'Jarang ditarik sebagai komitmen pendidikan berkelanjutan dalam keluarga.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Nabi ﷺ membuktikan bahwa kekurangan modal materiil tidak menghalangi seseorang menikah jika ia memiliki kekayaan karakter, ilmu, dan komitmen mendidik. Mahar berupa pengajaran Al-Qur\'an menempatkan relasi pasutri sebagai majelis belajar bersama.',
+      illatHukum: 'Mahar sebagai ikrar kesiapan membimbing dan mendampingi pasangan menuju kebaikan dunia-akhirat.',
+      poinKesalingan: [
+        'Investasi ilmu dan kebaikan akhlak lebih bernilai tinggi daripada harta benda.',
+        'Suami dan istri saling mengedukasi dan bertumbuh dalam kecerdasan spiritual bersama.'
+      ],
+      aplikasiHariIni: [
+        'Jadikan komitmen saling mengajarkan kebaikan dan ilmu sebagai bagian dari janji kehidupan rumah tangga.',
+        'Jangan membatalkan niat baik pernikahan semata-mata karena keterbatasan nominal materiil di awal.'
+      ]
+    },
+    pilarTerkait: ['Mitsaqan Ghalizhan', 'Zawaj'],
+    tags: ['Mahar Quran', 'Akad Nikah', 'Pendidikan Pasutri', 'Integritas'],
+    quoteSnippet: 'Ketika harta tiada, Nabi ﷺ menikahkan sahabat dengan mahar ilmu Al-Qur\'an: menegaskan bahwa nilai tertinggi manusia terletak pada pengetahuan dan integritasnya.'
+  },
 
-  // --- DOMESTIK ---
+  // ==========================================
+  // KLASTER 3: KESEHARIAN & KHIDMAH DOMESTIK
+  // ==========================================
   {
     id: 'hadis-khidmah-ahlihi',
     stageId: 'domestik',
@@ -230,7 +403,7 @@ export const HADITHS_DATA: HadithItem[] = [
         'Ketika istri ikut lelah bekerja mencari nafkah, pembagian kerja domestik menjadi kewajiban etis yang tak terelakkan.'
       ],
       aplikasiHariIni: [
-        'Buat pembagian tugas rumah tangga yang adil dan disepakati bersama pasangan (misal: giliran mencuci piring, menjaga anak, atau merapikan tempat tidur).',
+        'Buat pembagian tugas rumah tangga yang adil dan disepakati bersama pasangan (giliran mencuci piring, menjaga anak, merapikan rumah).',
         'Hentikan ejekan budaya yang menertawakan suami yang cekatan mengerjakan pekerjaan rumah tangga.'
       ]
     },
@@ -272,8 +445,77 @@ export const HADITHS_DATA: HadithItem[] = [
     tags: ['Apresiasi Pasangan', 'Adab Lisan', 'Kaff al-Adza'],
     quoteSnippet: 'Menahan lisan dari celaan dan menghargai jerih payah pasangan adalah sedekah akhlak yang menjaga kehangatan rumah tangga.'
   },
+  {
+    id: 'hadis-lomba-lari-aisyah',
+    stageId: 'domestik',
+    theme: 'Keakraban, Rekreasi & Humor Pasutri',
+    title: 'Lomba Lari Nabi & Aisyah: Menumbuhkan Canda, Kesenangan & Rekreasi Bersama',
+    rawi: 'Aisyah ra',
+    kitab: 'Sunan Abu Dawud & Musnad Ahmad',
+    noHadis: 'Abu Dawud No. 2578, Ahmad No. 24164',
+    matnArab: 'سَابَقَنِي النَّبِيُّ ﷺ فَسَبَقْتُهُ، فَلَمَّا رَهِقَنِي اللَّحْمُ سَابَقَنِي فَسَبَقَنِي، فَقَالَ: هَذِهِ بِتِلْكَ',
+    terjemahan: 'Nabi ﷺ pernah mengajakku berlomba lari, dan aku berhasil mengalahkan beliau. Selang beberapa tahun ketika tubuhku sudah lebih berisi, beliau mengajakku berlomba lari kembali dan beliau mengalahkanku. Beliau tertawa seraya berkata: "Kemenangan ini adalah balasan atas kekalahanku yang dulu!"',
+    pemaknaanKonvensional: {
+      ringkasan: 'Dikutip sebatas bukti kelembutan dan keramahan pribadi Nabi terhadap istrinya yang masih muda.',
+      poin: [
+        'Jarang dijadikan pedoman fiqh keluarga tentang pentingnya alokasi waktu hiburan bersama.',
+        'Agama kerap dicitrakan kaku dan melarang tawa di dalam rumah tangga.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Nabi ﷺ mencontohkan bahwa pernikahan yang sehat membutuhkan keakraban emosional, olahraga, rekreasi, dan humor yang sehat. Pasutri bukan sekadar mitra kerja formal hak-kewajiban, melainkan sahabat karib yang saling menikmati waktu bersama.',
+      illatHukum: 'Merawat cinta (mawaddah) dan menghindarkan kejenuhan rutinitas rumah tangga.',
+      poinKesalingan: [
+        'Kedua belah pihak berhak atas waktu bersenang-senang dan rekreasi yang menyegarkan jiwa.',
+        'Pemimpin rumah tangga tidak boleh bersikap feodal, kaku, atau dingin kepada pasangannya.'
+      ],
+      aplikasiHariIni: [
+        'Jadwalkan kencan atau aktivitas santai berdua tanpa gangguan gawai untuk menyegarkan hubungan.',
+        'Bangun budaya bercanda dan tertawa bersama di rumah tanpa merendahkan kekurangan fisik pasangan.'
+      ]
+    },
+    pilarTerkait: ['Zawaj', "Mu'asyarah bi al-Ma'ruf", 'Taradhin'],
+    tags: ['Keakraban Pasutri', 'Humor Rumah Tangga', 'Rekreasi', 'Mawaddah'],
+    quoteSnippet: 'Rasulullah ﷺ berlomba lari dan bercanda dengan istrinya: membuktikan bahwa kehangatan tawa dan rekreasi bersama adalah pilar penting ketenteraman rumah tangga.'
+  },
+  {
+    id: 'hadis-shalat-malam-bersama',
+    stageId: 'domestik',
+    theme: 'Kemitraan Spiritual Pasutri',
+    pertemuan: 3,
+    title: 'Saling Membangunkan Shalat Malam: Sinergi Spiritual yang Setara & Simetris',
+    rawi: 'Abu Hurairah ra',
+    kitab: 'Sunan Abu Dawud',
+    noHadis: 'No. 1310',
+    matnArab: 'رَحِمَ اللَّهُ رَجُلًا قَامَ مِنَ اللَّيْلِ فَصَلَّى وَأَيْقَظَ امْرَأَتَهُ، فَإِنْ أَبَتْ نَضَحَ فِي وَجْهِهَا المَاءَ. رَحِمَ اللَّهُ امْرَأَةً قَامَتْ مِنَ اللَّيْلِ فَصَلَّتْ وَأَيْقَظَتْ زَوْجَهَا، فَإِنْ أَبَى نَضَحَتْ فِي وَجْهِهِ المَاءَ',
+    terjemahan: 'Semoga Allah merahmati seorang laki-laki yang bangun malam untuk shalat lalu membangunkan istrinya; jika istrinya enggan, ia memercikkan air ke wajahnya. Dan semoga Allah merahmati seorang perempuan yang bangun malam untuk shalat lalu membangunkan suaminya; jika suaminya enggan, ia memercikkan air ke wajah suaminya.',
+    pemaknaanKonvensional: {
+      ringkasan: 'Ditempatkan dalam bab keutamaan shalat tahajud sunnah tanpa dihubungkan dengan model kesetaraan relasi rumah tangga.',
+      poin: [
+        'Diposisikan murni ritual pribadi.',
+        'Tidak dianalisis sebagai model ideal hubungan resiprokal tanpa hierarki.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Redaksi hadis ini disusun secara simetris sempurna: tindakan suami kepada istri identik dengan tindakan istri kepada suami, dan doa rahmat Allah dianugerahkan setara kepada keduanya. Mengajak pada kebaikan (amar ma\'ruf) adalah hak dan kewajiban bersama, bukan hak eksklusif suami atas istri.',
+      illatHukum: 'Kerjasama menuju kesalehan spiritual berbasis cinta dan kebersamaan.',
+      poinKesalingan: [
+        'Tidak ada pihak yang mendominasi dalam urusan ketaatan kepada Allah: istri berhak mengingatkan suami, suami berhak mengingatkan istri.',
+        'Bercandaan memercikkan air mencerminkan kelembutan dan keintiman yang hangat.'
+      ],
+      aplikasiHariIni: [
+        'Jadikan ibadah dan amal kebajikan sebagai proyek kolaborasi bersama pasangan.',
+        'Saling mendukung ketika salah satu pihak merasa futur (lemah semangat) dalam beribadah.'
+      ]
+    },
+    pilarTerkait: ['Zawaj', 'Tasyawur'],
+    tags: ['Kemitraan Spiritual', 'Shalat Malam', 'Kesalingan Simetris', 'Sakinah'],
+    quoteSnippet: 'Allah merahmati suami yang membangunkan istrinya untuk ibadah, dan Allah merahmati istri yang membangunkan suaminya: kesetaraan sempurna dalam meraih rida Ilahi.'
+  },
 
-  // --- FINANSIAL ---
+  // ==========================================
+  // KLASTER 4: FINANSIAL & NAFKAH
+  // ==========================================
   {
     id: 'hadis-hindun-nafkah',
     stageId: 'finansial',
@@ -342,8 +584,43 @@ export const HADITHS_DATA: HadithItem[] = [
     tags: ['Istri Bekerja', 'Kemandirian Finansial', 'Pahala Sedekah', 'Kerjasama Pasutri'],
     quoteSnippet: 'Ketika seorang istri turut menopang perekonomian rumah tangga, ia bukan sekadar penolong, melainkan mitra mulia yang dianugerahi ganjaran cinta dan sedekah berlipat.'
   },
+  {
+    id: 'hadis-suapan-makanan-sedekah',
+    stageId: 'finansial',
+    theme: 'Nafkah Batiniah & Afeksi Material',
+    title: 'Suapan Makanan Bernilai Sedekah: Menyatukan Dimensi Nafkah Lahir & Afeksi Hati',
+    rawi: 'Sa\'ad bin Abi Waqqash ra',
+    kitab: 'Sahih al-Bukhari & Sahih Muslim',
+    noHadis: 'Bukhari No. 56, Muslim No. 1628',
+    matnArab: 'وَإِنَّكَ لَنْ تُنْفِقَ نَفَقَةً تَبْتَغِي بِهَا وَجْهَ اللَّهِ إِلَّا أُجِرْتَ عَلَيْهَا، حَتَّى مَا تَجْعَلُ فِي فَمِ امْرَأَتِكَ',
+    terjemahan: 'Sesungguhnya tidaklah engkau mengeluarkan suatu nafkah demi mengharap rida Allah, melainkan engkau pasti diberi pahala atasnya, bahkan sampai suapan makanan yang engkau letakkan di mulut istrimu.',
+    pemaknaanKonvensional: {
+      ringkasan: 'Dikutip dalam bab keutamaan niat ikhlas dalam memberikan nafkah keluarga agar berpahala sedekah.',
+      poin: [
+        'Sering dipahami sebatas transfer uang atau belanja bulanan semata.',
+        'Mengabaikan dimensi bahasa cinta (*gesture*) yang dicontohkan dalam redaksi hadis.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Nabi ﷺ mengajarkan bahwa nafkah bukan sekadar transfer rupiah yang dingin, melainkan ekspresi cinta dan keintiman emosional. Suapan makanan melambangkan kepedulian, kelembutan, dan pemuliaan pasangan hidup.',
+      illatHukum: 'Menghadirkan kehangatan batiniah dalam setiap pemenuhan kebutuhan lahiriah.',
+      poinKesalingan: [
+        'Pemberian nafkah harus disertai dengan tutur kata yang manis dan sikap yang menghargai, bukan dengan gerutu atau rasa berkuasa.',
+        'Istri dan suami saling menyuapi dan melayani dengan penuh kerelaan.'
+      ],
+      aplikasiHariIni: [
+        'Biasakan makan bersama pasangan dan tunjukkan perhatian kecil seperti menyendokkan hidangan.',
+        'Jangan pernah menyertakan ungkapan merendahkan saat menyerahkan nafkah kepada pasangan.'
+      ]
+    },
+    pilarTerkait: ["Mu'asyarah bi al-Ma'ruf", 'Zawaj'],
+    tags: ['Nafkah Afeksi', 'Bahasa Cinta', 'Sedekah Keluarga', 'Kehangatan'],
+    quoteSnippet: 'Nafkah bukan sekadar angka transaksi; bahkan sebutir suapan yang engkau berikan dengan penuh cinta ke mulut pasanganmu bernilai sedekah agung di sisi Allah.'
+  },
 
-  // --- KEINTIMAN ---
+  // ==========================================
+  // KLASTER 5: KEINTIMAN & HAK REPRODUKSI
+  // ==========================================
   {
     id: 'hadis-ajakan-ranjang-mubadalah',
     stageId: 'keintiman',
@@ -413,8 +690,43 @@ export const HADITHS_DATA: HadithItem[] = [
     tags: ['Privasi', 'Amanah', 'Menjaga Aib', 'Etika Ranjang'],
     quoteSnippet: 'Pasangan sejati adalah pelindung rahasia yang saling menutupi kekurangan, bukan pembocor aib yang meruntuhkan martabat pasangannya di hadapan dunia.'
   },
+  {
+    id: 'hadis-izin-kb-azl',
+    stageId: 'keintiman',
+    theme: 'Hak Reproduksi & Pengaturan Kehamilan',
+    title: 'Pengaturan Kelahiran (\'Azl): Hak Bersama Menentukan Jarak Kelahiran & Kesehatan Reproduksi',
+    rawi: 'Jabir bin Abdillah ra',
+    kitab: 'Sahih al-Bukhari & Sahih Muslim',
+    noHadis: 'Bukhari No. 5209, Muslim No. 1440',
+    matnArab: 'كُنَّا نَعْزِلُ عَلَى عَهْدِ رَسُولِ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ وَالقُرْآنُ يَنْزِلُ',
+    terjemahan: 'Kami terbiasa melakukan \'azl (sanggama terputus / metode kontrasepsi alami) pada masa Rasulullah ﷺ, sementara Al-Qur\'an masih turun (dan syariat tidak melarangnya).',
+    pemaknaanKonvensional: {
+      ringkasan: 'Sebagian kalangan menolak KB dengan alasan menghambat rezeki atau melanggar anjuran memperbanyak keturunan.',
+      poin: [
+        'Membaca anjuran banyak anak secara kuantitas tanpa menimbang kualitas gizi dan kesehatan ibu.',
+        'Sering mengabaikan hak persetujuan istri dalam keputusan memiliki anak.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Fuqaha mazhab klasik (seperti Syafi\'i dan Hanbali) menetapkan bahwa \'azl (kontrasepsi) menuntut izin dan kerelaan istri karena menyangkut hak kenikmatan dan hak reproduksi tubuhnya. Pengaturan kehamilan demi menjaga kesehatan fisik dan psikologis ibu adalah perwujudan prinsip kemaslahatan.',
+      illatHukum: 'Melindungi keselamatan ibu dari bahaya kehamilan berjarak terlalu rapat (*la dharara wa la dhirar*).',
+      poinKesalingan: [
+        'Keputusan memiliki anak dan jarak kelahiran harus dimusyawarahkan berdua (*tasyawur*).',
+        'Laki-laki tidak boleh memaksakan kehamilan berturut-turut yang merusak kesehatan reproduksi istri.'
+      ],
+      aplikasiHariIni: [
+        'Gunakan metode keluarga berencana (KB) yang aman dan disepakati bersama pasangan.',
+        'Prioritaskan pemulihan fisik dan mental ibu pascamelahirkan sebelum merencanakan kehamilan berikutnya.'
+      ]
+    },
+    pilarTerkait: ['Tasyawur', 'Taradhin', "Mu'asyarah bi al-Ma'ruf"],
+    tags: ['Keluarga Berencana', 'Hak Reproduksi', 'Kesehatan Ibu', 'Azl'],
+    quoteSnippet: 'Mengatur jarak kelahiran demi menjaga kesehatan dan kebahagiaan ibu adalah ikhtiar syar\'i yang disepakati bersama dalam musyawarah cinta.'
+  },
 
-  // --- KONFLIK & ANTI KDRT ---
+  // ==========================================
+  // KLASTER 6: RESOLUSI KONFLIK & ANTI-KDRT
+  // ==========================================
   {
     id: 'hadis-larangan-mencambuk-istri',
     stageId: 'konflik',
@@ -442,7 +754,7 @@ export const HADITHS_DATA: HadithItem[] = [
       ],
       aplikasiHariIni: [
         'Pahami bahwa KDRT dalam bentuk apa pun adalah pelanggaran syariat dan hukum positif (UU PKDRT).',
-        'Ambil jeda (*time-out*) ketika emosi sedang memuncak; jangan mengambil tindakan fisik atau menjatuhkan kata-kata talak saat marah.'
+        'Ambil jeda (time-out) ketika emosi sedang memuncak; jangan mengambil tindakan fisik atau menjatuhkan kata-kata talak saat marah.'
       ]
     },
     pilarTerkait: ["Mu'asyarah bi al-Ma'ruf", 'Mitsaqan Ghalizhan', 'Zawaj'],
@@ -471,8 +783,7 @@ export const HADITHS_DATA: HadithItem[] = [
       illatHukum: 'Meneladani Nabi ﷺ adalah standar tertinggi kesempurnaan iman; orang yang memukul bukan orang yang terbaik.',
       poinKesalingan: [
         'Rasulullah bersabda tegas: "Kalian tidak akan mendapati orang-orang yang suka memukul itu sebagai orang terbaik di antara kalian" (HR. Abu Dawud No. 2146).',
-        'Menyelesaikan perselisihan keluarga menuntut kedewasaan akal dan dialog (tasyawur), bukan tangan besi.',
-        'Setiap pasangan berhak merasa terlindungi dan bebas dari ancaman teror di dalam rumahnya sendiri.'
+        'Menyelesaikan perselisihan keluarga menuntut kedewasaan akal dan dialog (tasyawur), bukan tangan besi.'
       ],
       aplikasiHariIni: [
         'Jadikan aturan tegas dalam rumah tangga: tidak boleh ada kontak fisik agresif dalam bentuk apa pun saat bertengkar.',
@@ -483,8 +794,181 @@ export const HADITHS_DATA: HadithItem[] = [
     tags: ['Akhlak Kenabian', 'Anti-Kekerasan', 'Keteladanan Rasul', 'Kedamaian Rumah'],
     quoteSnippet: 'Teladan Rasulullah ﷺ yang paling nyata di rumah adalah tidak pernah mengayunkan tangan untuk menyakiti perempuan atau siapa pun yang berada di dekatnya.'
   },
+  {
+    id: 'hadis-menahan-marah',
+    stageId: 'konflik',
+    theme: 'Manajemen Emosi dalam Konflik',
+    title: 'Kekuatan Sejati Adalah Menahan Diri: Pengendalian Diri saat Amarah Memuncak',
+    rawi: 'Abu Hurairah ra',
+    kitab: 'Sahih al-Bukhari & Sahih Muslim',
+    noHadis: 'Bukhari No. 6114, Muslim No. 2609',
+    matnArab: 'لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ، إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ',
+    terjemahan: 'Bukanlah orang yang kuat itu yang pandai bergulat (menang secara fisik), melainkan orang yang kuat adalah yang mampu mengendalikan dirinya ketika sedang marah.',
+    pemaknaanKonvensional: {
+      ringkasan: 'Ditempatkan dalam bab adab akhlak umum dalam pergaulan sosial.',
+      poin: [
+        'Jarang ditarik ke dalam penanganan pertengkaran suami-istri.',
+        'Banyak pihak merasa sah membentak pasangan dengan dalih "sedang emosi".'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Rumah tangga adalah ruang di mana ego paling sering teruji. Menahan amarah dan tidak mengeluarkan kata-kata keji adalah benteng yang menjaga perjanjian kokoh (mitsaqan ghalizhan) agar tidak koyak.',
+      illatHukum: 'Mencegah kerusakan permanen relasi akibat keputusan impulsif saat emosi membara.',
+      poinKesalingan: [
+        'Kekuatan suami atau istri bukan pada kemampuan mendominasi atau membentak pasangan.',
+        'Mampu mendengarkan dan menunda respons saat marah adalah kedewasaan spiritual tertinggi.'
+      ],
+      aplikasiHariIni: [
+        'Terapkan sunnah Nabi saat marah: diam, berwudhu, atau duduk/berbaring.',
+        'Jangan pernah menjatuhkan talak atau ancaman perpisahan saat sedang dikuasai amarah.'
+      ]
+    },
+    pilarTerkait: ["Mu'asyarah bi al-Ma'ruf", 'Mitsaqan Ghalizhan'],
+    tags: ['Manajemen Emosi', 'Pengendalian Marah', 'Anti-KDRT Verbal'],
+    quoteSnippet: 'Kekuatan sejati dalam rumah tangga bukan pada seberapa keras suaramu membentak, melainkan seberapa tangguh engkau mengendalikan amarahmu demi menjaga cinta.'
+  },
 
-  // --- PENGASUHAN ---
+  // ==========================================
+  // KLASTER 7: PERCERAIAN & GUGAT KHULU'
+  // ==========================================
+  {
+    id: 'hadis-khulu-jamilah-tsabit',
+    stageId: 'perceraian',
+    theme: 'Gugat Cerai Istri (Khulu\') Tanpa Perlu Menuduh Aib',
+    title: 'Khulu\' Jamilah binti Abdillah: Hak Gugat Cerai Istri yang Tidak Lagi Merasa Bahagia',
+    rawi: 'Ibnu Abbas ra',
+    kitab: 'Sahih al-Bukhari',
+    noHadis: 'No. 5273',
+    matnArab: 'أَنَّ امْرَأَةَ ثَابِتِ بْنِ قَيْسٍ أَتَتِ النَّبِيَّ ﷺ فَقَالَتْ: يَا رَسُولَ اللَّهِ، ثَابِتُ بْنُ قَيْسٍ مَا أَعْتِبُ عَلَيْهِ فِي خُلُقٍ وَلَا دِينٍ، وَلَكِنِّي أَكْرَهُ الكُفْرَ فِي الإِسْلَامِ. فَقَالَ: أَتَرُدِّينَ عَلَيْهِ حَدِيقَتَهُ؟ قَالَتْ: نَعَمْ. قَالَ: اقْبَلِ الحَدِيقَةَ وَطَلِّقْهَا تَطْلِيقَةً',
+    terjemahan: 'Istri Tsabit bin Qais (Jamilah) mendatangi Nabi ﷺ lalu berkata: "Wahai Rasulullah, aku tidak mencela Tsabit dalam hal akhlak maupun agamanya, tetapi aku khawatir kufur (tidak bisa menunaikan hak suami dengan tulus) dalam Islam." Nabi bertanya: "Maukah engkau mengembalikan kebun yang ia berikan kepadamu (sebagai mahar)?" Ia menjawab: "Ya." Maka Nabi ﷺ bersabda kepada Tsabit: "Terimalah kebun itu, dan ceraikanlah ia satu kali talak."',
+    pemaknaanKonvensional: {
+      ringkasan: 'Sebagian kalangan menganggap gugat cerai perempuan sebagai tindakan tabu dan aib, serta mengancam perempuan dengan hadis ancaman bau surga tanpa konteks.',
+      poin: [
+        'Membuat perempuan merasa berdosa besar ketika ingin keluar dari pernikahan yang menyiksa batinnya.',
+        'Mengabaikan kebijaksanaan Nabi yang mempermudah proses khulu\'.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Hadis ini adalah tonggak agung keadilan hukum Islam bagi perempuan. Tsabit adalah sahabat saleh tanpa cela moral, namun ketika sang istri merasa tidak ada lagi getaran cinta dan kenyamanan psikologis, Nabi ﷺ mengabulkan perceraian tersebut tanpa mencela atau menghakimi sang istri.',
+      illatHukum: 'Melindungi perempuan dari keterpaksaan hidup bersama pasangan yang tidak mampu ia cintai, demi mencegah kezaliman batin.',
+      poinKesalingan: [
+        'Sebagaimana laki-laki memiliki hak talak, perempuan memiliki instrumen hak gugat cerai (khulu\' & fasakh).',
+        'Pemberian tebusan (iwadh/pengembalian mahar) diselesaikan secara adil tanpa memeras pihak perempuan.',
+        'Dalam KHI dan Peradilan Agama di Indonesia, gugat cerai istri adalah instrumen sah yang dilindungi hukum.'
+      ],
+      aplikasiHariIni: [
+        'Hentikan stigma buruk terhadap perempuan yang mengajukan cerai gugat di Pengadilan Agama.',
+        'Selesaikan perpisahan secara ksatria dan bermartabat tanpa dendam (*tasrihun bi ihsan*).'
+      ]
+    },
+    pilarTerkait: ['Taradhin', 'Zawaj'],
+    tags: ['Khulu', 'Gugat Cerai', 'Hak Perempuan', 'Tasrih bi Ihsan', 'Peradilan Agama'],
+    quoteSnippet: 'Rasulullah ﷺ mengabulkan gugat cerai istri Tsabit tanpa mencelanya: membuktikan bahwa Islam tidak membiarkan perempuan terkurung dalam pernikahan yang menyiksa jiwanya.'
+  },
+  {
+    id: 'hadis-talak-saat-haid-ibnu-umar',
+    stageId: 'perceraian',
+    theme: 'Larangan Talak Bida\'i (Mentalak saat Haid)',
+    title: 'Kasus Ibnu Umar: Larangan Menjatuhkan Talak Saat Istri Haid Demi Menjaga Kestabilan Jiwa',
+    rawi: 'Abdullah bin Umar ra',
+    kitab: 'Sahih al-Bukhari & Sahih Muslim',
+    noHadis: 'Bukhari No. 5251, Muslim No. 1471',
+    matnArab: 'أَنَّهُ طَلَّقَ امْرَأَتَهُ وَهِيَ حَائِضٌ، فَسَأَلَ عُمَرُ النَّبِيَّ ﷺ فَقَالَ: مُرْهُ فَلْيُرَاجِعْهَا، ثُمَّ لِيُمْسِكْهَا حَتَّى تَطْهُرَ، ثُمَّ تَحِيضَ، ثُمَّ تَطْهُرَ، ثُمَّ إِنْ شَاءَ أَمْسَكَ بَعْدُ، وَإِنْ شَاءَ طَلَّقَ قَبْلَ أَنْ يَمَسَّ',
+    terjemahan: 'Ibnu Umar mentalak istrinya saat sedang haid. Umar menanyakan hal itu kepada Nabi ﷺ, maka beliau marah dan bersabda: "Perintahkan dia untuk merujuk istrinya, lalu tahanlah sampai ia suci, lalu haid lagi, lalu suci kembali. Setelah itu jika ia ingin tetap mempertahankannya silakan, dan jika ingin mentalaknya, talaklah dalam keadaan suci sebelum ia menggaulinya."',
+    pemaknaanKonvensional: {
+      ringkasan: 'Dianalisis sebatas teknis fiqh pembagian talak sunni dan talak bida\'i, serta perdebatan apakah talak saat haid itu sah atau batal.',
+      poin: [
+        'Fokus pada hukum sah/jatuhnya talak.',
+        'Kurang mendalami alasan psikologis dan perlindungan perempuan di balik larangan tersebut.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Nabi ﷺ melarang talak dijatuhkan saat istri haid karena masa haid adalah masa di mana kondisi hormonal dan psikologis perempuan sedang rentan, serta masa iddahnya akan bertambah panjang dan merugikannya. Perintah merujuk dan menunggu memberi jeda waktu panjang agar suami berpikir jernih dan amarahnya mereda.',
+      illatHukum: 'Mencegah talak tergesa-gesa dan melindungi perempuan dari beban psikologis masa iddah yang berlarut-larut.',
+      poinKesalingan: [
+        'Laki-laki tidak boleh menggunakan hak talak secara sembarangan atau seenak hatinya.',
+        'Syariat memberikan mekanisme penundaan agar peluang ishlah (damai kembali) tetap terbuka lebar.'
+      ],
+      aplikasiHariIni: [
+        'Pahami bahwa talak bukan urusan sepele yang bisa diucapkan saat emosi memuncak.',
+        'Dalam hukum Indonesia, perceraian hanya sah jika diikrarkan di depan sidang Pengadilan Agama setelah upaya mediasi gagal.'
+      ]
+    },
+    pilarTerkait: ['Mitsaqan Ghalizhan', "Mu'asyarah bi al-Ma'ruf"],
+    tags: ['Talak Bidai', 'Haid', 'Perlindungan Perempuan', 'Masa Iddah'],
+    quoteSnippet: 'Nabi ﷺ melarang keras mentalak istri di masa haid: syariat melindungi kestabilan psikologis perempuan dan mencegah keputusan cerai yang didorong emosi sesaat.'
+  },
+  {
+    id: 'hadis-talak-tiga-sekaligus',
+    stageId: 'perceraian',
+    theme: 'Kecaman Talak Tiga Sekaligus',
+    title: 'Kemarahan Nabi ﷺ atas Talak Tiga Sekaligus: Larangan Mempermainkan Kitabullah',
+    rawi: 'Mahmud bin Labid ra',
+    kitab: 'Sunan an-Nasa\'i',
+    noHadis: 'No. 3401',
+    matnArab: 'أُخْبِرَ رَسُولُ اللَّهِ ﷺ عَنْ رَجُلٍ طَلَّقَ امْرَأَتَهُ ثَلَاثَ تَطْلِيقَاتٍ جَمِيعًا، فَقَامَ غَضْبَانَ ثُمَّ قَالَ: أَيُلْعَبُ بِكِتَابِ اللَّهِ وَأَنَا بَيْنَ أَظْهُرِكُمْ؟',
+    terjemahan: 'Diberitahukan kepada Rasulullah ﷺ tentang seorang laki-laki yang mentalak istrinya tiga talak sekaligus dalam satu waktu. Maka beliau berdiri dalam keadaan sangat marah lalu bersabda: "Apakah Kitabullah (hukum Allah) dipermainkan, padahal aku masih berada di tengah-tengah kalian?!"',
+    pemaknaanKonvensional: {
+      ringkasan: 'Perdebatan tajam fiqh klasik: apakah talak tiga sekaligus jatuh tiga (pendapat jumhur mazhab klasik) atau jatuh satu (pendapat Ibnu Taimiyyah dan diadopsi KHI Indonesia).',
+      poin: [
+        'Perdebatan sering mengabaikan kemarahan moral Nabi atas arogansi suami.',
+        'Sebagian pihak masih menganggap sah melontarkan "talak 3" dalam sekali ucap.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Kemarahan Nabi ﷺ membuktikan bahwa syariat murka terhadap arogansi patriarkal yang mempermainkan hukum pernikahan untuk meneror dan membuang istri dalam sekejap. Al-Qur\'an mengatur talak terjadi bertahap (marratan) untuk membuka ruang refleksi dan rekonsiliasi.',
+      illatHukum: 'Menolak kekerasan verbal dan memastikan proses perpisahan berjalan secara adil dan bermartabat.',
+      poinKesalingan: [
+        'Hukum Indonesia (KHI Pasal 115) sejalan dengan semangat hadis ini: ucapan talak di luar sidang pengadilan tidak memiliki akibat hukum pembubaran perkawinan.',
+        'Kedua belah pihak wajib menghormati proses hukum resmi dan tidak bertindak sewenang-wenang.'
+      ],
+      aplikasiHariIni: [
+        'Jangan pernah menjadikan kata talak sebagai senjata ancaman dalam pertengkaran rumah tangga.',
+        'Selesaikan persoalan perceraian melalui jalur mediasi resmi di Pengadilan Agama.'
+      ]
+    },
+    pilarTerkait: ['Mitsaqan Ghalizhan', "Mu'asyarah bi al-Ma'ruf"],
+    tags: ['Talak Tiga', 'Anti-Arogansi', 'Hukum Perceraian', 'KHI'],
+    quoteSnippet: 'Rasulullah ﷺ bangkit dengan penuh amarah terhadap orang yang menjatuhkan talak tiga sekaligus: "Apakah Kitabullah dipermainkan?!" — kecaman atas arogansi dalam rumah tangga.'
+  },
+
+  // ==========================================
+  // KLASTER 8: PENGASUHAN ANAK & HADHANAH
+  // ==========================================
+  {
+    id: 'hadis-hak-asuh-ibu',
+    stageId: 'pengasuhan',
+    theme: 'Hak Asuh Anak Pasca-Perceraian (Hadhanah)',
+    title: 'Hak Asuh Ibu Pasca-Cerai: Perlindungan Ikatan Kelekatan Ibu & Anak',
+    rawi: 'Abdullah bin Amr ra',
+    kitab: 'Sunan Abu Dawud & Musnad Ahmad',
+    noHadis: 'Abu Dawud No. 2276, Ahmad No. 6707',
+    matnArab: 'أَنَّ امْرَأَةً قَالَتْ: يَا رَسُولَ اللَّهِ، إِنَّ ابْنِي هَذَا كَانَ بَطْنِي لَهُ وِعَاءً، وَثَدْيِي لَهُ سِقَاءً، وَحِجْرِي لَهُ حِوَاءً، وَإِنَّ أَبَاهُ طَلَّقَنِي وَأَرَادَ أَنْ يَنْتَزِعَهُ مِنِّي، فَقَالَ: أَنْتِ أَحَقُّ بِهِ مَا لَمْ تَنْكِحِي',
+    terjemahan: 'Seorang perempuan berkata: "Wahai Rasulullah, anakku ini dahulu perutkulah wadahnya, air susukulah minumannya, dan pangkuankulah tempat perlindungannya. Namun ayahnya telah menceraikanku dan hendak merampas anak ini dariku." Maka Rasulullah ﷺ bersabda kepadanya: "Engkau lebih berhak atas hak asuhnya selama engkau belum menikah lagi."',
+    pemaknaanKonvensional: {
+      ringkasan: 'Dijadikan dalil fiqh bahwa hak asuh anak kecil (mumayyiz) berada pada ibu, namun gugur jika ibu menikah lagi.',
+      poin: [
+        'Kerap diinterpretasikan kaku bahwa pernikahan baru ibu otomatis menggugurkan hak asuh tanpa menimbang kemaslahatan anak.',
+        'Sering dijadikan alat mantan suami untuk menekan mantan istri.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Nabi ﷺ mengakui kelelahan reproduktif dan kelekatan emosional ibu yang tak tertandingi (rahim, menyusui, merawat). Prinsip utama hadhanah adalah kepentingan terbaik bagi anak (the best interest of the child); anak tidak boleh dirampas sebagai objek sengketa dendam mantan pasangan.',
+      illatHukum: 'Menjamin stabilitas psikologis dan perlindungan anak usia dini di bawah asuhan sosok yang paling telaten.',
+      poinKesalingan: [
+        'Meskipun hak asuh berada pada ibu, kewajiban nafkah pemeliharaan anak tetap berada di pundak ayah.',
+        'Ayah tidak boleh menggunakan nafkah sebagai senjata untuk menyandera anak atau menyakiti mantan istrinya.',
+        'KHI Pasal 105 menetapkan pemeliharaan anak yang belum mumayyiz adalah hak ibunya.'
+      ],
+      aplikasiHariIni: [
+        'Jauhkan anak dari perselisihan pascaperceraian; terapkan pola asuh bersama (*co-parenting*) yang damai.',
+        'Penuhi nafkah anak secara rutin tanpa harus ditagih berulang kali oleh mantan istri.'
+      ]
+    },
+    pilarTerkait: ["Mu'asyarah bi al-Ma'ruf", 'Zawaj'],
+    tags: ['Hak Asuh', 'Hadhanah', 'Ibu & Anak', 'Nafkah Anak', 'Co-Parenting'],
+    quoteSnippet: 'Perutkulah wadahnya, air susukulah minumannya, dan pangkuankulah perlindungannya: Nabi ﷺ melarang anak dirampas paksa dari pelukan kasih sayang ibunya.'
+  },
   {
     id: 'hadis-kehangatan-ayah',
     stageId: 'pengasuhan',
@@ -552,6 +1036,39 @@ export const HADITHS_DATA: HadithItem[] = [
     pilarTerkait: ['Zawaj', 'Tasyawur'],
     tags: ['Keadilan Anak', 'Kesetaraan Gender Anak', 'Parenting Islami'],
     quoteSnippet: 'Berlaku adil kepada setiap anak dalam kasih sayang dan kesempatan adalah fondasi melahirkan generasi yang berjiwa damai dan berintegritas.'
+  },
+  {
+    id: 'hadis-memuliakan-anak-perempuan',
+    stageId: 'pengasuhan',
+    theme: 'Memuliakan Anak Perempuan',
+    title: 'Keutamaan Merawat Anak Perempuan: Perisai dari Siksa Api Neraka',
+    rawi: 'Aisyah ra',
+    kitab: 'Sahih al-Bukhari & Sahih Muslim',
+    noHadis: 'Bukhari No. 5995, Muslim No. 2629',
+    matnArab: 'مَنِ ابْتُلِيَ مِنْ هَذِهِ البَنَاتِ بِشَيْءٍ فَأَحْسَنَ إِلَيْهِنَّ، كُنَّ لَهُ سِتْرًا مِنَ النَّارِ',
+    terjemahan: 'Barangsiapa yang diuji dengan mengasuh anak-anak perempuan, lalu ia memperlakukan mereka dengan baik (penuh kasih sayang dan pendidikan), niscaya anak-anak perempuan itu akan menjadi penghalang baginya dari api neraka.',
+    pemaknaanKonvensional: {
+      ringkasan: 'Keutamaan bersabar mengasuh anak perempuan di masa Jahiliyah yang mengubur anak perempuan hidup-hidup.',
+      poin: [
+        'Kerap dianggap masa lalu yang sudah tidak relevan lagi.',
+        'Kurang dikaitkan dengan perjuangan melawan pernikahan dini dan diskriminasi anak perempuan saat ini.'
+      ]
+    },
+    pemaknaanMubadalah: {
+      ringkasan: 'Nabi ﷺ secara revolusioner merombak budaya patriarki Arab yang menganggap kelahiran anak perempuan sebagai kesialan. Merawat, mendidik, dan memuliakan anak perempuan hingga mandiri ditempatkan sebagai tiket spiritual tertinggi menuju surga.',
+      illatHukum: 'Menghapuskan diskriminasi gender dan menjamin pemuliaan martabat perempuan sejak usia anak.',
+      poinKesalingan: [
+        'Anak perempuan memiliki hak yang sama atas gizi terbaik, pendidikan tinggi, dan perlindungan masa depan.',
+        'Menikahkan anak perempuan di bawah umur demi melepaskan beban ekonomi keluarga bertentangan keras dengan hadis ini.'
+      ],
+      aplikasiHariIni: [
+        'Dukung pendidikan anak perempuan hingga jenjang tertinggi sesuai minat dan potensinya.',
+        'Lindungi anak perempuan dari bahaya perkawinan usia anak dan kekerasan seksual.'
+      ]
+    },
+    pilarTerkait: ["Mu'asyarah bi al-Ma'ruf", 'Mitsaqan Ghalizhan'],
+    tags: ['Anak Perempuan', 'Pencegahan Perkawinan Anak', 'Pendidikan Perempuan', 'Pemuliaan'],
+    quoteSnippet: 'Siapa yang merawat dan mendidik anak-anak perempuannya dengan baik, anak-anak itu akan menjadi perisai baginya dari api neraka: Islam memuliakan anak perempuan setara.'
   }
 ];
 

@@ -21,14 +21,18 @@ interface SidebarProps {
 }
 
 const TOPIC_FILTERS = [
+  'Hak Perempuan',
+  'Nikah Paksa',
+  'Khulu',
   'Kerja Domestik',
   'Istri Bekerja',
   'Anti-KDRT',
   'Marital Consent',
-  'Apresiasi Pasangan',
+  'Hak Asuh',
   'Peran Ayah',
   'Perjanjian Kawin',
-  'Nafkah Wajib'
+  'Nafkah Wajib',
+  'Anak Perempuan'
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({
