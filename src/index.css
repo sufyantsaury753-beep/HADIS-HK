@@ -2,81 +2,72 @@
 
 :root {
   --bg-primary: #FFFFFF;
-  --bg-secondary: #F7F7F5;
   --bg-surface: #FFFFFF;
-  --text-primary: #292929;
-  --text-secondary: #6B7280;
-  --border-primary: #E5E1DC;
-  --btn-primary: #C6A17B;
-  --btn-primary-text: #2B2118;
-  --btn-hover: #B78D66;
-  --btn-active: #A87951;
-  --border-btn-secondary: #D6C2AE;
-  --text-accent: #795A3F;
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --text-muted: #6B7280;
+  --border-light: #E5E7EB;
+  --accent-brown: #9E744A;
+  --accent-brown-light: #C6A17B;
+  --btn-brown-text: #2B2118;
 }
 
 @layer base {
-  body {
+  html, body {
+    background-color: #FFFFFF !important;
+    color: #111827;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.6;
     letter-spacing: -0.011em;
   }
 }
 
 .font-arabic {
   font-family: 'Amiri', 'Traditional Arabic', serif;
-  line-height: 2.2;
+  line-height: 2.3;
 }
 
-/* Tombol Utama Akademik */
-.btn-primary {
-  background-color: var(--btn-primary);
-  color: var(--btn-primary-text);
-  border: 1px solid #B8936E;
+/* Tombol Aksen Cokelat Akademik */
+.btn-brown {
+  background-color: #C6A17B;
+  color: #2B2118;
+  border: 1px solid #B78D66;
   border-radius: 6px;
   font-weight: 600;
   transition: all 0.15s ease-in-out;
 }
-.btn-primary:hover {
-  background-color: var(--btn-hover);
+.btn-brown:hover {
+  background-color: #B78D66;
 }
-.btn-primary:active {
-  background-color: var(--btn-active);
+.btn-brown:active {
+  background-color: #A87951;
 }
 
-/* Tombol Sekunder */
-.btn-secondary {
+/* Tombol Garis Tipis Netral */
+.btn-outline {
   background-color: #FFFFFF;
-  color: var(--text-primary);
-  border: 1px solid var(--border-btn-secondary);
+  color: #374151;
+  border: 1px solid #E5E7EB;
   border-radius: 6px;
   font-weight: 500;
   transition: all 0.15s ease-in-out;
 }
-.btn-secondary:hover {
-  background-color: #F7F7F5;
-  border-color: #C2AB94;
+.btn-outline:hover {
+  border-color: #C6A17B;
+  color: #111827;
 }
 
-/* Panel & Garis Pembatas Tipis */
-.border-subtle {
-  border-color: var(--border-primary);
-}
-
-/* Scrollbar rapi dan minimalis */
+/* Minimalist Clean Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F7F7F5;
+  background: #FFFFFF;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D9D4CC;
+  background: #E5E7EB;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #BDB5A9;
+  background: #D1D5DB;
 }
