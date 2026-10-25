@@ -27,7 +27,8 @@
 }
 
 /* Tombol Aksen Cokelat Akademik */
-.btn-brown {
+.btn-brown,
+.btn-primary {
   background-color: #C6A17B;
   color: #2B2118;
   border: 1px solid #B78D66;
@@ -35,15 +36,18 @@
   font-weight: 600;
   transition: all 0.15s ease-in-out;
 }
-.btn-brown:hover {
+.btn-brown:hover,
+.btn-primary:hover {
   background-color: #B78D66;
 }
-.btn-brown:active {
+.btn-brown:active,
+.btn-primary:active {
   background-color: #A87951;
 }
 
 /* Tombol Garis Tipis Netral */
-.btn-outline {
+.btn-outline,
+.btn-secondary {
   background-color: #FFFFFF;
   color: #374151;
   border: 1px solid #E5E7EB;
@@ -51,7 +55,8 @@
   font-weight: 500;
   transition: all 0.15s ease-in-out;
 }
-.btn-outline:hover {
+.btn-outline:hover,
+.btn-secondary:hover {
   border-color: #C6A17B;
   color: #111827;
 }

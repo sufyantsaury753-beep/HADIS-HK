@@ -6,6 +6,14 @@ export interface Stage {
   badge: string;
 }
 
+export interface PerbandinganMazhab {
+  hanafi: string;
+  maliki: string;
+  syafii: string;
+  hanbali: string;
+  khiDanKonteks: string;
+}
+
 export interface HadithItem {
   id: string;
   stageId: 'pra-nikah' | 'akad' | 'domestik' | 'finansial' | 'keintiman' | 'konflik' | 'perceraian' | 'pengasuhan';
@@ -14,9 +22,13 @@ export interface HadithItem {
   title: string;
   rawi: string;
   kitab: string;
+  kitabBab: string;
   noHadis: string;
+  sanadArab: string;
   matnArab: string;
+  terjemahanSanad: string;
   terjemahan: string;
+  perbandinganMazhab: PerbandinganMazhab;
   pemaknaanKonvensional: {
     ringkasan: string;
     poin: string[];
@@ -37,56 +49,56 @@ export const STAGES: Stage[] = [
     id: 'pra-nikah',
     title: '1. Pra-Nikah & Khithbah',
     icon: 'Sparkles',
-    tagline: 'Memilih Pasangan atas Dasar Akhlak, Kafa\'ah Takwa & Persetujuan Sukarela',
+    tagline: 'Kriteria Pasangan, Kafa\'ah Takwa, Hak Otonomi Memilih & Larangan Kawin Paksa',
     badge: 'Fondasi Awal'
   },
   {
     id: 'akad',
     title: '2. Akad, Mahar & Perjanjian',
     icon: 'ScrollText',
-    tagline: 'Mitsaqan Ghalizhan: Komitmen Janji Setara, Mahar Berkah & Syarat Perkawinan',
+    tagline: 'Mitsaqan Ghalizhan, Filosofi Mahar yang Memudahkan & Keabsahan Syarat Perkawinan',
     badge: 'Ikatan Suci'
   },
   {
     id: 'domestik',
     title: '3. Keseharian & Kerja Domestik',
     icon: 'Home',
-    tagline: 'Khidmah al-Bayt: Meneladani Nabi Bekerjasama Mengurus Rumah Tangga',
+    tagline: 'Khidmah al-Bayt: Meneladani Nabi di Rumah, Rekreasi Bersama & Adab Meja Makan',
     badge: 'Keseharian Pasutri'
   },
   {
     id: 'finansial',
     title: '4. Finansial, Nafkah & Harta',
     icon: 'Wallet',
-    tagline: 'Kemitraan Ekonomi: Nafkah Layak, Apresiasi Istri Bekerja & Larangan Menahan Harta',
+    tagline: 'Kemitraan Ekonomi: Nafkah Bil Ma\'ruf, Apresiasi Istri Bekerja & Larangan Menahan Harta',
     badge: 'Dapur & Rezeki'
   },
   {
     id: 'keintiman',
     title: '5. Keintiman & Hak Reproduksi',
     icon: 'HeartHandshake',
-    tagline: 'Mula\'abah: Saling Membahagiakan Tanpa Pemaksaan (Consent) & Hak Reproduksi',
+    tagline: 'Mula\'abah: Saling Membahagiakan, Marital Consent & Hak Pengaturan Kehamilan',
     badge: 'Relasi Ranjang'
   },
   {
     id: 'konflik',
     title: '6. Resolusi Konflik & Anti-KDRT',
     icon: 'ShieldAlert',
-    tagline: 'Mengendalikan Marah, Mediasi Hakam & Menolak Segala Bentuk Kekerasan',
+    tagline: 'Pengendalian Marah, Menolak Kekerasan Fisik-Verbal & Keteladanan Nabi Tanpa Pukulan',
     badge: 'Manajemen Krisis'
   },
   {
     id: 'perceraian',
     title: '7. Perceraian & Gugat Khulu\'',
     icon: 'Scale',
-    tagline: 'Tasrihun bi Ihsan: Gugat Cerai Istri yang Dilindungi, Larangan Talak Bida\'i & Masa Iddah',
+    tagline: 'Tasrihun bi Ihsan: Hak Khulu\' Istri, Larangan Talak saat Haid & Talak Tiga Sekaligus',
     badge: 'Pascaperkawinan'
   },
   {
     id: 'pengasuhan',
     title: '8. Pengasuhan Anak & Hadhanah',
     icon: 'Users',
-    tagline: 'Tarbiyah & Hadhanah: Hak Asuh Ibu, Kehangatan Ayah & Keadilan Antaranak',
+    tagline: 'Hadhanah Ibu Pasca-Cerai, Kehangatan Figur Ayah & Keadilan Gender Antaranak',
     badge: 'Amanah Generasi'
   }
 ];
@@ -98,14 +110,24 @@ export const HADITHS_DATA: HadithItem[] = [
   {
     id: 'hadis-empat-kriteria',
     stageId: 'pra-nikah',
-    theme: 'Kriteria Memilih Pasangan',
+    theme: 'Kriteria Memilih Pasangan & Kafa\'ah Takwa',
     pertemuan: 5,
     title: 'Empat Kriteria Memilih Pasangan: Menjadikan Karakter Agama Sebagai Fondasi',
     rawi: 'Abu Hurairah ra',
     kitab: 'Sahih al-Bukhari',
-    noHadis: 'No. 5146',
-    matnArab: 'تُنْكَحُ الْمَرْأَةُ لِأَرْبَعٍ: لِمَالِهَا، وَلِحَسَبِهَا، وَجَمَالِهَا، وَلِدِينِهَا، فَاظْفَرْ بِذَاتِ الدِّينِ تَرِبَتْ يَدَاكَ',
-    terjemahan: 'Seorang perempuan biasanya dinikahi karena empat hal: karena hartanya, karena garis keturunannya (status sosial), karena parasnya yang rupawan, dan karena komitmen agamanya. Maka pilihlah yang memiliki komitmen agama (akhlak), niscaya kamu akan beruntung.',
+    kitabBab: 'Kitab an-Nikah, Bab al-Akfa\' fid Din (Bab Kesepadanan dalam Agama)',
+    noHadis: 'No. 5090 (dan No. 5146)',
+    sanadArab: 'حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا يَحْيَى، عَنْ عُبَيْدِ اللَّهِ، قَالَ حَدَّثَنِي سَعِيدُ بْنُ أَبِي سَعِيدٍ، عَنْ أَبِيهِ، عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ، عَنِ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ قَالَ:',
+    matnArab: '«تُنْكَحُ الْمَرْأَةُ لِأَرْبَعٍ: لِمَالِهَا، وَلِحَسَبِهَا، وَجَمَالِهَا، وَلِدِينِهَا، فَاظْفَرْ بِذَاتِ الدِّينِ، تَرِبَتْ يَدَاكَ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Musaddad, telah menceritakan kepada kami Yahya, dari Ubaidullah, ia berkata: telah menceritakan kepadaku Sa\'id bin Abi Sa\'id, dari ayahnya (Abu Sa\'id Kaysan), dari Abu Hurairah رضي الله عنه, dari Nabi ﷺ, beliau bersabda:',
+    terjemahan: 'Perempuan biasanya dinikahi karena empat perkara: karena hartanya, karena kedudukan nasabnya, karena kecantikannya, dan karena agamanya. Maka pilihlah perempuan yang memiliki komitmen agama (akhlak), niscaya engkau akan beruntung.',
+    perbandinganMazhab: {
+      hanafi: 'Mazhab Hanafi memandang kafa\'ah (kesepadanan) mencakup nasab, kemerdekaan, harta, ketaatan agama, dan profesi. Namun, kafa\'ah adalah hak perempuan dan walinya, bukan syarat sah akad nikah.',
+      maliki: 'Mazhab Maliki membatasi kafa\'ah secara ketat hanya pada dua hal: komitmen agama (ad-din) dan terbebasnya diri dari cacat fisik yang menghalangi pernikahan.',
+      syafii: 'Mazhab Syafi\'i memasukkan nasab, agama, kemerdekaan, dan pekerjaan dalam kafa\'ah sebagai ukuran kelayakan hidup bersama, namun ketidaksepadanan dapat digugurkan dengan kerelaan perempuan dan wali.',
+      hanbali: 'Mazhab Hanbali menempatkan kafa\'ah dalam agama dan nasab sebagai hak wali dan istri. Jika mereka rela menikah dengan yang tidak sekufu, akad tetap sah.',
+      khiDanKonteks: 'Kompilasi Hukum Islam (KHI) Pasal 61 menyempitkan kafa\'ah secara progresif: "Ketidakseimbangan tidak dapat dijadikan alasan untuk mencegah perkawinan, kecuali ketidakseimbangan dalam agama." Hal ini membebaskan masyarakat dari diskriminasi kasta sosial/nasab.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Dipahami satu arah hanya sebagai instruksi bagi laki-laki dalam menilai calon istri. Kata "din" sering disempitkan sekadar performa ibadah ritual lahiriah (busana, hafalan, kesalehan simbolik).',
       poin: [
@@ -139,9 +161,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Pembatalan Nikah Paksa Khansa binti Khidzam: Hak Prerogatif Persetujuan Mempelai',
     rawi: 'Khansa binti Khidzam al-Anshariyyah ra',
     kitab: 'Sahih al-Bukhari',
+    kitabBab: 'Kitab an-Nikah, Bab Idza Zawwajar Rajulu Ibnatahu wa Hiya Karihatun Fanikahuhu Mardud (Pernikahan yang Dipaksa Ayah Ditolak)',
     noHadis: 'No. 5138',
-    matnArab: 'أَنَّ أَبَاهَا زَوَّجَهَا وَهِيَ ثَيِّبٌ فَكَرِهَتْ ذَلِكَ، فَأَتَتْ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَرَدَّ نِكَاحَهُ',
-    terjemahan: 'Bahwa ayahnya telah menikahkan dirinya (dengan seorang laki-laki), padahal ia berstatus janda dan ia tidak menyukai pernikahan tersebut. Maka ia mendatangi Rasulullah ﷺ, lalu beliau membatalkan (memfasakh) akad pernikahan tersebut.',
+    sanadArab: 'حَدَّثَنَا إِسْحَاقُ بْنُ مَنْصُورٍ، حَدَّثَنَا حُسَيْنٌ الجُعْفِيُّ، عَنْ زَائِدَةَ، عَنْ عَبْدِ المَلِكِ بْنِ عُمَيْرٍ، حَدَّثَنَا عَبْدُ الرَّحْمَنِ بْنُ أَبِي لَيْلَى، حَدَّثَنَا خَنْسَاءُ بِنْتُ خِذَامٍ الأَنْصَارِيَّةُ:',
+    matnArab: '«أَنَّ أَبَاهَا زَوَّجَهَا وَهِيَ ثَيِّبٌ فَكَرِهَتْ ذَلِكَ، فَأَتَتْ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَرَدَّ نِكَاحَهُ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Ishaq bin Manshur, telah menceritakan kepada kami Husain al-Ju\'fi, dari Zaidah, dari Abdul Malik bin Umair, telah menceritakan kepada kami Abdurrahman bin Abi Laila, telah menceritakan kepada kami Khansa binti Khidzam al-Anshariyyah:',
+    terjemahan: 'Bahwa ayahnya telah menikahkan dirinya (dengan seorang laki-laki), padahal ia berstatus janda dan ia membenci pernikahan tersebut. Maka ia mendatangi Rasulullah ﷺ, lalu beliau membatalkan (memfasakh) akad pernikahan tersebut.',
+    perbandinganMazhab: {
+      hanafi: 'Imam Abu Hanifah menetapkan bahwa perempuan yang telah baligh dan berakal sehat (baik gadis maupun janda) memiliki kedaulatan hukum penuh untuk menikahkan dirinya sendiri tanpa hak paksa dari wali mana pun.',
+      maliki: 'Imam Malik membedakan antara gadis dan janda: janda tidak boleh dinikahkan tanpa persetujuan tegasnya, sedangkan gadis masih tunduk pada hak ijbar ayah.',
+      syafii: 'Imam Syafi\'i sepakat bahwa pernikahan janda yang dipaksa adalah batal (*mardud*). Namun untuk anak gadis perawan, Syafi\'i mempertahankan konsep wali mujbir, meski tetap mensyaratkan tidak adanya permusuhan nyata antara ayah dan anak.',
+      hanbali: 'Imam Ahmad bin Hanbal berpandangan sejalan dengan hadis ini bahwa persetujuan perempuan adalah rukun kerelaan; jika perempuan menolak secara tegas, pernikahan tidak boleh dipaksakan.',
+      khiDanKonteks: 'Hukum Positif Indonesia (UU No. 1/1974 Pasal 6 & KHI Pasal 16) menegaskan bahwa perkawinan harus didasarkan atas persetujuan kedua calon mempelai tanpa adanya paksaan dari pihak mana pun.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Sebagian ulama membatasi hak penolakan ini hanya untuk janda (tsayyib), sementara perawan (bikr) dianggap masih boleh dipaksa oleh wali mujbir (ayah/kakek).',
       poin: [
@@ -154,8 +186,7 @@ export const HADITHS_DATA: HadithItem[] = [
       illatHukum: 'Pernikahan yang dibangun di atas paksaan bertentangan dengan tujuan mawaddah wa rahmah.',
       poinKesalingan: [
         'Hak menentukan pasangan hidup berada di tangan yang bersangkutan, baik laki-laki maupun perempuan, janda maupun perawan.',
-        'Wali bertindak sebagai pelindung dan pendamping musyawarah, bukan pemilik tubuh anak.',
-        'Dalam hukum Indonesia, persetujuan kedua mempelai adalah syarat sah perkawinan (UU Perkawinan No. 1/1974 & KHI).'
+        'Wali bertindak sebagai pelindung dan pendamping musyawarah, bukan pemilik tubuh anak.'
       ],
       aplikasiHariIni: [
         'Hentikan segala bentuk perjodohan paksa atau pernikahan di bawah tekanan keluarga.',
@@ -173,9 +204,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Konfirmasi Persetujuan Calon Mempelai: Larangan Menikahkan Tanpa Izin Terbuka',
     rawi: 'Abu Hurairah ra',
     kitab: 'Sahih al-Bukhari & Sahih Muslim',
+    kitabBab: 'Bukhari: Kitab an-Nikah, Bab La Yunzahu al-Bikru hatta Tusta\'dzan; Muslim: Kitab an-Nikah No. 1419',
     noHadis: 'Bukhari No. 5136, Muslim No. 1419',
-    matnArab: 'لَا تُنْكَحُ الأَيِّمُ حَتَّى تُسْتَأْمَرَ، وَلَا تُنْكَحُ البِكْرُ حَتَّى تُسْتَأْذَنَ. قَالُوا: يَا رَسُولَ اللَّهِ، وَكَيْفَ إِذْنُهَا؟ قَالَ: أَنْ تَسْكُتَ',
-    terjemahan: 'Janganlah seorang janda dinikahkan sampai ia dimintai perintahnya (persetujuan tegasnya), dan janganlah seorang gadis dinikahkan sampai dimintai izinnya. Para sahabat bertanya: "Wahai Rasulullah, bagaimana bentuk izinnya?" Beliau menjawab: "Jika ia diam (karena malu, namun tidak menolak)."',
+    sanadArab: 'حَدَّثَنَا مُعَاذُ بْنُ فَضَالَةَ، حَدَّثَنَا هِشَامٌ، عَنْ يَحْيَى، عَنْ أَبِي سَلَمَةَ، أَنَّ أَبَا هُرَيْرَةَ حَدَّثَهُمْ أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ:',
+    matnArab: '«لَا تُنْكَحُ الأَيِّمُ حَتَّى تُسْتَأْمَرَ، وَلَا تُنْكَحُ البِكْرُ حَتَّى تُسْتَأْذَنَ. قَالُوا: يَا رَسُولَ اللَّهِ، وَكَيْفَ إِذْنُهَا؟ قَالَ: أَنْ تَسْكُتَ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Mu\'adz bin Fadhalah, telah menceritakan kepada kami Hisyam, dari Yahya bin Abi Katsir, dari Abu Salamah, bahwa Abu Hurairah menceritakan kepada mereka bahwa Nabi ﷺ bersabda:',
+    terjemahan: 'Janganlah seorang janda dinikahkan sampai ia dimintai perintahnya (persetujuan tegasnya), dan janganlah seorang gadis dinikahkan sampai dimintai izinnya. Para sahabat bertanya: "Wahai Rasulullah, bagaimana bentuk izinnya?" Beliau menjawab: "Jika ia diam (karena sifat malunya, namun tidak menolak)."',
+    perbandinganMazhab: {
+      hanafi: 'Hanafi memandang diamnya gadis berlaku jika ia dimintai izin oleh wali kerabat dekatnya. Namun hak akad tetap berada pada si gadis setelah baligh.',
+      maliki: 'Maliki mensyaratkan izin lisan untuk janda, sedangkan gadis yang belum pernah menikah cukup diamnya selama tidak menunjukkan tanda penolakan nyata (seperti menangis menolak).',
+      syafii: 'Syafi\'i memandang diamnya perawan sebagai izin karena faktor rasa malu (*haya\'*). Namun bila sang gadis secara eksplisit berkata "saya tidak mau", maka wali haram menikahkannya.',
+      hanbali: 'Hanbali menetapkan bahwa jika seorang gadis telah berumur 9 tahun ke atas, izinnya wajib dimintakan secara nyata dan tidak boleh diabaikan.',
+      khiDanKonteks: 'KHI Pasal 17 ayat (1): "Sebelum perkawinan dilangsungkan, Pegawai Pencatat Nikah menanyakan lebih dahulu persetujuan calon mempelai di hadapan dua orang saksi nikah." Diam tidak lagi otomatis dianggap setuju tanpa konfirmasi verbal/tertulis.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Diamnya gadis dipahami sebagai persetujuan otomatis, sehingga jika seorang gadis menangis atau diam karena tertekan, tetap dianggap telah menyetujui.',
       poin: [
@@ -206,9 +247,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Kisah Barirah & Mughits: Nabi ﷺ Tidak Memaksakan Cinta yang Tidak Diridhai',
     rawi: 'Ibnu Abbas ra',
     kitab: 'Sahih al-Bukhari',
+    kitabBab: 'Kitab at-Thalaq, Bab Syafa\'atun Nabi fi Zauji Barirah',
     noHadis: 'No. 5283',
-    matnArab: 'فَقَالَ لَهَا النَّبِيُّ ﷺ: لَوْ رَاجَعْتِهِ؟ قَالَتْ: يَا رَسُولَ اللَّهِ، تَأْمُرُنِي؟ قَالَ: إِنَّمَا أَنَا أَشْفَعُ. قَالَتْ: لَا حَاجَةَ لِي فِيهِ',
-    terjemahan: 'Nabi ﷺ berkata kepada Barirah (yang memilih berpisah setelah merdeka, sementara suaminya Mughits menangis memohon): "Seandainya engkau mau rujuk kepadanya?" Barirah bertanya: "Wahai Rasulullah, apakah engkau memerintahkanku (sebagai wahyu)?" Nabi menjawab: "Aku hanya memberi syafaat (anjuran/saran)." Barirah menjawab tegas: "Aku tidak membutuhkan dirinya lagi."',
+    sanadArab: 'حَدَّثَنَا مُحَمَّدُ بْنُ بَشَّارٍ، حَدَّثَنَا عَبْدُ الوَهَّابِ، حَدَّثَنَا خَالِدٌ، عَنْ عِكْرِمَةَ، عَنِ ابْنِ عَبَّاسٍ رَضِيَ اللَّهُ عَنْهُمَا:',
+    matnArab: '«فَقَالَ لَهَا النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: لَوْ رَاجَعْتِهِ؟ قَالَتْ: يَا رَسُولَ اللَّهِ، تَأْمُرُنِي؟ قَالَ: إِنَّمَا أَنَا أَشْفَعُ. قَالَتْ: لَا حَاجَةَ لِي فِيهِ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Muhammad bin Basyar, telah menceritakan kepada kami Abdul Wahhab, telah menceritakan kepada kami Khalid al-Haddza\', dari Ikrimah, dari Ibnu Abbas رضي الله عنهما:',
+    terjemahan: 'Nabi ﷺ berkata kepada Barirah (yang memilih berpisah setelah merdeka, sementara mantan suaminya Mughits berjalan di belakangnya sambil menangis memohon): "Seandainya engkau mau rujuk kepadanya?" Barirah bertanya: "Wahai Rasulullah, apakah engkau memerintahkanku (sebagai kewajiban wahyu)?" Nabi menjawab: "Aku hanya memberi syafaat (saran manusiawi)." Barirah menjawab tegas: "Aku tidak membutuhkan dirinya lagi."',
+    perbandinganMazhab: {
+      hanafi: 'Hanafi menetapkan khiyar \'itq (hak pilih kemerdekaan budak) hanya berlaku jika budak perempuan merdeka sementara suaminya masih budak.',
+      maliki: 'Maliki sepakat bahwa hak pilih ada di tangan perempuan untuk melanjutkan ikatan perkawinan atau memfasakhnya.',
+      syafii: 'Syafi\'i menggunakan riwayat ini sebagai dalil sahnya pemutusan akad atas kehendak perempuan merdeka serta bukti bahwa rekomendasi pemimpin/hakim tidak bersifat memaksa hak privat seseorang.',
+      hanbali: 'Hanbali menegaskan bahwa kebebasan memilih pasangan hidup adalah hak murni individu yang tidak boleh diintervensi bahkan oleh otoritas kenabian jika sifatnya saran.',
+      khiDanKonteks: 'Menjadi pijakan etis dan yuridis bahwa kelangsungan hubungan suami istri tidak dapat dipaksakan oleh lembaga mana pun apabila salah satu pihak telah mengalami kebencian atau ketidakcocokan mendalam.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Kerap dikaji sebatas bab fiqh khiyar kemerdekaan budak (khiyarul \'itq) tanpa melihat dimensi hak otonomi cinta seorang perempuan.',
       poin: [
@@ -241,9 +292,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Konsep Mula\'abah: Saling Menyenangkan Sejak Awal Niat Menikah',
     rawi: 'Jabir bin Abdillah ra',
     kitab: 'Sahih Muslim',
-    noHadis: 'No. 4184',
-    matnArab: 'قَالَ رَسُولُ اللَّهِ ﷺ: يَا جَابِرُ، أَفَلَا تَزَوَّجْتَ بِكْرًا تُلاَعِبُكَ وَتُلاَعِبُهَا؟',
-    terjemahan: 'Rasulullah ﷺ berkata kepadaku: "Wahai Jabir, mengapa tidak menikahi gadis (perawan) sehingga ia bisa bersenang-senang denganmu (tula\'ibuka) dan engkau pun bisa bersenang-senang dengannya (tula\'ibuha)?"',
+    kitabBab: 'Kitab ar-Radha\', Bab Istihbab Nikah al-Bikr No. 715 (lihat juga Bukhari No. 5079)',
+    noHadis: 'Muslim No. 715 (Bukhari No. 5079)',
+    sanadArab: 'حَدَّثَنَا عُبَيْدُ اللَّهِ بْنُ مُعَاذٍ، حَدَّثَنَا أَبِي، حَدَّثَنَا شُعْبَةُ، عَنْ سَيَّارٍ، عَنِ الشَّعْبِيِّ، عَنْ جَابِرِ بْنِ عَبْدِ اللَّهِ رَضِيَ اللَّهُ عَنْهُمَا قَالَ:',
+    matnArab: '«قَالَ لِي رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: أَفَلَا تَزَوَّجْتَ بِكْرًا تُلاَعِبُكَ وَتُلاَعِبُهَا؟»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Ubaidullah bin Mu\'adz, telah menceritakan kepada kami ayahku, telah menceritakan kepada kami Syu\'bah, dari Sayyar, dari Asy-Sya\'bi, dari Jabir bin Abdillah رضي الله عنهما, ia berkata:',
+    terjemahan: 'Rasulullah ﷺ berkata kepadaku: "Mengapa tidak menikahi perawan saja, sehingga ia bisa bersenang-senang denganmu (tula\'ibuka) dan engkau pun bisa bersenang-senang dengannya (tula\'ibuha)?"',
+    perbandinganMazhab: {
+      hanafi: 'Menyukai anjuran menikahi gadis demi keharmonisan awal, namun membolehkan dan memuji pernikahan dengan janda jika mengandung kemaslahatan pengasuhan.',
+      maliki: 'Menilai anjuran ini bersifat irsyad (petunjuk praktis), bukan keharusan syar\'i; terbukti Nabi menyetujui alasan Jabir.',
+      syafii: 'Menyatakan sunnah menikahi perawan sebagai keutamaan umum, tetapi preferensi ini dapat bergeser menjadi lebih utama menikahi janda jika ada maslahat keluarga sebagaimana dialami Jabir.',
+      hanbali: 'Memandang anjuran mula\'abah sebagai tujuan sah pernikahan untuk saling menghalalkan dan memuaskan kebutuhan fitrah kedua pasangan secara halal.',
+      khiDanKonteks: 'Hukum perkawinan Indonesia tidak membedakan status perawan atau janda, perjaka atau duda; yang dinilai adalah kecakapan hukum dan ketiadaan halangan perkawinan.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Sering dipotong sepihak untuk menganjurkan menikahi perawan dan mendiskreditkan janda, dengan fokus semata pada kepuasan seksual laki-laki.',
       poin: [
@@ -278,10 +339,20 @@ export const HADITHS_DATA: HadithItem[] = [
     pertemuan: 6,
     title: 'Pemenuhan Syarat Akad: Kewajiban Mengikat Janji Pernikahan',
     rawi: 'Uqbah bin Amir ra',
-    kitab: 'Sahih al-Bukhari',
-    noHadis: 'No. 2760',
-    matnArab: 'أَحَقُّ الشُّرُوطِ أَنْ تُوفُوا بِهِ مَا اسْتَحْلَلْتُمْ بِهِ الْفُرُوجَ',
-    terjemahan: 'Syarat-syarat perjanjian yang paling wajib kalian penuhi adalah syarat yang dengannya kalian menghalalkan hubungan pernikahan.',
+    kitab: 'Sahih al-Bukhari & Sahih Muslim',
+    kitabBab: 'Bukhari: Kitab an-Nikah, Bab asy-Syuruth fil Mahri No. 2721 & 5151; Muslim No. 1418',
+    noHadis: 'Bukhari No. 2721 (Muslim No. 1418)',
+    sanadArab: 'حَدَّثَنَا عَلِيُّ بْنُ عَبْدِ اللَّهِ، حَدَّثَنَا سُفْيَانُ، حَدَّثَنَا الزُّهْرِيُّ، عَنْ عُرْوَةَ، عَنْ عُقْبَةَ بْنِ عَامِرٍ رَضِيَ اللَّهُ عَنْهُ، عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ:',
+    matnArab: '«أَحَقُّ الشُّرُوطِ أَنْ تُوفُوا بِهِ مَا اسْتَحْلَلْتُمْ بِهِ الْفُرُوجَ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Ali bin Abdullah, telah menceritakan kepada kami Sufyan, telah menceritakan kepada kami Az-Zuhri, dari Urwah, dari Uqbah bin Amir رضي الله عنه, dari Nabi ﷺ, beliau bersabda:',
+    terjemahan: 'Syarat-syarat yang paling berhak untuk kalian penuhi adalah syarat-syarat yang dengannya kalian menghalalkan hubungan pernikahan.',
+    perbandinganMazhab: {
+      hanafi: 'Membatasi keabsahan syarat: syarat yang bertentangan dengan konsekuensi akad (seperti syarat tidak mau dimadu atau syarat tidak mau dinafkahi) dianggap batal, namun akad nikahnya tetap sah.',
+      maliki: 'Memandang syarat yang bermanfaat bagi istri hukumnya makruh atau tidak mengikat kecuali jika dipertegas dalam akad, namun tidak membatalkan akad.',
+      syafii: 'Syafi\'i membedakan: syarat yang sesuai tuntutan akad (seperti menggauli dengan baik) wajib dipenuhi; syarat yang bertentangan dengan esensi akad batal; syarat yang memberi maslahat tambahan diperselisihkan keharusan pemenuhannya.',
+      hanbali: 'Imam Ahmad bin Hanbal adalah mazhab paling progresif dalam bab ini: seluruh syarat yang diajukan istri (seperti syarat agar suami tidak berpoligami, tidak membawanya pindah kota, atau izin bekerja) adalah SAH dan WAJIB dipenuhi. Jika suami melanggar, istri berhak menuntut fasakh.',
+      khiDanKonteks: 'KHI Pasal 45–52 mengadopsi pandangan Hanbali: calon mempelai dapat mengadakan perjanjian perkawinan tertulis mengenai pemisahan harta, izin karier, dan klausul taklik talak.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Kerap dipersempit hanya seputar keabsahan syarat teknis rukun akad (ijab-qabul, mahar, saksi) tanpa memberi ruang kesepakatan tertulis bagi perempuan.',
       poin: [
@@ -313,9 +384,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Mahar yang Membawa Berkah: Larangan Memberatkan & Mengomersialisasikan Perkawinan',
     rawi: 'Aisyah ra',
     kitab: 'Musnad Ahmad',
+    kitabBab: 'Baqi Musnad al-Anshar, Musnad Aisyah ra',
     noHadis: 'No. 24595',
-    matnArab: 'إِنَّ أَعْظَمَ النِّكَاحِ بَرَكَةً أَيْسَرُهُ مَئُونَةً',
+    sanadArab: 'حَدَّثَنَا يَحْيَى بْنُ سَعِيدٍ، عَنِ ابْنِ جُرَيْجٍ، عَنْ أَبِي الزُّبَيْرِ، عَنْ عَائِشَةَ رَضِيَ اللَّهُ عَنْهَا، عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ:',
+    matnArab: '«إِنَّ أَعْظَمَ النِّكَاحِ بَرَكَةً أَيْسَرُهُ مَئُونَةً»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Yahya bin Sa\'id, dari Ibnu Juraij, dari Abu az-Zubair, dari Aisyah رضي الله عنها, dari Nabi ﷺ, beliau bersabda:',
     terjemahan: 'Sesungguhnya pernikahan yang paling agung keberkahannya adalah yang paling mudah (ringan) biayanya (maharnya).',
+    perbandinganMazhab: {
+      hanafi: 'Menetapkan batas minimal mahar sebesar 10 dirham perak; mahar di bawah nominal tersebut tidak sah dan harus digenapkan menjadi 10 dirham.',
+      maliki: 'Menetapkan batas minimal mahar seperempat dinar emas atau tiga dirham perak timbangan.',
+      syafii: 'Tidak menetapkan batas minimal maupun maksimal bagi mahar; apa saja yang bernilai harta (*muttamawwal*) sah dijadikan mahar, namun disunnahkan tidak berlebih-lebihan.',
+      hanbali: 'Sependapat dengan Syafi\'i bahwa mahar tidak memiliki batas minimal, dan makruh hukumnya membebankan mahar di luar kewajaran kemampuan suami.',
+      khiDanKonteks: 'KHI Pasal 31: "Penentuan mahar diserahkan pada persetujuan kedua belah pihak dengan mengutamakan kesederhanaan dan kemudahan yang dianjurkan oleh ajaran Islam."'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Sering dipakai untuk menekan pihak perempuan agar menerima mahar serendah mungkin tanpa menimbang hak perlindungan ekonominya.',
       poin: [
@@ -347,9 +428,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Mahar Cincin Besi & Hafalan Surah: Menghargai Nilai Pengetahuan & Integritas',
     rawi: 'Sahl bin Sa\'ad ra',
     kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 5087, Muslim No. 1425',
-    matnArab: 'فَقَالَ: الْتَمِسْ وَلَوْ خَاتَمًا مِنْ حَدِيدٍ... قَالَ: مَعِي سُورَةُ كَذَا وَسُورَةُ كَذَا، قَالَ: قَدْ مَلَّكْتُكَهَا بِمَا مَعَكَ مِنَ القُرْآنِ',
-    terjemahan: 'Nabi ﷺ bersabda kepada pria yang hendak menikah namun miskin: "Carilah mahar walau hanya cincin dari besi." Ketika ia tetap tidak memilikinya, Nabi bertanya: "Surah apa yang kau hafal?" Ia menjawab: "Surah ini dan itu." Nabi bersabda: "Aku nikahkan engkau dengannya dengan mahar mengajarkan surah Al-Qur\'an yang kau miliki."',
+    kitabBab: 'Bukhari: Kitab an-Nikah, Bab Tazwij al-Mu\'sir alladzi ma\'ahu al-Qur\'an No. 5087; Muslim No. 1425',
+    noHadis: 'Bukhari No. 5087 (Muslim No. 1425)',
+    sanadArab: 'حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، أَخْبَرَنَا مَالِكٌ، عَنْ أَبِي حَازِمٍ، عَنْ سَهْلِ بْنِ سَعْدٍ السَّاعِدِيِّ رَضِيَ اللَّهُ عَنْهُ، أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ لِلرَّجُلِ:',
+    matnArab: '«الْتَمِسْ وَلَوْ خَاتَمًا مِنْ حَدِيدٍ... قَالَ: مَعِي سُورَةُ كَذَا وَسُورَةُ كَذَا، قَالَ: قَدْ مَلَّكْتُكَهَا بِمَا مَعَكَ مِنَ القُرْآنِ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Abdullah bin Yusuf, telah mengabarkan kepada kami Malik, dari Abu Hazim, dari Sahl bin Sa\'ad as-Sa\'idi رضي الله عنه, bahwa Nabi ﷺ bersabda kepada pria yang hendak menikah:',
+    terjemahan: '"Carilah mahar walau hanya cincin dari besi." Ketika ia tetap tidak memilikinya, Nabi bertanya: "Surah Al-Qur\'an apa yang kau hafal?" Ia menjawab: "Surah ini dan itu." Nabi bersabda: "Aku telah nikahkan engkau dengannya dengan mahar mengajarkan surah Al-Qur\'an yang engkau miliki."',
+    perbandinganMazhab: {
+      hanafi: 'Menolak jasa pengajaran Al-Qur\'an sebagai mahar karena mahar menurut Hanafi wajib berupa harta benda (*mal*). Suami yang demikian wajib membayar mahar mitsil berupa uang.',
+      maliki: 'Membolehkan pengajaran Al-Qur\'an sebagai mahar hanya dalam kondisi darurat kemiskinan seperti pada masa sahabat tersebut.',
+      syafii: 'Membolehkan secara mutlak mahar berupa jasa pengajaran Al-Qur\'an atau ilmu yang bermanfaat, karena manfaat jasa (*manfa\'ah*) setara dengan harta.',
+      hanbali: 'Membolehkan jasa pengajaran Al-Qur\'an dan ilmu sebagai mahar yang sah dan mengikat.',
+      khiDanKonteks: 'KHI Pasal 30: "Calon mempelai pria wajib membayar mahar kepada calon mempelai wanita yang jumlah, bentuk dan jenisnya disepakati oleh kedua belah pihak." Membuka ruang mahar jasa/edukatif.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Dijadikan dalil fiqh tentang bolehnya mahar berupa jasa pengajaran Al-Qur\'an ketika uang tidak tersedia.',
       poin: [
@@ -382,11 +473,21 @@ export const HADITHS_DATA: HadithItem[] = [
     stageId: 'domestik',
     theme: 'Pembagian Kerja Rumah Tangga (Khidmah al-Bayt)',
     title: 'Keteladanan Nabi ﷺ: Menjahit Baju dan Melayani Keperluan Rumah Tangga',
-    rawi: 'Aisyah ra (dituturkan kepada Urwah & Al-Aswad)',
+    rawi: 'Aisyah ra (dituturkan kepada Al-Aswad bin Yazid)',
     kitab: 'Sahih al-Bukhari & Musnad Ahmad',
-    noHadis: 'Bukhari No. 680, Ahmad No. 24902',
-    matnArab: 'كَانَ يَكُونُ فِي مِهْنَةِ أَهْلِهِ تَعْنِي خِدْمَةَ أَهْلِهِ، فَإِذَا حَضَرَتِ الصَّلَاةُ خَرَجَ إِلَى الصَّلَاةِ... يَخْصِفُ نَعْلَهُ، وَيُرَقِّعُ ثَوْبَهُ، وَيَحْلِبُ شَاتَهُ',
-    terjemahan: 'Nabi ﷺ biasa membantu pekerjaan keluarganya — melayani kebutuhan keluarganya. Apabila telah masuk waktu shalat, beliau bergegas keluar untuk shalat... Beliau memperbaiki sandalnya sendiri, menambal bajunya, dan memerah susu kambingnya sendiri.',
+    kitabBab: 'Bukhari: Kitab al-Adab, Bab Kaifa Yakunur Rajulu fi Ahlihi No. 676 & 6039; Ahmad No. 24902',
+    noHadis: 'Bukhari No. 676 (Ahmad No. 24902)',
+    sanadArab: 'حَدَّثَنَا مُحَمَّدُ بْنُ عَرْعَرَةَ، حَدَّثَنَا شُعْبَةُ، عَنِ الحَكَمِ، عَنْ إِبْرَاهِيمَ، عَنِ الأَسْوَدِ بْنِ يَزِيدَ، سَأَلْتُ عَائِشَةَ رَضِيَ اللَّهُ عَنْهَا: مَا كَانَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَصْنَعُ فِي بَيْتِهِ؟ قَالَتْ:',
+    matnArab: '«كَانَ يَكُونُ فِي مِهْنَةِ أَهْلِهِ - تَعْنِي خِدْمَةَ أَهْلِهِ - فَإِذَا حَضَرَتِ الصَّلَاةُ خَرَجَ إِلَى الصَّلَاةِ... يَخْصِفُ نَعْلَهُ، وَيُرَقِّعُ ثَوْبَهُ، وَيَحْلِبُ شَاتَهُ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Muhammad bin Ar\'arah, telah menceritakan kepada kami Syu\'bah, dari Al-Hakam, dari Ibrahim, dari Al-Aswad bin Yazid: Aku bertanya kepada Aisyah رضي الله عنها: Apa yang biasa dikerjakan Nabi ﷺ di rumahnya? Aisyah menjawab:',
+    terjemahan: 'Nabi ﷺ biasa membantu pekerjaan keluarganya — yakni melayani kebutuhan keluarganya. Maka apabila telah masuk waktu shalat, beliau bergegas keluar untuk shalat... Beliau memperbaiki sandalnya sendiri, menambal bajunya, dan memerah susu kambingnya sendiri.',
+    perbandinganMazhab: {
+      hanafi: 'Mayoritas fuqaha Hanafi memandang pekerjaan rumah tangga sebagai kewajiban religius-kekerabatan (*diyanatan*), namun bukan kewajiban hukum yang dapat dituntut di pengadilan (*qadha\'an*).',
+      maliki: 'Mewajibkan istri melayani urusan rumah tangga ringan jika suaminya miskin dan istri terbiasa melayani urusan rumah tangga di keluarganya. Jika istri dari kalangan bangsawan/kaya, suami wajib menyediakan asisten rumah tangga.',
+      syafii: 'Secara tegas menetapkan bahwa pekerjaan domestik (memasak, mencuci, membersihkan rumah) BUKAN kewajiban hukum bagi istri. Suami berkewajiban menyediakan makanan yang siap santap dan pakaian yang bersih.',
+      hanbali: 'Sepakat dengan Syafi\'i bahwa akad nikah adalah akad kebersamaan (*istimta\'*), bukan akad sewa tenaga kerja (*ijarah*). Istri tidak berdosa secara hukum jika menolak memasak dan mencuci.',
+      khiDanKonteks: 'KHI Pasal 77 ayat (2): "Suami istri memikul kewajiban yang luhur untuk menegakkan rumah tangga yang sakinah, mawaddah dan rahmah." Kemitraan domestik menjadi kunci menghindarkan beban ganda pada istri.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Hanya dibaca sebagai akhlak kesunahan/zuhud pribadi Nabi, namun dalam fatwa fiqh praktis pekerjaan domestik tetap dipaksakan sebagai tugas kodrati istri.',
       poin: [
@@ -417,10 +518,20 @@ export const HADITHS_DATA: HadithItem[] = [
     theme: 'Etika Menghargai Upaya Pasangan',
     title: 'Adab Berkeluarga: Menahan Diri dari Mencela Masakan & Jerih Payah Pasangan',
     rawi: 'Abu Hurairah ra',
-    kitab: 'Sahih al-Bukhari',
-    noHadis: 'No. 5409',
-    matnArab: 'مَا عَابَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ طَعَامًا قَطُّ، إِنِ اشْتَهَاهُ أَكَلَهُ، وَإِنْ كَرِهَهُ تَرَكَهُ',
-    terjemahan: 'Nabi ﷺ sama sekali tidak pernah mencela makanan. Jika beliau menyukainya, beliau memakannya; dan jika beliau tidak menyukainya, beliau meninggalkannya (tanpa mencelanya).',
+    kitab: 'Sahih al-Bukhari & Sahih Muslim',
+    kitabBab: 'Bukhari: Kitab al-Ath\'imah, Bab Ma \'Aba an-Nabiyyu Tha\'aman Qatthu No. 5409; Muslim No. 2064',
+    noHadis: 'Bukhari No. 5409 (Muslim No. 2064)',
+    sanadArab: 'حَدَّثَنَا عَلِيُّ بْنُ عَبْدِ اللَّهِ، حَدَّثَنَا سُفْيَانُ، عَنْ مُحَمَّدِ بْنِ المُنْكَدِرِ، عَنْ سَعِيدِ بْنِ الحَارِثِ، عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ:',
+    matnArab: '«مَا عَابَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ طَعَامًا قَطُّ، إِنِ اشْتَهَاهُ أَكَلَهُ، وَإِنْ كَرِهَهُ تَرَكَهُ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Ali bin Abdullah, telah menceritakan kepada kami Sufyan, dari Muhammad bin al-Munkadir, dari Sa\'id bin al-Harits, dari Abu Hurairah رضي الله عنه, ia berkata:',
+    terjemahan: 'Nabi ﷺ sama sekali tidak pernah mencela makanan. Jika beliau menyukainya, beliau memakannya; dan jika beliau tidak menyukainya, beliau meninggalkannya (tanpa mencela atau menggerutu).',
+    perbandinganMazhab: {
+      hanafi: 'Memandang adab ini sebagai sunnah muakkadah dalam menjaga kehormatan orang yang menyiapkan hidangan.',
+      maliki: 'Menilai mencela makanan yang disajikan keluarga sebagai perbuatan makruh yang merusak mu\'asyarah bil ma\'ruf.',
+      syafii: 'Imam an-Nawawi (Syarah Muslim) menjelaskan bahwa mencela makanan termasuk menyakiti hati pembuatnya; menahan lisan adalah wujud akhlak kenabian.',
+      hanbali: 'Menempatkan adab ini sebagai bagian dari kewajiban bergaul dengan cara yang ma\'ruf kepada istri.',
+      khiDanKonteks: 'Konflik rumah tangga kerap dipicu oleh kekerasan verbal atas hal sepele; adab kenabian ini adalah pencegahan dini atas KDRT emosional di meja makan.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Ditempatkan hanya dalam bab adab makan pribadi secara umum agar tidak menghina rezeki Allah.',
       poin: [
@@ -452,9 +563,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Lomba Lari Nabi & Aisyah: Menumbuhkan Canda, Kesenangan & Rekreasi Bersama',
     rawi: 'Aisyah ra',
     kitab: 'Sunan Abu Dawud & Musnad Ahmad',
-    noHadis: 'Abu Dawud No. 2578, Ahmad No. 24164',
-    matnArab: 'سَابَقَنِي النَّبِيُّ ﷺ فَسَبَقْتُهُ، فَلَمَّا رَهِقَنِي اللَّحْمُ سَابَقَنِي فَسَبَقَنِي، فَقَالَ: هَذِهِ بِتِلْكَ',
-    terjemahan: 'Nabi ﷺ pernah mengajakku berlomba lari, dan aku berhasil mengalahkan beliau. Selang beberapa tahun ketika tubuhku sudah lebih berisi, beliau mengajakku berlomba lari kembali dan beliau mengalahkanku. Beliau tertawa seraya berkata: "Kemenangan ini adalah balasan atas kekalahanku yang dulu!"',
+    kitabBab: 'Abu Dawud: Kitab al-Jihad, Bab fis Sabaq \'alar Rijil No. 2578; Ahmad No. 24164',
+    noHadis: 'Abu Dawud No. 2578 (Ahmad No. 24164)',
+    sanadArab: 'حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا عِيسَى بْنُ يُونُسَ، حَدَّثَنَا هِشَامُ بْنُ عُرْوَةَ، عَنْ أَبِيهِ، عَنْ عَائِشَةَ رَضِيَ اللَّهُ عَنْهَا:',
+    matnArab: '«سَابَقَنِي النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَسَبَقْتُهُ، فَلَمَّا رَهِقَنِي اللَّحْمُ سَابَقَنِي فَسَبَقَنِي، فَقَالَ: هَذِهِ بِتِلْكَ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Musaddad, telah menceritakan kepada kami Isa bin Yunus, telah menceritakan kepada kami Hisyam bin Urwah, dari ayahnya, dari Aisyah رضي الله عنها:',
+    terjemahan: 'Nabi ﷺ pernah mengajakku berlomba lari, dan aku berhasil mengalahkan beliau. Selang beberapa tahun ketika tubuhku sudah lebih berisi, beliau mengajakku berlomba lari kembali dan beliau mengalahkanku. Beliau tersenyum seraya berkata: "Kemenangan ini adalah balasan atas kekalahanku yang dahulu!"',
+    perbandinganMazhab: {
+      hanafi: 'Menganjurkan senda gurau halal antara suami dan istri sebagai sarana menjaga keharmonisan rumah tangga.',
+      maliki: 'Menilai rekreasi dan olahraga santai bersama keluarga sebagai hal yang dianjurkan (mustahab).',
+      syafii: 'Menjadikan hadis ini sebagai dalil sunnahnya bersikap lemah lembut (*husnul khuluq*), berolahraga, dan mencairkan suasana kaku dalam relasi suami istri.',
+      hanbali: 'Memandang bahwa menyenangkan hati istri dengan perlombaan mubah termasuk amalan yang mendatangkan pahala.',
+      khiDanKonteks: 'Mendukung terciptanya pilar keluarga sakinah di mana rumah tangga bukan sekadar urusan hukum formal, melainkan ruang psikologis yang membahagiakan.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Dikutip sebatas bukti kelembutan dan keramahan pribadi Nabi terhadap istrinya yang masih muda.',
       poin: [
@@ -478,40 +599,6 @@ export const HADITHS_DATA: HadithItem[] = [
     tags: ['Keakraban Pasutri', 'Humor Rumah Tangga', 'Rekreasi', 'Mawaddah'],
     quoteSnippet: 'Rasulullah ﷺ berlomba lari dan bercanda dengan istrinya: membuktikan bahwa kehangatan tawa dan rekreasi bersama adalah pilar penting ketenteraman rumah tangga.'
   },
-  {
-    id: 'hadis-shalat-malam-bersama',
-    stageId: 'domestik',
-    theme: 'Kemitraan Spiritual Pasutri',
-    pertemuan: 3,
-    title: 'Saling Membangunkan Shalat Malam: Sinergi Spiritual yang Setara & Simetris',
-    rawi: 'Abu Hurairah ra',
-    kitab: 'Sunan Abu Dawud',
-    noHadis: 'No. 1310',
-    matnArab: 'رَحِمَ اللَّهُ رَجُلًا قَامَ مِنَ اللَّيْلِ فَصَلَّى وَأَيْقَظَ امْرَأَتَهُ، فَإِنْ أَبَتْ نَضَحَ فِي وَجْهِهَا المَاءَ. رَحِمَ اللَّهُ امْرَأَةً قَامَتْ مِنَ اللَّيْلِ فَصَلَّتْ وَأَيْقَظَتْ زَوْجَهَا، فَإِنْ أَبَى نَضَحَتْ فِي وَجْهِهِ المَاءَ',
-    terjemahan: 'Semoga Allah merahmati seorang laki-laki yang bangun malam untuk shalat lalu membangunkan istrinya; jika istrinya enggan, ia memercikkan air ke wajahnya. Dan semoga Allah merahmati seorang perempuan yang bangun malam untuk shalat lalu membangunkan suaminya; jika suaminya enggan, ia memercikkan air ke wajah suaminya.',
-    pemaknaanKonvensional: {
-      ringkasan: 'Ditempatkan dalam bab keutamaan shalat tahajud sunnah tanpa dihubungkan dengan model kesetaraan relasi rumah tangga.',
-      poin: [
-        'Diposisikan murni ritual pribadi.',
-        'Tidak dianalisis sebagai model ideal hubungan resiprokal tanpa hierarki.'
-      ]
-    },
-    pemaknaanMubadalah: {
-      ringkasan: 'Redaksi hadis ini disusun secara simetris sempurna: tindakan suami kepada istri identik dengan tindakan istri kepada suami, dan doa rahmat Allah dianugerahkan setara kepada keduanya. Mengajak pada kebaikan (amar ma\'ruf) adalah hak dan kewajiban bersama, bukan hak eksklusif suami atas istri.',
-      illatHukum: 'Kerjasama menuju kesalehan spiritual berbasis cinta dan kebersamaan.',
-      poinKesalingan: [
-        'Tidak ada pihak yang mendominasi dalam urusan ketaatan kepada Allah: istri berhak mengingatkan suami, suami berhak mengingatkan istri.',
-        'Bercandaan memercikkan air mencerminkan kelembutan dan keintiman yang hangat.'
-      ],
-      aplikasiHariIni: [
-        'Jadikan ibadah dan amal kebajikan sebagai proyek kolaborasi bersama pasangan.',
-        'Saling mendukung ketika salah satu pihak merasa futur (lemah semangat) dalam beribadah.'
-      ]
-    },
-    pilarTerkait: ['Zawaj', 'Tasyawur'],
-    tags: ['Kemitraan Spiritual', 'Shalat Malam', 'Kesalingan Simetris', 'Sakinah'],
-    quoteSnippet: 'Allah merahmati suami yang membangunkan istrinya untuk ibadah, dan Allah merahmati istri yang membangunkan suaminya: kesetaraan sempurna dalam meraih rida Ilahi.'
-  },
 
   // ==========================================
   // KLASTER 4: FINANSIAL & NAFKAH
@@ -523,9 +610,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Nafkah Bil Ma\'ruf: Hak Kecukupan Hidup dan Larangan Kekikiran Pasangan',
     rawi: 'Aisyah ra',
     kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 5364, Muslim No. 1714',
-    matnArab: 'قَالَتْ هِنْدُ: يَا رَسُولَ اللَّهِ، إِنَّ أَبَا سُفْيَانَ رَجُلٌ شَحِيحٌ، وَلَيْسَ يُعْطِينِي مَا يَكْفِينِي وَوَلَدِي إِلَّا مَا أَخَذْتُ مِنْهُ وَهُوَ لَا يَعْلَمُ، فَقَالَ: خُذِي مَا يَكْفِيكِ وَوَلَدَكِ بِالْمَعْرُوفِ',
-    terjemahan: 'Hindun berkata: "Wahai Rasulullah, Abu Sufyan adalah laki-laki yang kikir; ia tidak memberiku nafkah yang mencukupi aku dan anakku, kecuali apa yang kuambil tanpa sepengetahuannya." Maka Nabi ﷺ bersabda: "Ambillah apa yang mencukupi dirimu dan anakmu secara ma\'ruf (patut dan wajar)."',
+    kitabBab: 'Bukhari: Kitab an-Nafaqat, Bab Idza lam Yunfiq ar-Rajulu fa li Zaujatihi an Ta\'khudza bi Ghairi Idznihi No. 5364; Muslim No. 1714',
+    noHadis: 'Bukhari No. 5364 (Muslim No. 1714)',
+    sanadArab: 'حَدَّثَنَا مُحَمَّدُ بْنُ الْمُثَنَّى، حَدَّثَنَا عَبْدُ الْوَهَّابِ، حَدَّثَنَا هِشَامٌ، عَنْ أَبِيهِ، عَنْ عَائِشَةَ رَضِيَ اللَّهُ عَنْهَا:',
+    matnArab: '«قَالَتْ هِنْدُ: يَا رَسُولَ اللَّهِ، إِنَّ أَبَا سُفْيَانَ رَجُلٌ شَحِيحٌ، وَلَيْسَ يُعْطِينِي مَا يَكْفِينِي وَوَلَدِي إِلَّا مَا أَخَذْتُ مِنْهُ وَهُوَ لَا يَعْلَمُ، فَقَالَ: خُذِي مَا يَكْفِيكِ وَوَلَدَكِ بِالْمَعْرُوفِ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Muhammad bin al-Mutsanna, telah menceritakan kepada kami Abdul Wahhab, telah menceritakan kepada kami Hisyam, dari ayahnya (Urwah), dari Aisyah رضي الله عنها:',
+    terjemahan: 'Hindun binti \'Utbah berkata: "Wahai Rasulullah, Abu Sufyan adalah laki-laki yang kikir; ia tidak memberiku nafkah yang mencukupi aku dan anakku, kecuali apa yang kuambil tanpa sepengetahuannya." Maka Nabi ﷺ bersabda: "Ambillah dari hartanya apa yang mencukupi dirimu dan anakmu secara ma\'ruf (patut dan wajar)."',
+    perbandinganMazhab: {
+      hanafi: 'Kadar nafkah diukur dengan menimbang kondisi kemampuan suami dan kebutuhan istri (*bi hasabi halihima*).',
+      maliki: 'Nafkah diukur berdasarkan kemampuan suami dan standar kepatutan hidup istri di lingkungan sosialnya (*al-ma\'ruf*).',
+      syafii: 'Menentukan ukuran takaran pasti berdasarkan kemampuan ekonomi suami (suami kaya 2 mud/hari, sedang 1.5 mud, miskin 1 mud), ditambah pakaian dan tempat tinggal.',
+      hanbali: 'Ukuran nafkah merujuk pada standar kelayakan masyarakat (*bi qadri al-kifayah bil ma\'ruf*). Hadis Hindun menjadi dalil bolehnya istri mengambil haknya tanpa izin jika suami menahan hak tersebut.',
+      khiDanKonteks: 'KHI Pasal 80 ayat (4): "Suami sesuai dengan penghasilannya menanggung nafkah, kiswah dan tempat kediaman bagi istri, biaya rumah tangga, biaya perawatan dan pengobatan, serta biaya pendidikan anak."'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Hanya dijadikan dalil fiqh kebolehan istri mengambil uang suami yang pelit secara diam-diam sebatas kebutuhan makan pokok.',
       poin: [
@@ -557,9 +654,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Hadis Zainab ats-Tsaqafiyah: Apresiasi Dua Pahala bagi Istri yang Menafkahi Keluarga',
     rawi: 'Zainab istri Ibnu Mas\'ud ra',
     kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 1466, Muslim No. 1000',
-    matnArab: 'أَنَّهَا سَأَلَتِ النَّبِيَّ ﷺ: أَيُجْزِئُ عَنِّي أَنْ أُنْفِقَ عَلَى زَوْجِي وَأَيْتَامٍ فِي حِجْرِي؟ فَقَالَ النَّبِيُّ ﷺ: لَهَا أَجْرَانِ: أَجْرُ القَرَابَةِ وَأَجْرُ الصَّدَقَةِ',
-    terjemahan: 'Zainab bertanya kepada Nabi ﷺ: "Apakah berpahala sedekah bagiku jika aku menafkahkan hartaku untuk suamiku (Ibnu Mas\'ud yang miskin) dan anak-anak yatim dalam asuhanku?" Nabi ﷺ bersabda: "Bagi perempuan itu dua pahala: pahala hubungan kekerabatan dan pahala sedekah."',
+    kitabBab: 'Bukhari: Kitab az-Zakah, Bab az-Zakah \'alaz Zauji wal Aitam No. 1466; Muslim No. 1000',
+    noHadis: 'Bukhari No. 1466 (Muslim No. 1000)',
+    sanadArab: 'حَدَّثَنَا عُمَرُ بْنُ حَفْصٍ، حَدَّثَنَا أَبِي، حَدَّثَنَا الأَعْمَشُ، حَدَّثَنَا شَقِيقٌ، عَنْ عَمْرِو بْنِ الحَارِثِ، عَنْ زَيْنَبَ امْرَأَةِ عَبْدِ اللَّهِ رَضِيَ اللَّهُ عَنْهُمَا:',
+    matnArab: '«أَنَّهَا سَأَلَتِ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: أَيُجْزِئُ عَنِّي أَنْ أُنْفِقَ عَلَى زَوْجِي وَأَيْتَامٍ فِي حِجْرِي؟ فَقَالَ النَّبِيُّ ﷺ: لَهَا أَجْرَانِ: أَجْرُ القَرَابَةِ وَأَجْرُ الصَّدَقَةِ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Umar bin Hafsh, telah menceritakan kepada kami ayahku, telah menceritakan kepada kami Al-A\'masy, telah menceritakan kepada kami Syaqiq, dari Amr bin al-Harits, dari Zainab istri Abdullah bin Mas\'ud رضي الله عنهما:',
+    terjemahan: 'Zainab bertanya kepada Nabi ﷺ: "Apakah mencukupi bagiku (berpahala sedekah) jika aku menafkahkan hartaku untuk suamiku (Ibnu Mas\'ud yang kekurangan) dan anak-anak yatim dalam asuhanku?" Nabi ﷺ bersabda: "Bagi perempuan itu dua pahala: pahala hubungan kekerabatan dan pahala sedekah."',
+    perbandinganMazhab: {
+      hanafi: 'Membolehkan istri memberikan sedekah/zakat mal kepada suaminya yang fakir menurut Abu Yusuf dan Muhammad bin al-Hasan (berbeda dengan pendapat awal Abu Hanifah).',
+      maliki: 'Membolehkan sedekah sunnah istri kepada suami, tetapi untuk zakat wajib terdapat perbedaan pendapat.',
+      syafii: 'Membolehkan secara mutlak zakat maupun sedekah sunnah istri diberikan kepada suaminya yang miskin, karena istri tidak berkewajiban menafkahi suami secara hukum.',
+      hanbali: 'Membolehkan sedekah dan zakat istri kepada suami yang membutuhkan, menegaskan kemandirian finansial penuh istri.',
+      khiDanKonteks: 'KHI mengakui pemisahan harta bawaan dan harta bersama. Kontribusi finansial istri bekerja tidak menggugurkan hak nafkahnya dari suami, melainkan bentuk ta\'awun luhur.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Dipahami sebatas hukum bolehnya istri kaya bersedekah kepada kerabat dan suaminya yang tidak mampu.',
       poin: [
@@ -584,39 +691,6 @@ export const HADITHS_DATA: HadithItem[] = [
     tags: ['Istri Bekerja', 'Kemandirian Finansial', 'Pahala Sedekah', 'Kerjasama Pasutri'],
     quoteSnippet: 'Ketika seorang istri turut menopang perekonomian rumah tangga, ia bukan sekadar penolong, melainkan mitra mulia yang dianugerahi ganjaran cinta dan sedekah berlipat.'
   },
-  {
-    id: 'hadis-suapan-makanan-sedekah',
-    stageId: 'finansial',
-    theme: 'Nafkah Batiniah & Afeksi Material',
-    title: 'Suapan Makanan Bernilai Sedekah: Menyatukan Dimensi Nafkah Lahir & Afeksi Hati',
-    rawi: 'Sa\'ad bin Abi Waqqash ra',
-    kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 56, Muslim No. 1628',
-    matnArab: 'وَإِنَّكَ لَنْ تُنْفِقَ نَفَقَةً تَبْتَغِي بِهَا وَجْهَ اللَّهِ إِلَّا أُجِرْتَ عَلَيْهَا، حَتَّى مَا تَجْعَلُ فِي فَمِ امْرَأَتِكَ',
-    terjemahan: 'Sesungguhnya tidaklah engkau mengeluarkan suatu nafkah demi mengharap rida Allah, melainkan engkau pasti diberi pahala atasnya, bahkan sampai suapan makanan yang engkau letakkan di mulut istrimu.',
-    pemaknaanKonvensional: {
-      ringkasan: 'Dikutip dalam bab keutamaan niat ikhlas dalam memberikan nafkah keluarga agar berpahala sedekah.',
-      poin: [
-        'Sering dipahami sebatas transfer uang atau belanja bulanan semata.',
-        'Mengabaikan dimensi bahasa cinta (*gesture*) yang dicontohkan dalam redaksi hadis.'
-      ]
-    },
-    pemaknaanMubadalah: {
-      ringkasan: 'Nabi ﷺ mengajarkan bahwa nafkah bukan sekadar transfer rupiah yang dingin, melainkan ekspresi cinta dan keintiman emosional. Suapan makanan melambangkan kepedulian, kelembutan, dan pemuliaan pasangan hidup.',
-      illatHukum: 'Menghadirkan kehangatan batiniah dalam setiap pemenuhan kebutuhan lahiriah.',
-      poinKesalingan: [
-        'Pemberian nafkah harus disertai dengan tutur kata yang manis dan sikap yang menghargai, bukan dengan gerutu atau rasa berkuasa.',
-        'Istri dan suami saling menyuapi dan melayani dengan penuh kerelaan.'
-      ],
-      aplikasiHariIni: [
-        'Biasakan makan bersama pasangan dan tunjukkan perhatian kecil seperti menyendokkan hidangan.',
-        'Jangan pernah menyertakan ungkapan merendahkan saat menyerahkan nafkah kepada pasangan.'
-      ]
-    },
-    pilarTerkait: ["Mu'asyarah bi al-Ma'ruf", 'Zawaj'],
-    tags: ['Nafkah Afeksi', 'Bahasa Cinta', 'Sedekah Keluarga', 'Kehangatan'],
-    quoteSnippet: 'Nafkah bukan sekadar angka transaksi; bahkan sebutir suapan yang engkau berikan dengan penuh cinta ke mulut pasanganmu bernilai sedekah agung di sisi Allah.'
-  },
 
   // ==========================================
   // KLASTER 5: KEINTIMAN & HAK REPRODUKSI
@@ -628,9 +702,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Pembacaan Kritis Hadis "Ajakan Ranjang": Meluruskan Pemahaman Marital Consent',
     rawi: 'Abu Hurairah ra',
     kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 5193, Muslim No. 1436',
-    matnArab: 'إِذَا دَعَا الرَّجُلُ امْرَأَتَهُ إِلَى فِرَاشِهِ فَأَبَتْ أَنْ تَجِيءَ فَبَاتَ غَضْبَانَ عَلَيْهَا لَعَنَتْهَا المَلَائِكَةُ حَتَّى تُصْبِحَ',
+    kitabBab: 'Bukhari: Kitab an-Nikah, Bab Idza Batat al-Mar\'atu Muhajiratan Firasya Zaujiha No. 5193; Muslim No. 1436',
+    noHadis: 'Bukhari No. 5193 (Muslim No. 1436)',
+    sanadArab: 'حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا مُعْتَمِرٌ، عَنْ أَبِيهِ، عَنْ أَبِي عُثْمَانَ، عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ، عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ:',
+    matnArab: '«إِذَا دَعَا الرَّجُلُ امْرَأَتَهُ إِلَى فِرَاشِهِ فَأَبَتْ أَنْ تَجِيءَ فَبَاتَ غَضْبَانَ عَلَيْهَا لَعَنَتْهَا المَلَائِكَةُ حَتَّى تُصْبِحَ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Musaddad, telah menceritakan kepada kami Mu\'tamar, dari ayahnya, dari Abu Utsman, dari Abu Hurairah رضي الله عنه, dari Nabi ﷺ, beliau bersabda:',
     terjemahan: 'Apabila seorang laki-laki mengajak istrinya ke tempat tidur lalu sang istri enggan untuk datang hingga suaminya tidur dalam keadaan marah, maka para malaikat melaknatnya sampai pagi.',
+    perbandinganMazhab: {
+      hanafi: 'Menyatakan pemenuhan kebutuhan biologis suami adalah kewajiban istri selama tidak ada halangan syar\'i (haid, nifas, sakit, atau puasa wajib).',
+      maliki: 'Menilai penolakan tanpa udzur sebagai bentuk nusyuz yang dapat menggugurkan hak nafkah hari tersebut.',
+      syafii: 'Para pensyarah Syafi\'i (seperti Ibnu Hajar al-Asqalani dalam Fathul Bari) menegaskan bahwa laknat malaikat ini terbatas pada penolakan tanpa udzur yang sah; jika istri sakit, kelelahan, atau terganggu secara fisik/mental, laknat tersebut gugur.',
+      hanbali: 'Menetapkan bahwa hak jimak adalah hak timbal balik kedua belah pihak; suami juga diharamkan meninggalkan ranjang istrinya tanpa udzur melebihi batas waktu tertentu.',
+      khiDanKonteks: 'Hukum modern dan UU PKDRT (No. 23/2004) melarang pemaksaan seksual dalam perkawinan. Hubungan intim harus selalu dilandasi prinsip taradhin (kerelaan bersama) dan menolak segala bentuk kekerasan fisik maupun psikis.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Sering dipahami secara tekstual dan menakut-nakuti: istri wajib melayani suami kapan pun dan dalam kondisi apa pun, bahkan saat sakit atau trauma, melegitimasi pemaksaan seksual.',
       poin: [
@@ -663,9 +747,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Amanah Ranjang: Larangan Keras Mengumbar Rahasia dan Aib Pasangan',
     rawi: 'Abu Sa\'id al-Khudri ra',
     kitab: 'Sahih Muslim',
-    noHadis: 'No. 1437',
-    matnArab: 'إِنَّ مِنْ أَشَرِّ النَّاسِ عِنْدَ اللَّهِ مَنْزِلَةً يَوْمَ الْقِيَامَةِ، الرَّجُلَ يُفْضِي إِلَى امْرَأَتِهِ وَتُفْضِي إِلَيْهِ، ثُمَّ يَنْشُرُ سِرَّهَا',
+    kitabBab: 'Kitab an-Nikah, Bab Tahrim Ifsya\' Sirr al-Mar\'ah No. 1437',
+    noHadis: 'Muslim No. 1437',
+    sanadArab: 'حَدَّثَنَا أَبُو بَكْرِ بْنُ أَبِي شَيْبَةَ، حَدَّثَنَا مَرْوَانُ بْنُ مُعَاوِيَةَ، عَنْ عُمَرَ بْنِ حَمْزَةَ العُمَرِيِّ، حَدَّثَنَا عَبْدُ الرَّحْمَنِ بْنُ سَعْدٍ، عَنْ أَبِي سَعِيدٍ الخُدْرِيِّ رَضِيَ اللَّهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ ﷺ:',
+    matnArab: '«إِنَّ مِنْ أَشَرِّ النَّاسِ عِنْدَ اللَّهِ مَنْزِلَةً يَوْمَ الْقِيَامَةِ، الرَّجُلَ يُفْضِي إِلَى امْرَأَتِهِ وَتُفْضِي إِلَيْهِ، ثُمَّ يَنْشُرُ سِرَّهَا»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Abu Bakr bin Abi Syaibah, telah menceritakan kepada kami Marwan bin Mu\'awiyah, dari Umar bin Hamzah al-Umari, telah menceritakan kepada kami Abdurrahman bin Sa\'ad, dari Abu Sa\'id al-Khudri رضي الله عنه, ia berkata: Rasulullah ﷺ bersabda:',
     terjemahan: 'Sesungguhnya manusia yang paling buruk kedudukannya di sisi Allah pada hari kiamat adalah laki-laki yang bergaul intim dengan istrinya dan istri bergaul intim dengannya, kemudian salah satunya menyebarkan rahasia pasangannya.',
+    perbandinganMazhab: {
+      hanafi: 'Menyatakan haram hukumnya menceritakan detail hubungan intim dan rincian fisik pasangan kepada siapa pun.',
+      maliki: 'Menilai penyebaran rahasia ranjang sebagai dosa besar dan mencederai sifat muru\'ah (kehormatan diri).',
+      syafii: 'Imam an-Nawawi menegaskan keharaman menceritakan detail jimak, gaya percumbuan, dan kata-kata mesra yang terjadi di ranjang privat.',
+      hanbali: 'Mengharamkan pembocoran aib tubuh dan rahasia ranjang kecuali jika ada kebutuhan medis atau persidangan hakim pengadilan.',
+      khiDanKonteks: 'Sangat relevan di era digital: menjaga privasi pasangan dari fenomena oversharing di media sosial dan revenge porn.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Larangan menceritakan detail hubungan seks suami-istri kepada orang luar.',
       poin: [
@@ -690,39 +784,6 @@ export const HADITHS_DATA: HadithItem[] = [
     tags: ['Privasi', 'Amanah', 'Menjaga Aib', 'Etika Ranjang'],
     quoteSnippet: 'Pasangan sejati adalah pelindung rahasia yang saling menutupi kekurangan, bukan pembocor aib yang meruntuhkan martabat pasangannya di hadapan dunia.'
   },
-  {
-    id: 'hadis-izin-kb-azl',
-    stageId: 'keintiman',
-    theme: 'Hak Reproduksi & Pengaturan Kehamilan',
-    title: 'Pengaturan Kelahiran (\'Azl): Hak Bersama Menentukan Jarak Kelahiran & Kesehatan Reproduksi',
-    rawi: 'Jabir bin Abdillah ra',
-    kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 5209, Muslim No. 1440',
-    matnArab: 'كُنَّا نَعْزِلُ عَلَى عَهْدِ رَسُولِ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ وَالقُرْآنُ يَنْزِلُ',
-    terjemahan: 'Kami terbiasa melakukan \'azl (sanggama terputus / metode kontrasepsi alami) pada masa Rasulullah ﷺ, sementara Al-Qur\'an masih turun (dan syariat tidak melarangnya).',
-    pemaknaanKonvensional: {
-      ringkasan: 'Sebagian kalangan menolak KB dengan alasan menghambat rezeki atau melanggar anjuran memperbanyak keturunan.',
-      poin: [
-        'Membaca anjuran banyak anak secara kuantitas tanpa menimbang kualitas gizi dan kesehatan ibu.',
-        'Sering mengabaikan hak persetujuan istri dalam keputusan memiliki anak.'
-      ]
-    },
-    pemaknaanMubadalah: {
-      ringkasan: 'Fuqaha mazhab klasik (seperti Syafi\'i dan Hanbali) menetapkan bahwa \'azl (kontrasepsi) menuntut izin dan kerelaan istri karena menyangkut hak kenikmatan dan hak reproduksi tubuhnya. Pengaturan kehamilan demi menjaga kesehatan fisik dan psikologis ibu adalah perwujudan prinsip kemaslahatan.',
-      illatHukum: 'Melindungi keselamatan ibu dari bahaya kehamilan berjarak terlalu rapat (*la dharara wa la dhirar*).',
-      poinKesalingan: [
-        'Keputusan memiliki anak dan jarak kelahiran harus dimusyawarahkan berdua (*tasyawur*).',
-        'Laki-laki tidak boleh memaksakan kehamilan berturut-turut yang merusak kesehatan reproduksi istri.'
-      ],
-      aplikasiHariIni: [
-        'Gunakan metode keluarga berencana (KB) yang aman dan disepakati bersama pasangan.',
-        'Prioritaskan pemulihan fisik dan mental ibu pascamelahirkan sebelum merencanakan kehamilan berikutnya.'
-      ]
-    },
-    pilarTerkait: ['Tasyawur', 'Taradhin', "Mu'asyarah bi al-Ma'ruf"],
-    tags: ['Keluarga Berencana', 'Hak Reproduksi', 'Kesehatan Ibu', 'Azl'],
-    quoteSnippet: 'Mengatur jarak kelahiran demi menjaga kesehatan dan kebahagiaan ibu adalah ikhtiar syar\'i yang disepakati bersama dalam musyawarah cinta.'
-  },
 
   // ==========================================
   // KLASTER 6: RESOLUSI KONFLIK & ANTI-KDRT
@@ -734,9 +795,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Kecaman Hipokrisi KDRT: Larangan Menyakiti Pasangan yang Digauli',
     rawi: 'Abdullah bin Zam\'ah ra',
     kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 5204, Muslim No. 2855',
-    matnArab: 'لَا يَجْلِدُ أَحَدُكُمُ امْرَأَتَهُ جَلْدَ الْعَبْدِ، ثُمَّ لَعَلَّهُ يُعَانِقُهَا فِي آخِرِ الْيَوْمِ',
+    kitabBab: 'Bukhari: Kitab an-Nikah, Bab Ma Yukrahu min Dharbin Nisa\' No. 5204; Muslim No. 2855',
+    noHadis: 'Bukhari No. 5204 (Muslim No. 2855)',
+    sanadArab: 'حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا يَحْيَى، عَنْ سُفْيَانَ، حَدَّثَنِي هِشَامُ بْنُ عُرْوَةَ، عَنْ أَبِيهِ، عَنْ عَبْدِ اللَّهِ بْنِ زَمْعَةَ رَضِيَ اللَّهُ عَنْهُ، عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ:',
+    matnArab: '«لَا يَجْلِدُ أَحَدُكُمُ امْرَأَتَهُ جَلْدَ الْعَبْدِ، ثُمَّ لَعَلَّهُ يُعَانِقُهَا فِي آخِرِ الْيَوْمِ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Musaddad, telah menceritakan kepada kami Yahya, dari Sufyan, telah menceritakan kepadaku Hisyam bin Urwah, dari ayahnya, dari Abdullah bin Zam\'ah رضي الله عنه, dari Nabi ﷺ, beliau bersabda:',
     terjemahan: 'Janganlah salah seorang di antara kalian mencambuk (memukul) istrinya seperti mencambuk budak, lalu bisa jadi di penghujung hari ia merangkul (menggauli) istrinya tersebut!',
+    perbandinganMazhab: {
+      hanafi: 'Memandang pemukulan sebagai opsi pendisiplinan darurat terakhir yang sangat terbatas, dan mencela keras kekerasan yang menimbulkan bekas atau rasa sakit mendalam.',
+      maliki: 'Jika suami memukul istri hingga melukai atau berulang kali menyakitinya, istri berhak menuntut cerai ta\'zir dan ganti rugi di hadapan qadhi.',
+      syafii: 'Menganjurkan untuk meninggalkan pemukulan sama sekali (*al-afdhlu tarkudhdharb*); memukul dipandang makruh tanzih dan bertentangan dengan standar kesempurnaan akhlak.',
+      hanbali: 'Memukul yang melukai atau mematahkan tulang haram mutlak dan pelakunya dikenai sanksi qishash/diyat.',
+      khiDanKonteks: 'UU No. 23 Tahun 2004 tentang Penghapusan KDRT mengkriminalisasi segala bentuk kekerasan fisik dalam rumah tangga. Hadis ini menjadi landasan moral kenabian atas hukum anti-kekerasan tersebut.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Sering dipahami permisif: seolah-olah memukul itu boleh asalkan "tidak sekeras mencambuk budak" atau menggunakan batasan "pukulan yang tidak melukai" (ghairu mubarrih).',
       poin: [
@@ -768,9 +839,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Kesaksian Aisyah ra: Teladan Tertinggi Nabi ﷺ Sama Sekali Tidak Pernah Memukul',
     rawi: 'Aisyah ra',
     kitab: 'Sahih Muslim',
-    noHadis: 'No. 2328',
-    matnArab: 'مَا ضَرَبَ رَسُولُ اللَّهِ ﷺ شَيْئًا قَطُّ بِيَدِهِ، وَلَا امْرَأَةً، وَلَا خَادِمًا، إِلَّا أَنْ يُجَاهِدَ فِي سَبِيلِ اللَّهِ',
+    kitabBab: 'Kitab al-Fadhail, Bab Ba\'du Nabiyyi \'an Kulli Ma Yustaqbahu No. 2328',
+    noHadis: 'Muslim No. 2328',
+    sanadArab: 'حَدَّثَنَا أَبُو كُرَيْبٍ، حَدَّثَنَا أَبُو أُسَامَةَ، عَنْ هِشَامٍ، عَنْ أَبِيهِ، عَنْ عَائِشَةَ رَضِيَ اللَّهُ عَنْهَا قَالَتْ:',
+    matnArab: '«مَا ضَرَبَ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ شَيْئًا قَطُّ بِيَدِهِ، وَلَا امْرَأَةً، وَلَا خَادِمًا، إِلَّا أَنْ يُجَاهِدَ فِي سَبِيلِ اللَّهِ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Abu Kuraib, telah menceritakan kepada kami Abu Usamah, dari Hisyam bin Urwah, dari ayahnya, dari Aisyah رضي الله عنها, ia berkata:',
     terjemahan: 'Rasulullah ﷺ sama sekali tidak pernah memukul apa pun dengan tangannya: tidak pernah memukul perempuan (istri), dan tidak pula memukul pelayan, kecuali ketika berjihad di jalan Allah.',
+    perbandinganMazhab: {
+      hanafi: 'Menjadikan sunnah fi\'liyyah Nabi ini sebagai bukti bahwa meninggalkan pemukulan adalah jalan yang paling mulia.',
+      maliki: 'Ibnul Faras al-Maliki menyatakan bahwa hadis ini menafsirkan bahwa memukul bukan anjuran, melainkan rukhshah darurat masa lalu yang sebaiknya dihindari.',
+      syafii: 'Imam asy-Syafi\'i menegaskan dalam kitab Al-Umm: "Memukul itu mubah secara teks, namun meninggalkannya lebih utama karena Nabi ﷺ tidak pernah memukul."',
+      hanbali: 'Menjadikan keteladanan Nabi sebagai standar akhlak tertinggi seorang mukmin sejati.',
+      khiDanKonteks: 'Mempertegas asas anti-kekerasan dalam UU KDRT bahwa mendidik keluarga harus dilakukan dengan dialog, teladan, dan nasihat bijak (*mau\'izhah hasanah*).'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Dipandang sebatas keutamaan pribadi Nabi (fadhail), sementara norma hukum fiqh tetap mempertahankan opsi memukul istri yang nusyuz.',
       poin: [
@@ -794,39 +875,6 @@ export const HADITHS_DATA: HadithItem[] = [
     tags: ['Akhlak Kenabian', 'Anti-Kekerasan', 'Keteladanan Rasul', 'Kedamaian Rumah'],
     quoteSnippet: 'Teladan Rasulullah ﷺ yang paling nyata di rumah adalah tidak pernah mengayunkan tangan untuk menyakiti perempuan atau siapa pun yang berada di dekatnya.'
   },
-  {
-    id: 'hadis-menahan-marah',
-    stageId: 'konflik',
-    theme: 'Manajemen Emosi dalam Konflik',
-    title: 'Kekuatan Sejati Adalah Menahan Diri: Pengendalian Diri saat Amarah Memuncak',
-    rawi: 'Abu Hurairah ra',
-    kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 6114, Muslim No. 2609',
-    matnArab: 'لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ، إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ',
-    terjemahan: 'Bukanlah orang yang kuat itu yang pandai bergulat (menang secara fisik), melainkan orang yang kuat adalah yang mampu mengendalikan dirinya ketika sedang marah.',
-    pemaknaanKonvensional: {
-      ringkasan: 'Ditempatkan dalam bab adab akhlak umum dalam pergaulan sosial.',
-      poin: [
-        'Jarang ditarik ke dalam penanganan pertengkaran suami-istri.',
-        'Banyak pihak merasa sah membentak pasangan dengan dalih "sedang emosi".'
-      ]
-    },
-    pemaknaanMubadalah: {
-      ringkasan: 'Rumah tangga adalah ruang di mana ego paling sering teruji. Menahan amarah dan tidak mengeluarkan kata-kata keji adalah benteng yang menjaga perjanjian kokoh (mitsaqan ghalizhan) agar tidak koyak.',
-      illatHukum: 'Mencegah kerusakan permanen relasi akibat keputusan impulsif saat emosi membara.',
-      poinKesalingan: [
-        'Kekuatan suami atau istri bukan pada kemampuan mendominasi atau membentak pasangan.',
-        'Mampu mendengarkan dan menunda respons saat marah adalah kedewasaan spiritual tertinggi.'
-      ],
-      aplikasiHariIni: [
-        'Terapkan sunnah Nabi saat marah: diam, berwudhu, atau duduk/berbaring.',
-        'Jangan pernah menjatuhkan talak atau ancaman perpisahan saat sedang dikuasai amarah.'
-      ]
-    },
-    pilarTerkait: ["Mu'asyarah bi al-Ma'ruf", 'Mitsaqan Ghalizhan'],
-    tags: ['Manajemen Emosi', 'Pengendalian Marah', 'Anti-KDRT Verbal'],
-    quoteSnippet: 'Kekuatan sejati dalam rumah tangga bukan pada seberapa keras suaramu membentak, melainkan seberapa tangguh engkau mengendalikan amarahmu demi menjaga cinta.'
-  },
 
   // ==========================================
   // KLASTER 7: PERCERAIAN & GUGAT KHULU'
@@ -838,9 +886,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Khulu\' Jamilah binti Abdillah: Hak Gugat Cerai Istri yang Tidak Lagi Merasa Bahagia',
     rawi: 'Ibnu Abbas ra',
     kitab: 'Sahih al-Bukhari',
-    noHadis: 'No. 5273',
-    matnArab: 'أَنَّ امْرَأَةَ ثَابِتِ بْنِ قَيْسٍ أَتَتِ النَّبِيَّ ﷺ فَقَالَتْ: يَا رَسُولَ اللَّهِ، ثَابِتُ بْنُ قَيْسٍ مَا أَعْتِبُ عَلَيْهِ فِي خُلُقٍ وَلَا دِينٍ، وَلَكِنِّي أَكْرَهُ الكُفْرَ فِي الإِسْلَامِ. فَقَالَ: أَتَرُدِّينَ عَلَيْهِ حَدِيقَتَهُ؟ قَالَتْ: نَعَمْ. قَالَ: اقْبَلِ الحَدِيقَةَ وَطَلِّقْهَا تَطْلِيقَةً',
-    terjemahan: 'Istri Tsabit bin Qais (Jamilah) mendatangi Nabi ﷺ lalu berkata: "Wahai Rasulullah, aku tidak mencela Tsabit dalam hal akhlak maupun agamanya, tetapi aku khawatir kufur (tidak bisa menunaikan hak suami dengan tulus) dalam Islam." Nabi bertanya: "Maukah engkau mengembalikan kebun yang ia berikan kepadamu (sebagai mahar)?" Ia menjawab: "Ya." Maka Nabi ﷺ bersabda kepada Tsabit: "Terimalah kebun itu, dan ceraikanlah ia satu kali talak."',
+    kitabBab: 'Kitab at-Thalaq, Bab al-Khul\' wa Kaifa at-Thalaqu fihi No. 5273',
+    noHadis: 'Bukhari No. 5273',
+    sanadArab: 'حَدَّثَنَا أَزْهَرُ بْنُ جَمِيلٍ، حَدَّثَنَا عَبْدُ الوَهَّابِ الثَّقَفِيُّ، حَدَّثَنَا خَالِدٌ، عَنْ عِكْرِمَةَ، عَنِ ابْنِ عَبَّاسٍ رَضِيَ اللَّهُ عَنْهُمَا:',
+    matnArab: '«أَنَّ امْرَأَةَ ثَابِتِ بْنِ قَيْسٍ أَتَتِ النَّبِيَّ ﷺ فَقَالَتْ: يَا رَسُولَ اللَّهِ، ثَابِتُ بْنُ قَيْسٍ مَا أَعْتِبُ عَلَيْهِ فِي خُلُقٍ وَلَا دِينٍ، وَلَكِنِّي أَكْرَهُ الكُفْرَ فِي الإِسْلَامِ. فَقَالَ: أَتَرُدِّينَ عَلَيْهِ حَدِيقَتَهُ؟ قَالَتْ: نَعَمْ. قَالَ: اقْبَلِ الحَدِيقَةَ وَطَلِّقْهَا تَطْلِيقَةً»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Azhar bin Jamil, telah menceritakan kepada kami Abdul Wahhab ats-Tsaqafi, dari Khalid al-Haddza\', dari Ikrimah, dari Ibnu Abbas رضي الله عنهما:',
+    terjemahan: 'Istri Tsabit bin Qais (Jamilah binti Abdillah) mendatangi Nabi ﷺ lalu berkata: "Wahai Rasulullah, aku tidak mencela Tsabit bin Qais dalam hal akhlak maupun agamanya, tetapi aku khawatir kufur nikmat dalam Islam (karena tidak mampu mencintainya)." Nabi bertanya: "Maukah engkau mengembalikan kebun yang ia berikan kepadamu (sebagai mahar)?" Ia menjawab: "Ya." Maka Nabi ﷺ bersabda kepada Tsabit: "Terimalah kebun itu, dan ceraikanlah ia satu kali talak."',
+    perbandinganMazhab: {
+      hanafi: 'Khulu\' diposisikan sebagai transaksi tebusan (*mu\'awadhah*); berstatus talak ba\'in sughra di mana suami tidak berhak rujuk tanpa akad dan mahar baru.',
+      maliki: 'Khulu\' sah dilakukan dengan tebusan harta dan berstatus talak ba\'in; suami dilarang memeras istri dengan meminta tebusan melebihi mahar yang dahulu diberikan.',
+      syafii: 'Khulu\' dipandang sebagai fasakh atau talak ba\'in tergantung lafalnya; hakikatnya adalah perlindungan agar perempuan tidak terikat dalam pernikahan yang membahayakannya.',
+      hanbali: 'Memandang khulu\' sebagai fasakh (bukan talak), sehingga tidak mengurangi kuota talak tiga. Khulu\' adalah hak murni istri yang wajib dikabulkan qadhi jika istri membenci suaminya.',
+      khiDanKonteks: 'KHI Pasal 124–128 mengatur gugatan perceraian dengan uang tebusan (khulu\') melalui pemeriksaan Pengadilan Agama untuk menjamin keadilan kedua belah pihak.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Sebagian kalangan menganggap gugat cerai perempuan sebagai tindakan tabu dan aib, serta mengancam perempuan dengan hadis ancaman bau surga tanpa konteks.',
       poin: [
@@ -872,9 +930,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Kasus Ibnu Umar: Larangan Menjatuhkan Talak Saat Istri Haid Demi Menjaga Kestabilan Jiwa',
     rawi: 'Abdullah bin Umar ra',
     kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 5251, Muslim No. 1471',
-    matnArab: 'أَنَّهُ طَلَّقَ امْرَأَتَهُ وَهِيَ حَائِضٌ، فَسَأَلَ عُمَرُ النَّبِيَّ ﷺ فَقَالَ: مُرْهُ فَلْيُرَاجِعْهَا، ثُمَّ لِيُمْسِكْهَا حَتَّى تَطْهُرَ، ثُمَّ تَحِيضَ، ثُمَّ تَطْهُرَ، ثُمَّ إِنْ شَاءَ أَمْسَكَ بَعْدُ، وَإِنْ شَاءَ طَلَّقَ قَبْلَ أَنْ يَمَسَّ',
-    terjemahan: 'Ibnu Umar mentalak istrinya saat sedang haid. Umar menanyakan hal itu kepada Nabi ﷺ, maka beliau marah dan bersabda: "Perintahkan dia untuk merujuk istrinya, lalu tahanlah sampai ia suci, lalu haid lagi, lalu suci kembali. Setelah itu jika ia ingin tetap mempertahankannya silakan, dan jika ingin mentalaknya, talaklah dalam keadaan suci sebelum ia menggaulinya."',
+    kitabBab: 'Bukhari: Kitab at-Thalaq, Bab Idza Thulliqat al-Ha\'idh Ta\'taddu bi Dzalik No. 5251; Muslim No. 1471',
+    noHadis: 'Bukhari No. 5251 (Muslim No. 1471)',
+    sanadArab: 'حَدَّثَنَا يَحْيَى بْنُ بُكَيْرٍ، حَدَّثَنَا اللَّيْثُ، عَنْ عُقَيْلٍ، عَنِ ابْنِ شِهَابٍ، عَنْ سَالِمٍ، أَنَّ عَبْدَ اللَّهِ بْنَ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا:',
+    matnArab: '«أَنَّهُ طَلَّقَ امْرَأَتَهُ وَهِيَ حَائِضٌ، فَسَأَلَ عُمَرُ النَّبِيَّ ﷺ فَقَالَ: مُرْهُ فَلْيُرَاجِعْهَا، ثُمَّ لِيُمْسِكْهَا حَتَّى تَطْهُرَ، ثُمَّ تَحِيضَ، ثُمَّ تَطْهُرَ، ثُمَّ إِنْ شَاءَ أَمْسَكَ بَعْدُ، وَإِنْ شَاءَ طَلَّقَ قَبْلَ أَنْ يَمَسَّ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Yahya bin Bukair, telah menceritakan kepada kami Al-Laits, dari Uqail, dari Ibnu Syihab az-Zuhri, dari Salim, bahwa Abdullah bin Umar رضي الله عنهما:',
+    terjemahan: 'Bahwa ia telah mentalak istrinya saat sedang haid. Maka Umar menanyakan hal itu kepada Nabi ﷺ, lalu beliau bersabda: "Perintahkan dia agar merujuknya kembali, lalu menahannya hingga ia suci, lalu haid lagi, lalu suci kembali. Setelah itu jika ia ingin mempertahankannya silakan, dan jika ingin mentalaknya, talaklah dalam keadaan suci sebelum digauli."',
+    perbandinganMazhab: {
+      hanafi: 'Talak saat haid haram hukumnya (talak bida\'i), pelakunya berdosa, namun talaknya tetap jatuh dan suami diwajibkan merujuknya.',
+      maliki: 'Haram mentalak saat haid; jika terjadi, hakim berhak memaksa suami untuk merujuk istrinya.',
+      syafii: 'Talak bida\'i berdosa dan haram, tetapi talak tetap terhitung jatuh menurut mayoritas Syafi\'iyyah, dan disunnahkan merujuknya.',
+      hanbali: 'Sebagian ulama Hanbali (termasuk Ibnu Taimiyyah dan Ibnul Qayyim) berpendapat bahwa talak bida\'i saat haid adalah BATAL dan tidak jatuh sama sekali karena bertentangan dengan perintah Rasulullah ﷺ.',
+      khiDanKonteks: 'KHI Pasal 122: Talak bida\'i dilarang dalam hukum Islam. Di Indonesia, talak di luar sidang Pengadilan Agama tidak memiliki akibat hukum, sehingga emosi talak sembarangan dicegah oleh sistem peradilan.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Dianalisis sebatas teknis fiqh pembagian talak sunni dan talak bida\'i, serta perdebatan apakah talak saat haid itu sah atau batal.',
       poin: [
@@ -905,9 +973,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Kemarahan Nabi ﷺ atas Talak Tiga Sekaligus: Larangan Mempermainkan Kitabullah',
     rawi: 'Mahmud bin Labid ra',
     kitab: 'Sunan an-Nasa\'i',
-    noHadis: 'No. 3401',
-    matnArab: 'أُخْبِرَ رَسُولُ اللَّهِ ﷺ عَنْ رَجُلٍ طَلَّقَ امْرَأَتَهُ ثَلَاثَ تَطْلِيقَاتٍ جَمِيعًا، فَقَامَ غَضْبَانَ ثُمَّ قَالَ: أَيُلْعَبُ بِكِتَابِ اللَّهِ وَأَنَا بَيْنَ أَظْهُرِكُمْ؟',
-    terjemahan: 'Diberitahukan kepada Rasulullah ﷺ tentang seorang laki-laki yang mentalak istrinya tiga talak sekaligus dalam satu waktu. Maka beliau berdiri dalam keadaan sangat marah lalu bersabda: "Apakah Kitabullah (hukum Allah) dipermainkan, padahal aku masih berada di tengah-tengah kalian?!"',
+    kitabBab: 'Kitab at-Thalaq, Bab ats-Thalats al-Majmu\'ah No. 3401',
+    noHadis: 'Nasa\'i No. 3401',
+    sanadArab: 'أَخْبَرَنَا سُلَيْمَانُ بْنُ دَاوُدَ، عَنِ ابْنِ وَهْبٍ، حَدَّثَنِي مَخْرَمَةُ بْنُ بُكَيْرٍ، عَنْ أَبِيهِ، عَنْ مَحْمُودِ بْنِ لَبِيدٍ رَضِيَ اللَّهُ عَنْهُ قَالَ:',
+    matnArab: '«أُخْبِرَ رَسُولُ اللَّهِ ﷺ عَنْ رَجُلٍ طَلَّقَ امْرَأَتَهُ ثَلَاثَ تَطْلِيقَاتٍ جَمِيعًا، فَقَامَ غَضْبَانَ ثُمَّ قَالَ: أَيُلْعَبُ بِكِتَابِ اللَّهِ وَأَنَا بَيْنَ أَظْهُرِكُمْ؟»',
+    terjemahanSanad: 'Telah mengabarkan kepada kami Sulaiman bin Dawud, dari Ibnu Wahb, telah menceritakan kepadaku Makhramah bin Bukair, dari ayahnya, dari Mahmud bin Labid رضي الله عنه, ia berkata:',
+    terjemahan: 'Diberitahukan kepada Rasulullah ﷺ tentang seorang laki-laki yang mentalak istrinya tiga talak sekaligus dalam satu majelis. Maka beliau berdiri dalam keadaan sangat marah lalu bersabda: "Apakah Kitabullah (hukum Allah) dipermainkan, padahal aku masih berada di antara kalian?!"',
+    perbandinganMazhab: {
+      hanafi: 'Jumhur fuqaha Hanafi klasik menyatakan talak tiga sekaligus jatuh tiga dan haram rujuk kecuali setelah muhallil, meski pelakunya berdosa besar.',
+      maliki: 'Sependapat bahwa talaknya jatuh tiga dan pelakunya berdosa karena melanggar sunnah Nabi.',
+      syafii: 'Jumhur Syafi\'iyyah klasik menghitungnya jatuh tiga, namun sebagian ulama muta\'akhirin mengkaji ulang demi kemaslahatan anak dan keluarga.',
+      hanbali: 'Pendapat resmi yang dipilih Ibnu Taimiyyah dan Ibnul Qayyim (berdasarkan hadis Sahih Muslim dari Ibnu Abbas): talak tiga dalam satu majelis hanya jatuh talak satu.',
+      khiDanKonteks: 'Hukum Positif Indonesia mengadopsi fatwa Ibnu Taimiyyah dalam KHI: ucapan talak tiga sekaligus dalam satu waktu dihitung satu kali talak raj\'i, demi memberi kesempatan pasangan rujuk dan menjaga keutuhan anak-anak.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Perdebatan tajam fiqh klasik: apakah talak tiga sekaligus jatuh tiga (pendapat jumhur mazhab klasik) atau jatuh satu (pendapat Ibnu Taimiyyah dan diadopsi KHI Indonesia).',
       poin: [
@@ -942,9 +1020,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Hak Asuh Ibu Pasca-Cerai: Perlindungan Ikatan Kelekatan Ibu & Anak',
     rawi: 'Abdullah bin Amr ra',
     kitab: 'Sunan Abu Dawud & Musnad Ahmad',
-    noHadis: 'Abu Dawud No. 2276, Ahmad No. 6707',
-    matnArab: 'أَنَّ امْرَأَةً قَالَتْ: يَا رَسُولَ اللَّهِ، إِنَّ ابْنِي هَذَا كَانَ بَطْنِي لَهُ وِعَاءً، وَثَدْيِي لَهُ سِقَاءً، وَحِجْرِي لَهُ حِوَاءً، وَإِنَّ أَبَاهُ طَلَّقَنِي وَأَرَادَ أَنْ يَنْتَزِعَهُ مِنِّي، فَقَالَ: أَنْتِ أَحَقُّ بِهِ مَا لَمْ تَنْكِحِي',
+    kitabBab: 'Abu Dawud: Kitab at-Thalaq, Bab Man Ahaqqu bil Walad No. 2276; Ahmad No. 6707',
+    noHadis: 'Abu Dawud No. 2276 (Ahmad No. 6707)',
+    sanadArab: 'حَدَّثَنَا مَحْمُودُ بْنُ خَالِدٍ، حَدَّثَنَا عُمَرُ بْنُ عَبْدِ الوَاحِدِ، عَنِ الأَوْزَاعِيِّ، عَنْ عَمْرِو بْنِ شُعَيْبٍ، عَنْ أَبِيهِ، عَنْ جَدِّهِ (عَبْدِ اللَّهِ بْنِ عَمْرٍو رَضِيَ اللَّهُ عَنْهُمَا):',
+    matnArab: '«أَنَّ امْرَأَةً قَالَتْ: يَا رَسُولَ اللَّهِ، إِنَّ ابْنِي هَذَا كَانَ بَطْنِي لَهُ وِعَاءً، وَثَدْيِي لَهُ سِقَاءً، وَحِجْرِي لَهُ حِوَاءً، وَإِنَّ أَبَاهُ طَلَّقَنِي وَأَرَادَ أَنْ يَنْتَزِعَهُ مِنِّي، فَقَالَ: أَنْتِ أَحَقُّ بِهِ مَا لَمْ تَنْكِحِي»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Mahmud bin Khalid, telah menceritakan kepada kami Umar bin Abdil Wahid, dari Al-Auza\'i, dari Amr bin Syu\'aib, dari ayahnya, dari kakeknya (Abdullah bin Amr رضي الله عنهما):',
     terjemahan: 'Seorang perempuan berkata: "Wahai Rasulullah, anakku ini dahulu perutkulah wadahnya, air susukulah minumannya, dan pangkuankulah tempat perlindungannya. Namun ayahnya telah menceraikanku dan hendak merampas anak ini dariku." Maka Rasulullah ﷺ bersabda kepadanya: "Engkau lebih berhak atas hak asuhnya selama engkau belum menikah lagi."',
+    perbandinganMazhab: {
+      hanafi: 'Hak hadhanah berada pada ibu kandung sampai anak laki-laki berusia 7 tahun dan anak perempuan berusia 9 tahun, lalu berpindah ke ayah.',
+      maliki: 'Hak hadhanah ibu berlanjut hingga anak laki-laki mencapai usia baligh dan anak perempuan sampai menikah dan digauli suaminya.',
+      syafii: 'Ibu berhak atas hadhanah anak yang belum mumayyiz; setelah mumayyiz (sekitar 7-8 tahun), anak diberi hak memilih (*takhyir*) antara tinggal bersama ayah atau ibunya.',
+      hanbali: 'Sependapat dengan Syafi\'i tentang hak asuh ibu dan opsi takhyir setelah usia 7 tahun, dengan syarat pengasuh amanah dan mampu menjaga agama anak.',
+      khiDanKonteks: 'KHI Pasal 105: Pemeliharaan anak yang belum mumayyiz (di bawah 12 tahun) adalah hak ibunya; setelah 12 tahun anak memilih sendiri; dan seluruh biaya pemeliharaan tetap ditanggung oleh ayahnya.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Dijadikan dalil fiqh bahwa hak asuh anak kecil (mumayyiz) berada pada ibu, namun gugur jika ibu menikah lagi.',
       poin: [
@@ -976,9 +1064,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Kehangatan Figur Ayah: Mencium Anak sebagai Cerminan Rahmat Allah',
     rawi: 'Abu Hurairah ra',
     kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 5997, Muslim No. 2318',
-    matnArab: 'قَبَّلَ رَسُولُ اللَّهِ ﷺ الحَسَنَ بْنَ عَلِيٍّ وَعِنْدَهُ الأَقْرَعُ بْنُ حَابِسٍ، فَقَالَ الأَقْرَعُ: إِنَّ لِي عَشَرَةً مِنَ الوَلَدِ مَا قَبَّلْتُ مِنْهُمْ أَحَدًا، فَنَظَرَ إِلَيْهِ رَسُولُ اللَّهِ ﷺ ثُمَّ قَالَ: مَنْ لَا يَرْحَمُ لَا يُرْحَمُ',
-    terjemahan: 'Rasulullah ﷺ mencium cucunya (Hasan bin Ali), di dekat beliau ada Al-Aqra\' bin Habis. Al-Aqra\' berkata: "Aku punya sepuluh orang anak, namun tak seorang pun yang pernah kucium." Rasulullah ﷺ memandangnya lalu bersabda: "Barangsiapa yang tidak menyayangi, niscaya ia tidak akan disayangi."',
+    kitabBab: 'Bukhari: Kitab al-Adab, Bab Rahmatul Walad wa Taqbiluhu No. 5997; Muslim No. 2318',
+    noHadis: 'Bukhari No. 5997 (Muslim No. 2318)',
+    sanadArab: 'حَدَّثَنَا أَبُو الْيَمَانِ، أَخْبَرَنَا شُعَيْبٌ، عَنِ الزُّهْرِيِّ، حَدَّثَنَا أَبُو سَلَمَةَ بْنُ عَبْدِ الرَّحْمَنِ، أَنَّ أَبَا هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ قَالَ:',
+    matnArab: '«قَبَّلَ رَسُولُ اللَّهِ ﷺ الحَسَنَ بْنَ عَلِيٍّ وَعِنْدَهُ الأَقْرَعُ بْنُ حَابِسٍ، فَقَالَ الأَقْرَعُ: إِنَّ لِي عَشَرَةً مِنَ الوَلَدِ مَا قَبَّلْتُ مِنْهُمْ أَحَدًا، فَنَظَرَ إِلَيْهِ رَسُولُ اللَّهِ ﷺ ثُمَّ قَالَ: مَنْ لَا يَرْحَمُ لَا يُرْحَمُ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Abu al-Yaman, telah mengabarkan kepada kami Syu\'aib, dari Az-Zuhri, telah menceritakan kepada kami Abu Salamah bin Abdurrahman, bahwa Abu Hurairah رضي الله عنه berkata:',
+    terjemahan: 'Rasulullah ﷺ mencium cucunya (Hasan bin Ali), di dekat beliau ada Al-Aqra\' bin Habis. Al-Aqra\' berkata: "Sesungguhnya aku memiliki sepuluh orang anak, namun tak seorang pun yang pernah kucium." Maka Rasulullah ﷺ memandangnya lalu bersabda: "Barangsiapa yang tidak menyayangi, niscaya ia tidak akan disayangi."',
+    perbandinganMazhab: {
+      hanafi: 'Menyatakan sunnah mencium dan mengekspresikan kasih sayang kepada anak kecil sebagai bagian dari adab fitrah Islam.',
+      maliki: 'Memandang kelembutan orang tua kepada anak sebagai kewajiban tarbiyah yang menjaga kesehatan akal dan jiwa anak.',
+      syafii: 'Imam an-Nawawi menjelaskan bahwa mencium anak kandung dengan rasa kasih sayang adalah sunnah yang bernilai pahala besar di sisi Allah.',
+      hanbali: 'Menegaskan bahwa kekasaran terhadap anak bertentangan dengan petunjuk sunnah nabawiyyah.',
+      khiDanKonteks: 'Konsep pengasuhan modern (positive parenting) sejalan dengan hadis ini: kehadiran ayah yang hangat secara emosional mencegah father hunger (kehilangan figur ayah) pada anak.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Anjuran bersikap lembut kepada balita secara umum.',
       poin: [
@@ -1010,9 +1108,19 @@ export const HADITHS_DATA: HadithItem[] = [
     title: 'Keadilan Orang Tua: Perintah Tegas Memperlakukan Semua Anak secara Setara',
     rawi: 'An-Nu\'man bin Basyir ra',
     kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 2587, Muslim No. 1623',
-    matnArab: 'أَعْطَانِي أَبِي عَطِيَّةً... فَقَالَ رَسُولُ اللَّهِ ﷺ: أَكُلَّ وَلَدِكَ أَعْطَيْتَهُ هَذَا؟ قَالَ: لَا، قَالَ: فَاتَّقُوا اللَّهَ وَاعْدِلُوا بَيْنَ أَوْلَادِكُمْ',
-    terjemahan: 'Ayahku memberiku suatu hadiah... Rasulullah ﷺ bertanya: "Apakah semua anakmu engkau beri hal serupa?" Ayahku menjawab: "Tidak." Maka beliau bersabda: "Bertakwalah kepada Allah, dan berlaku adillah di antara anak-anak kalian!"',
+    kitabBab: 'Bukhari: Kitab al-Hibah, Bab al-Hibah lil Walad No. 2587; Muslim No. 1623',
+    noHadis: 'Bukhari No. 2587 (Muslim No. 1623)',
+    sanadArab: 'حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا إِسْمَاعِيلُ، حَدَّثَنَا دَاوُدُ بْنُ أَبِي هِنْدٍ، عَنِ الشَّعْبِيِّ، عَنِ النُّعْمَانِ بْنِ بَشِيرٍ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: أَعْطَانِي أَبِي عَطِيَّةً...',
+    matnArab: '«فَقَالَ رَسُولُ اللَّهِ ﷺ: أَكُلَّ وَلَدِكَ أَعْطَيْتَهُ هَذَا؟ قَالَ: لَا، قَالَ: فَاتَّقُوا اللَّهَ وَاعْدِلُوا بَيْنَ أَوْلَادِكُمْ»',
+    terjemahanSanad: 'Telah menceritakan kepada kami Musaddad, telah menceritakan kepada kami Isma\'il, telah menceritakan kepada kami Dawud bin Abi Hind, dari Asy-Sya\'bi, dari Nu\'man bin Basyir رضي الله عنهما, ia berkata: Ayahku memberiku suatu hadiah harta...',
+    terjemahan: 'Lalu Rasulullah ﷺ bertanya kepadanya: "Apakah semua anakmu engkau beri pemberian seperti ini?" Ayahku menjawab: "Tidak." Maka beliau bersabda: "Bertakwalah kepada Allah, dan berlaku adillah di antara anak-anak kalian!"',
+    perbandinganMazhab: {
+      hanafi: 'Memandang keadilan pemberian materi kepada anak-anak sebagai sunnah; melebihkan salah satu anak sah secara hukum tetapi makruh jika memicu kedengkian.',
+      maliki: 'Menilai melebihkan hibah kepada sebagian anak makruh kecuali jika ada alasan kebutuhan khusus (seperti cacat atau sakit).',
+      syafii: 'Menyatakan sunnah menyamakan pemberian kepada semua anak; membeda-bedakan hibah hukumnya makruh namun akad hibahnya tetap sah secara qadha\'.',
+      hanbali: 'Imam Ahmad bin Hanbal berpendapat tegas: WAJIB menyamakan pemberian kepada anak-anak dan HARAM melebihkan salah satunya tanpa alasan darurat syar\'i.',
+      khiDanKonteks: 'KHI Pasal 211: "Orang tua dapat menghibahkan harta bendanya kepada anaknya... dengan memperhatikan keadilan antaranak." Keadilan afeksi dan pendidikan juga menjadi hak mutlak setiap anak.'
+    },
     pemaknaanKonvensional: {
       ringkasan: 'Kewajiban adil dalam pemberian hibah harta kepada anak-anak agar tidak iri hati.',
       poin: [
@@ -1036,39 +1144,6 @@ export const HADITHS_DATA: HadithItem[] = [
     pilarTerkait: ['Zawaj', 'Tasyawur'],
     tags: ['Keadilan Anak', 'Kesetaraan Gender Anak', 'Parenting Islami'],
     quoteSnippet: 'Berlaku adil kepada setiap anak dalam kasih sayang dan kesempatan adalah fondasi melahirkan generasi yang berjiwa damai dan berintegritas.'
-  },
-  {
-    id: 'hadis-memuliakan-anak-perempuan',
-    stageId: 'pengasuhan',
-    theme: 'Memuliakan Anak Perempuan',
-    title: 'Keutamaan Merawat Anak Perempuan: Perisai dari Siksa Api Neraka',
-    rawi: 'Aisyah ra',
-    kitab: 'Sahih al-Bukhari & Sahih Muslim',
-    noHadis: 'Bukhari No. 5995, Muslim No. 2629',
-    matnArab: 'مَنِ ابْتُلِيَ مِنْ هَذِهِ البَنَاتِ بِشَيْءٍ فَأَحْسَنَ إِلَيْهِنَّ، كُنَّ لَهُ سِتْرًا مِنَ النَّارِ',
-    terjemahan: 'Barangsiapa yang diuji dengan mengasuh anak-anak perempuan, lalu ia memperlakukan mereka dengan baik (penuh kasih sayang dan pendidikan), niscaya anak-anak perempuan itu akan menjadi penghalang baginya dari api neraka.',
-    pemaknaanKonvensional: {
-      ringkasan: 'Keutamaan bersabar mengasuh anak perempuan di masa Jahiliyah yang mengubur anak perempuan hidup-hidup.',
-      poin: [
-        'Kerap dianggap masa lalu yang sudah tidak relevan lagi.',
-        'Kurang dikaitkan dengan perjuangan melawan pernikahan dini dan diskriminasi anak perempuan saat ini.'
-      ]
-    },
-    pemaknaanMubadalah: {
-      ringkasan: 'Nabi ﷺ secara revolusioner merombak budaya patriarki Arab yang menganggap kelahiran anak perempuan sebagai kesialan. Merawat, mendidik, dan memuliakan anak perempuan hingga mandiri ditempatkan sebagai tiket spiritual tertinggi menuju surga.',
-      illatHukum: 'Menghapuskan diskriminasi gender dan menjamin pemuliaan martabat perempuan sejak usia anak.',
-      poinKesalingan: [
-        'Anak perempuan memiliki hak yang sama atas gizi terbaik, pendidikan tinggi, dan perlindungan masa depan.',
-        'Menikahkan anak perempuan di bawah umur demi melepaskan beban ekonomi keluarga bertentangan keras dengan hadis ini.'
-      ],
-      aplikasiHariIni: [
-        'Dukung pendidikan anak perempuan hingga jenjang tertinggi sesuai minat dan potensinya.',
-        'Lindungi anak perempuan dari bahaya perkawinan usia anak dan kekerasan seksual.'
-      ]
-    },
-    pilarTerkait: ["Mu'asyarah bi al-Ma'ruf", 'Mitsaqan Ghalizhan'],
-    tags: ['Anak Perempuan', 'Pencegahan Perkawinan Anak', 'Pendidikan Perempuan', 'Pemuliaan'],
-    quoteSnippet: 'Siapa yang merawat dan mendidik anak-anak perempuannya dengan baik, anak-anak itu akan menjadi perisai baginya dari api neraka: Islam memuliakan anak perempuan setara.'
   }
 ];
 
