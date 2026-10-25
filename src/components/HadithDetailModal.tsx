@@ -7,13 +7,13 @@ import {
   Check, 
   Volume2, 
   Share2, 
-  Heart, 
-  Scale, 
-  BookOpen, 
+  Bookmark, 
   Lightbulb, 
   CheckCircle2, 
   AlertCircle,
-  ZoomIn
+  ZoomIn,
+  ZoomOut,
+  FileText
 } from 'lucide-react';
 
 interface HadithDetailModalProps {
@@ -35,13 +35,13 @@ export const HadithDetailModal: React.FC<HadithDetailModalProps> = ({
 
   const [mobileTab, setMobileTab] = useState<'mubadalah' | 'konvensional'>('mubadalah');
   const [copied, setCopied] = useState(false);
-  const [fontSizeClass, setFontSizeClass] = useState<'text-xl' | 'text-2xl' | 'text-3xl'>('text-2xl');
+  const [fontSize, setFontSize] = useState<number>(24);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
   const stage = STAGES.find(s => s.id === hadith.stageId);
 
   const handleCopy = () => {
-    const text = `${hadith.title}\n\n${hadith.matnArab}\n\n"${hadith.terjemahan}"\n\nSumber: ${hadith.kitab} (${hadith.noHadis})\n\nRefleksi Mubadalah:\n${hadith.pemaknaanMubadalah.ringkasan}`;
+    const text = `${hadith.title}\n\n${hadith.matnArab}\n\n"${hadith.terjemahan}"\n\nSumber: ${hadith.kitab} (${hadith.noHadis})\nPerawi: ${hadith.rawi}\n\nPembacaan Mubadalah:\n${hadith.pemaknaanMubadalah.ringkasan}`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -49,7 +49,6 @@ export const HadithDetailModal: React.FC<HadithDetailModalProps> = ({
 
   const handlePlayAudioSimulation = () => {
     setIsPlayingAudio(true);
-    // Speech synthesis for text-to-speech if supported, or gentle simulation
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(hadith.terjemahan);
@@ -63,30 +62,28 @@ export const HadithDetailModal: React.FC<HadithDetailModalProps> = ({
     }
   };
 
-  const toggleFontSize = () => {
-    if (fontSizeClass === 'text-xl') setFontSizeClass('text-2xl');
-    else if (fontSizeClass === 'text-2xl') setFontSizeClass('text-3xl');
-    else setFontSizeClass('text-xl');
-  };
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/60 backdrop-blur-sm animate-fade-in overflow-y-auto">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/50 backdrop-blur-xs overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+    >
       <div 
-        className="bg-[#FAF8F5] w-full max-w-5xl rounded-3xl border border-[#DDD6C7] shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col"
+        className="bg-white w-full max-w-5xl rounded-lg border border-[#E5E1DC] shadow-xl overflow-hidden my-auto max-h-[94vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top Header Bar */}
-        <div className="px-6 py-4 bg-white border-b border-[#E7E2D6] flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#1F4E3D] text-white">
+        {/* Top Header Bar: Clean Academic Bar */}
+        <div className="px-5 py-3.5 bg-[#F7F7F5] border-b border-[#E5E1DC] flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2 flex-wrap text-xs">
+            <span className="font-semibold text-[#795A3F] bg-white border border-[#E5E1DC] px-2.5 py-1 rounded">
               {stage ? stage.title : hadith.stageId}
             </span>
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#EAE4D7] text-[#4B5563]">
+            <span className="text-[#6B7280]">
               {hadith.kitab} • {hadith.noHadis}
             </span>
             {hadith.pertemuan && (
-              <span className="text-xs font-medium px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
-                Pertemuan {hadith.pertemuan}
+              <span className="text-[#6B7280] bg-white border border-[#E5E1DC] px-2 py-0.5 rounded">
+                Silabus Pertemuan {hadith.pertemuan}
               </span>
             )}
           </div>
@@ -94,203 +91,200 @@ export const HadithDetailModal: React.FC<HadithDetailModalProps> = ({
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => onToggleSave(hadith.id)}
-              className="p-2 rounded-xl text-gray-500 hover:text-[#C86D51] hover:bg-[#F3EFE6] transition"
-              title="Simpan Hadis"
+              className="p-1.5 rounded hover:bg-white text-[#6B7280] hover:text-[#292929] transition border border-transparent hover:border-[#E5E1DC]"
+              title={isSaved ? "Hapus dari koleksi tersimpan" : "Simpan hadis"}
+              aria-label={isSaved ? "Hapus dari koleksi tersimpan" : "Simpan hadis"}
             >
-              <Heart className={`w-5 h-5 ${isSaved ? 'text-[#C86D51] fill-[#C86D51]' : ''}`} />
+              <Bookmark className={`w-4 h-4 ${isSaved ? 'text-[#795A3F] fill-[#795A3F]' : ''}`} />
             </button>
             <button
               onClick={() => onOpenQuote(hadith)}
-              className="p-2 rounded-xl text-gray-500 hover:text-[#1F4E3D] hover:bg-[#F3EFE6] transition"
-              title="Buat Kartu Kutipan"
+              className="p-1.5 rounded hover:bg-white text-[#6B7280] hover:text-[#292929] transition border border-transparent hover:border-[#E5E1DC]"
+              title="Ekspor Kutipan"
+              aria-label="Ekspor Kutipan"
             >
-              <Share2 className="w-5 h-5" />
+              <Share2 className="w-4 h-4" />
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-gray-400 hover:text-gray-700 hover:bg-[#F3EFE6] transition ml-1"
+              className="p-1.5 rounded hover:bg-white text-[#6B7280] hover:text-[#292929] transition border border-transparent hover:border-[#E5E1DC] ml-1"
+              title="Tutup Jendela"
+              aria-label="Tutup Jendela"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Scrollable Content Body */}
+        {/* Scrollable Content */}
         <div className="overflow-y-auto p-5 sm:p-7 space-y-6">
-          {/* Main Title & Rawi */}
-          <div>
-            <h2 className="font-serif-heading text-2xl sm:text-3xl font-bold text-[#1F4E3D] leading-tight mb-1.5">
+          {/* Title & Transmission */}
+          <div className="border-b border-[#F0ECE6] pb-4">
+            <h2 className="text-xl sm:text-2xl font-semibold text-[#292929] leading-snug mb-2">
               {hadith.title}
             </h2>
-            <p className="text-xs sm:text-sm text-gray-600">
-              Diriwayatkan dari sahabat mulia: <strong className="text-[#1F4E3D]">{hadith.rawi}</strong>
-            </p>
+            <div className="text-xs text-[#6B7280] flex items-center gap-2">
+              <span>Perawi Primer: <strong className="text-[#292929]">{hadith.rawi}</strong></span>
+              <span>•</span>
+              <span>Koleksi: <strong className="text-[#292929]">{hadith.kitab}</strong></span>
+            </div>
           </div>
 
-          {/* Arabic Matn Box */}
-          <div className="bg-white rounded-2xl p-5 sm:p-6 border border-[#E7E1D4] shadow-xs relative">
-            <div className="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                Teks Asli Matn Hadis
+          {/* Arabic Text Panel: Pure Legibility */}
+          <div className="bg-[#FAF9F7] rounded-md p-5 border border-[#E5E1DC]">
+            <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#EBE6DE]">
+              <span className="text-xs font-semibold text-[#6B7280] flex items-center gap-1.5">
+                <FileText className="w-3.5 h-3.5 text-[#795A3F]" />
+                Teks Matn Arab
               </span>
               <div className="flex items-center gap-1">
                 <button
                   onClick={handlePlayAudioSimulation}
-                  className={`p-1.5 rounded-lg text-xs font-medium flex items-center gap-1 transition ${
-                    isPlayingAudio ? 'bg-[#1F4E3D] text-white' : 'text-gray-600 hover:bg-[#F3EFE6]'
-                  }`}
+                  className="px-2 py-1 rounded text-xs text-[#4B5563] hover:text-[#292929] hover:bg-white border border-transparent hover:border-[#E5E1DC] flex items-center gap-1 transition"
                   title="Dengarkan pembacaan terjemahan"
                 >
-                  <Volume2 className="w-4 h-4" />
-                  <span className="text-[11px] hidden sm:inline">
-                    {isPlayingAudio ? 'Memutar...' : 'Audio'}
-                  </span>
+                  <Volume2 className="w-3.5 h-3.5" />
+                  <span>{isPlayingAudio ? 'Memutar...' : 'Audio'}</span>
                 </button>
-                <button
-                  onClick={toggleFontSize}
-                  className="p-1.5 rounded-lg text-gray-600 hover:bg-[#F3EFE6] transition"
-                  title="Ubah Ukuran Huruf Arab"
-                >
-                  <ZoomIn className="w-4 h-4" />
-                </button>
+                <div className="flex items-center border border-[#E5E1DC] rounded bg-white">
+                  <button
+                    onClick={() => setFontSize(Math.max(18, fontSize - 2))}
+                    className="px-1.5 py-1 text-xs text-[#4B5563] hover:text-[#292929] border-r border-[#E5E1DC]"
+                    title="Perkecil Font"
+                  >
+                    <ZoomOut className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={() => setFontSize(Math.min(36, fontSize + 2))}
+                    className="px-1.5 py-1 text-xs text-[#4B5563] hover:text-[#292929]"
+                    title="Perbesar Font"
+                  >
+                    <ZoomIn className="w-3.5 h-3.5" />
+                  </button>
+                </div>
                 <button
                   onClick={handleCopy}
-                  className="p-1.5 rounded-lg text-gray-600 hover:bg-[#F3EFE6] transition flex items-center gap-1"
+                  className="px-2 py-1 rounded text-xs text-[#4B5563] hover:text-[#292929] hover:bg-white border border-transparent hover:border-[#E5E1DC] flex items-center gap-1 transition"
                   title="Salin Hadis"
                 >
-                  {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
-                  <span className="text-[11px] hidden sm:inline">{copied ? 'Tersalin' : 'Salin'}</span>
+                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copied ? 'Tersalin' : 'Salin'}</span>
                 </button>
               </div>
             </div>
 
             <p 
               dir="rtl" 
-              className={`font-arabic text-right ${fontSizeClass} text-[#1A202C] leading-loose sm:leading-[2.4] font-medium tracking-wide my-2`}
+              style={{ fontSize: `${fontSize}px` }}
+              className="font-arabic text-right text-[#1A1A1A] leading-loose sm:leading-[2.4] my-2 select-text"
             >
               {hadith.matnArab}
             </p>
 
-            <div className="mt-4 pt-4 border-t border-gray-100">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 block mb-1">
-                Terjemahan Makna:
+            <div className="mt-4 pt-4 border-t border-[#EBE6DE]">
+              <span className="text-xs font-semibold text-[#6B7280] block mb-1">
+                Terjemahan Bahasa Indonesia:
               </span>
-              <p className="text-sm sm:text-base text-gray-700 leading-relaxed italic">
+              <p className="text-sm text-[#374151] leading-relaxed">
                 "{hadith.terjemahan}"
               </p>
             </div>
           </div>
 
-          {/* Section: Mobile Tab Switcher */}
-          <div className="md:hidden flex rounded-xl bg-[#EBE5D8] p-1 border border-[#DDD6C7]">
+          {/* Mobile Tab Control for Dual Hermeneutics */}
+          <div className="md:hidden flex rounded border border-[#E5E1DC] bg-[#F7F7F5] p-0.5">
             <button
               onClick={() => setMobileTab('mubadalah')}
-              className={`flex-1 py-2 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5 ${
+              className={`flex-1 py-1.5 text-xs font-semibold rounded transition ${
                 mobileTab === 'mubadalah'
-                  ? 'bg-[#1F4E3D] text-white shadow-xs'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white text-[#292929] shadow-xs'
+                  : 'text-[#6B7280]'
               }`}
             >
-              <Scale className="w-3.5 h-3.5" />
-              <span>Pembacaan Mubadalah</span>
+              Pembacaan Mubadalah
             </button>
             <button
               onClick={() => setMobileTab('konvensional')}
-              className={`flex-1 py-2 text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5 ${
+              className={`flex-1 py-1.5 text-xs font-semibold rounded transition ${
                 mobileTab === 'konvensional'
-                  ? 'bg-white text-gray-800 shadow-xs'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white text-[#292929] shadow-xs'
+                  : 'text-[#6B7280]'
               }`}
             >
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>Fiqh Arus Utama</span>
+              Fiqh Arus Utama
             </button>
           </div>
 
-          {/* Section: DUAL COMPARISON VIEW (Split-Screen on Desktop, Tabbed on Mobile) */}
+          {/* DUAL VIEW COMPARISON: Split-Screen Desktop, Tabbed on Mobile */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* COLUMN 1: Pemaknaan Konvensional / Arus Utama */}
-            <div className={`bg-white rounded-2xl p-5 border border-[#E5DFD3] shadow-xs flex flex-col justify-between ${
+            {/* Column 1: Pemaknaan Konvensional */}
+            <div className={`bg-[#F7F7F5] rounded-md p-5 border border-[#E5E1DC] flex flex-col justify-between ${
               mobileTab === 'konvensional' ? 'block' : 'hidden md:flex'
             }`}>
               <div>
-                <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-100">
-                  <div className="w-6 h-6 rounded-md bg-amber-100 text-amber-800 flex items-center justify-center">
-                    <BookOpen className="w-3.5 h-3.5" />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                      Tinjauan Fiqh Arus Utama
-                    </h4>
-                    <p className="text-[11px] text-gray-400">Pembacaan Tekstual-Legalistik Tradisional</p>
-                  </div>
+                <div className="pb-2.5 mb-3 border-b border-[#E5E1DC] flex items-center justify-between">
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-[#6B7280]">
+                    1. Tinjauan Fiqh Arus Utama (Tekstual)
+                  </h4>
+                  <span className="text-[10px] text-[#6B7280] bg-white border border-[#E5E1DC] px-1.5 py-0.5 rounded">
+                    Formal-Legalistik
+                  </span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-gray-700 leading-relaxed mb-4 bg-amber-50/60 p-3 rounded-xl border border-amber-100/80">
+                <p className="text-xs sm:text-sm text-[#374151] leading-relaxed mb-4">
                   {hadith.pemaknaanKonvensional.ringkasan}
                 </p>
 
                 <div className="space-y-2">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 block">
-                    Karakteristik Pemaknaan:
+                  <span className="text-[11px] font-semibold text-[#6B7280] block">
+                    Karakteristik Pembacaan:
                   </span>
                   {hadith.pemaknaanKonvensional.poin.map((point, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-xs text-gray-600">
-                      <AlertCircle className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+                    <div key={idx} className="flex items-start gap-2 text-xs text-[#4B5563]">
+                      <AlertCircle className="w-3.5 h-3.5 text-[#9CA3AF] shrink-0 mt-0.5" />
                       <span>{point}</span>
                     </div>
                   ))}
                 </div>
               </div>
-
-              <div className="mt-4 pt-3 border-t border-gray-100 text-[11px] text-gray-400 italic">
-                *Cenderung formal-sepihak dan sering memosisikan istri sebagai objek hukum.
-              </div>
             </div>
 
-            {/* COLUMN 2: Pembacaan Mubadalah (Kesalingan) */}
-            <div className={`bg-[#F1F7F3] rounded-2xl p-5 border-2 border-[#1F4E3D]/30 shadow-xs flex flex-col justify-between relative overflow-hidden ${
+            {/* Column 2: Pembacaan Mubadalah */}
+            <div className={`bg-white rounded-md p-5 border border-[#C6A17B] ring-1 ring-[#C6A17B] flex flex-col justify-between ${
               mobileTab === 'mubadalah' ? 'block' : 'hidden md:flex'
             }`}>
-              <div className="absolute top-0 right-0 bg-[#1F4E3D] text-[#E7C693] text-[10px] font-bold px-3 py-0.5 rounded-bl-xl tracking-wider uppercase">
-                Paradigma Kesalingan
-              </div>
-
               <div>
-                <div className="flex items-center gap-2 mb-3 pb-2 border-b border-[#CCDCD2]">
-                  <div className="w-6 h-6 rounded-md bg-[#1F4E3D] text-white flex items-center justify-center">
-                    <Scale className="w-3.5 h-3.5 text-[#E7C693]" />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F4E3D]">
-                      Pembacaan Mubadalah & Maqashid
-                    </h4>
-                    <p className="text-[11px] text-[#4A6B5D]">Resiprokal, Adil Hakiki & Berakhlak</p>
-                  </div>
+                <div className="pb-2.5 mb-3 border-b border-[#F0ECE6] flex items-center justify-between">
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-[#795A3F]">
+                    2. Pembacaan Mubadalah (Kesalingan)
+                  </h4>
+                  <span className="text-[10px] font-medium text-[#2B2118] bg-[#F7F7F5] border border-[#C6A17B] px-1.5 py-0.5 rounded">
+                    Etika Relasional
+                  </span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-[#1B352A] leading-relaxed mb-4 bg-white/80 p-3.5 rounded-xl border border-[#CCDCD2] font-medium">
+                <p className="text-xs sm:text-sm text-[#292929] leading-relaxed mb-4 font-medium">
                   {hadith.pemaknaanMubadalah.ringkasan}
                 </p>
 
                 <div className="space-y-3">
-                  <div className="bg-[#E5EFE8] p-2.5 rounded-xl border border-[#D0E0D6]">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#1F4E3D] block mb-0.5">
+                  <div className="bg-[#FAF9F7] p-3 rounded border border-[#E5E1DC]">
+                    <span className="text-[10px] font-semibold text-[#795A3F] uppercase tracking-wider block mb-0.5">
                       'Illat Hukum (Tujuan Etis):
                     </span>
-                    <p className="text-xs text-[#2A4437]">
+                    <p className="text-xs text-[#4B5563]">
                       {hadith.pemaknaanMubadalah.illatHukum}
                     </p>
                   </div>
 
                   <div>
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#1F4E3D] block mb-1.5">
-                      Pilar Kesalingan Dua Arah:
+                    <span className="text-[11px] font-semibold text-[#292929] block mb-1.5">
+                      Prinsip Kesalingan Dua Arah:
                     </span>
                     <div className="space-y-1.5">
                       {hadith.pemaknaanMubadalah.poinKesalingan.map((point, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-xs text-[#2A4437]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#1F4E3D] shrink-0 mt-0.5" />
+                        <div key={idx} className="flex items-start gap-2 text-xs text-[#374151]">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#795A3F] shrink-0 mt-0.5" />
                           <span>{point}</span>
                         </div>
                       ))}
@@ -298,31 +292,25 @@ export const HadithDetailModal: React.FC<HadithDetailModalProps> = ({
                   </div>
                 </div>
               </div>
-
-              <div className="mt-4 pt-3 border-t border-[#CCDCD2] text-[11px] text-[#1F4E3D] font-medium flex items-center gap-1">
-                <span>Rujukan: Metodologi Qira'ah Mubadalah (Fiqh al-Usrah)</span>
-              </div>
             </div>
           </div>
 
-          {/* Practical Application Box */}
-          <div className="bg-[#FFFDF9] rounded-2xl p-5 border border-[#E7DECD] shadow-xs">
+          {/* Practical Application for Couples */}
+          <div className="bg-[#FAF9F7] rounded-md p-5 border border-[#E5E1DC]">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-7 h-7 rounded-lg bg-[#FBEFE3] text-[#C86D51] flex items-center justify-center">
-                <Lightbulb className="w-4 h-4" />
-              </div>
-              <h4 className="font-serif-heading text-base font-bold text-[#1F4E3D]">
-                Aplikasi Nyata bagi Pasutri Hari Ini
+              <Lightbulb className="w-4 h-4 text-[#795A3F]" />
+              <h4 className="text-sm font-semibold text-[#292929]">
+                Kaidah Operasional bagi Pasutri Hari Ini
               </h4>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {hadith.pemaknaanMubadalah.aplikasiHariIni.map((app, idx) => (
-                <div key={idx} className="bg-white p-3 rounded-xl border border-[#ECE5D8] flex items-start gap-2.5">
-                  <span className="w-5 h-5 rounded-full bg-[#EAE4D7] text-[#1F4E3D] text-[11px] font-bold flex items-center justify-center shrink-0">
-                    {idx + 1}
+                <div key={idx} className="bg-white p-3 rounded border border-[#E5E1DC] flex items-start gap-2.5">
+                  <span className="text-xs font-mono font-semibold text-[#795A3F] shrink-0 mt-0.5">
+                    {idx + 1}.
                   </span>
-                  <p className="text-xs text-gray-700 leading-relaxed">
+                  <p className="text-xs text-[#4B5563] leading-relaxed">
                     {app}
                   </p>
                 </div>
@@ -331,11 +319,11 @@ export const HadithDetailModal: React.FC<HadithDetailModalProps> = ({
           </div>
 
           {/* Tags & Pillars */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 text-xs text-[#6B7280] border-t border-[#F0ECE6]">
             <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-xs text-gray-500 font-medium">Pilar Sakinah:</span>
+              <span>Pilar Terkait:</span>
               {hadith.pilarTerkait.map((pilar) => (
-                <span key={pilar} className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-[#1F4E3D]/10 text-[#1F4E3D]">
+                <span key={pilar} className="font-medium text-[#292929] bg-[#F7F7F5] border border-[#E5E1DC] px-2 py-0.5 rounded">
                   {pilar}
                 </span>
               ))}
@@ -343,7 +331,7 @@ export const HadithDetailModal: React.FC<HadithDetailModalProps> = ({
 
             <div className="flex items-center gap-1.5 flex-wrap">
               {hadith.tags.map((tag) => (
-                <span key={tag} className="text-[11px] text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
+                <span key={tag} className="text-[#6B7280]">
                   #{tag}
                 </span>
               ))}
@@ -351,19 +339,19 @@ export const HadithDetailModal: React.FC<HadithDetailModalProps> = ({
           </div>
         </div>
 
-        {/* Modal Footer */}
-        <div className="px-6 py-4 bg-white border-t border-[#E7E2D6] flex items-center justify-between gap-3">
+        {/* Modal Action Footer */}
+        <div className="px-5 py-3.5 bg-[#F7F7F5] border-t border-[#E5E1DC] flex items-center justify-between gap-3">
           <button
             onClick={() => onOpenQuote(hadith)}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#C86D51] hover:bg-[#B35D43] text-white text-xs font-bold transition shadow-xs"
+            className="btn-primary px-3.5 py-2 text-xs flex items-center gap-2"
           >
-            <Share2 className="w-4 h-4" />
-            <span>Buat Kartu Kutipan (IG / WA Story)</span>
+            <Share2 className="w-3.5 h-3.5" />
+            <span>Ekspor Kartu Kutipan</span>
           </button>
 
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-[#EAE4D7] hover:bg-[#DDD6C7] text-gray-800 text-xs font-bold transition"
+            className="btn-secondary px-4 py-2 text-xs"
           >
             Tutup
           </button>

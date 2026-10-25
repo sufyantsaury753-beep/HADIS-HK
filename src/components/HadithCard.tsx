@@ -1,7 +1,7 @@
 import React from 'react';
 import { STAGES } from '../data/hadiths';
 import type { HadithItem } from '../data/hadiths';
-import { Heart, Share2, ArrowUpRight, Scale } from 'lucide-react';
+import { Bookmark, Share2, ArrowRight } from 'lucide-react';
 
 interface HadithCardProps {
   hadith: HadithItem;
@@ -21,74 +21,81 @@ export const HadithCard: React.FC<HadithCardProps> = ({
   const stage = STAGES.find(s => s.id === hadith.stageId);
 
   return (
-    <div className="bg-white rounded-2xl border border-[#E5DFD3] hover:border-[#C4B8A3] shadow-xs hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
-      {/* Header Info */}
-      <div className="p-5 pb-3">
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#E8EFEA] text-[#1F4E3D] border border-[#D0E0D6]">
-            {stage ? stage.title.replace(/^\d+\.\s*/, '') : hadith.stageId}
-          </span>
+    <article className="bg-white rounded-md border border-[#E5E1DC] hover:border-[#C6A17B] transition-all flex flex-col justify-between overflow-hidden shadow-xs">
+      {/* Card Header & Metadata */}
+      <div className="p-5">
+        <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#F0ECE6]">
+          <div className="flex items-center gap-2 text-xs">
+            <span className="font-semibold text-[#795A3F] bg-[#F7F7F5] border border-[#E5E1DC] px-2 py-0.5 rounded">
+              {stage ? stage.title.replace(/^\d+\.\s*/, '') : hadith.stageId}
+            </span>
+            <span className="text-[#6B7280]">
+              {hadith.kitab} • {hadith.noHadis}
+            </span>
+          </div>
+
           <div className="flex items-center gap-1">
             <button
               onClick={() => onToggleSave(hadith.id)}
-              className="p-1.5 rounded-lg text-gray-400 hover:text-[#C86D51] hover:bg-[#F8F4EE] transition"
-              title={isSaved ? "Hapus dari simpanan" : "Simpan hadis"}
+              className="p-1.5 rounded hover:bg-[#F7F7F5] text-[#6B7280] hover:text-[#292929] transition"
+              title={isSaved ? "Hapus dari koleksi tersimpan" : "Simpan hadis"}
+              aria-label={isSaved ? "Hapus dari koleksi tersimpan" : "Simpan hadis"}
             >
-              <Heart className={`w-4 h-4 ${isSaved ? 'text-[#C86D51] fill-[#C86D51]' : ''}`} />
+              <Bookmark className={`w-4 h-4 ${isSaved ? 'text-[#795A3F] fill-[#795A3F]' : ''}`} />
             </button>
             <button
               onClick={() => onOpenQuote(hadith)}
-              className="p-1.5 rounded-lg text-gray-400 hover:text-[#1F4E3D] hover:bg-[#F8F4EE] transition"
-              title="Buat Kartu Kutipan (IG/WA Story)"
+              className="p-1.5 rounded hover:bg-[#F7F7F5] text-[#6B7280] hover:text-[#292929] transition"
+              title="Ekspor Kartu Kutipan"
+              aria-label="Ekspor Kartu Kutipan"
             >
               <Share2 className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Title & Reference */}
+        {/* Title */}
         <h3 
           onClick={() => onOpenDetail(hadith)}
-          className="font-serif-heading text-lg font-bold text-[#1F4E3D] group-hover:text-[#C86D51] transition cursor-pointer leading-snug mb-1"
+          className="text-base font-semibold text-[#292929] hover:text-[#795A3F] cursor-pointer transition leading-snug mb-1.5"
         >
           {hadith.title}
         </h3>
-        <p className="text-xs text-gray-500 font-medium mb-3">
-          {hadith.kitab} • {hadith.noHadis} (Perawi: {hadith.rawi})
+        <p className="text-xs text-[#6B7280] mb-3.5">
+          Perawi: <span className="text-[#292929] font-medium">{hadith.rawi}</span>
         </p>
 
-        {/* Arabic Matn Snippet */}
-        <div className="bg-[#FAF8F5] rounded-xl p-3 border border-[#EFECE6] mb-3">
+        {/* Arabic Matn Box: Clean Scholarly Typography */}
+        <div className="bg-[#F7F7F5] rounded-md p-3.5 border border-[#E5E1DC] mb-3">
           <p 
             dir="rtl" 
-            className="font-arabic text-right text-lg sm:text-xl text-[#2C3338] leading-loose line-clamp-2"
+            className="font-arabic text-right text-lg text-[#1A1A1A] leading-loose line-clamp-2"
           >
             {hadith.matnArab}
           </p>
         </div>
 
         {/* Translation Snippet */}
-        <p className="text-xs text-gray-600 line-clamp-2 italic leading-relaxed mb-4">
+        <p className="text-xs text-[#4B5563] line-clamp-2 leading-relaxed mb-4">
           "{hadith.terjemahan}"
         </p>
 
-        {/* Mubadalah Key Takeaway Box */}
-        <div className="bg-[#F0F6F2] rounded-xl p-3 border-l-3 border-[#1F4E3D]">
-          <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#1F4E3D] mb-1">
-            <Scale className="w-3.5 h-3.5 text-[#1F4E3D]" />
-            Ruh Kesalingan (Mubadalah):
-          </div>
-          <p className="text-xs text-[#2A3B32] line-clamp-2 leading-relaxed">
+        {/* Mubadalah Scholarly Note */}
+        <div className="bg-white p-3 rounded-md border-l-2 border-[#C6A17B] border-y border-r border-[#E5E1DC]">
+          <span className="text-[11px] font-semibold text-[#795A3F] uppercase tracking-wider block mb-1">
+            Perspektif Kesalingan (Mubadalah):
+          </span>
+          <p className="text-xs text-[#374151] line-clamp-2 leading-relaxed">
             {hadith.pemaknaanMubadalah.ringkasan}
           </p>
         </div>
       </div>
 
-      {/* Footer Pill & Action */}
-      <div className="px-5 py-3.5 bg-[#FAF8F5] border-t border-[#EFECE6] flex items-center justify-between mt-2">
-        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
+      {/* Card Action & Footer */}
+      <div className="px-5 py-3 bg-[#FAF9F7] border-t border-[#E5E1DC] flex items-center justify-between">
+        <div className="flex items-center gap-1.5 flex-wrap">
           {hadith.pilarTerkait.slice(0, 2).map((pilar) => (
-            <span key={pilar} className="text-[10px] font-medium text-gray-600 bg-white border border-gray-200 px-2 py-0.5 rounded-md whitespace-nowrap">
+            <span key={pilar} className="text-[10px] text-[#6B7280] bg-white border border-[#E5E1DC] px-2 py-0.5 rounded">
               {pilar}
             </span>
           ))}
@@ -96,12 +103,12 @@ export const HadithCard: React.FC<HadithCardProps> = ({
 
         <button
           onClick={() => onOpenDetail(hadith)}
-          className="inline-flex items-center gap-1 text-xs font-bold text-[#1F4E3D] hover:text-[#C86D51] transition"
+          className="btn-primary px-3 py-1.5 text-xs flex items-center gap-1.5"
         >
-          <span>Komparasi</span>
-          <ArrowUpRight className="w-3.5 h-3.5" />
+          <span>Telaah Teks</span>
+          <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
-    </div>
+    </article>
   );
 };

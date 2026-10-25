@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Sparkles, RefreshCw, ArrowRight, Heart } from 'lucide-react';
+import { X, RotateCcw, ArrowRight, HelpCircle } from 'lucide-react';
 
 interface RelationQuizModalProps {
   onClose: () => void;
@@ -20,11 +20,11 @@ const QUESTIONS: Question[] = [
   {
     id: 1,
     pilar: "Mu'asyarah bi al-Ma'ruf (Kerja Domestik)",
-    text: "Ketika cucian piring menumpuk atau rumah berantakan setelah hari yang melelahkan:",
+    text: "Ketika pekerjaan rumah tangga menumpuk setelah seharian beraktivitas:",
     options: [
-      { label: "Kami saling membantu tanpa gengsi, siapa yang senggang langsung turun tangan.", score: 3 },
-      { label: "Biasa dibicarakan dulu, kadang salah satu berinisiatif.", score: 2 },
-      { label: "Pasti dianggap tugas salah satu pihak (biasanya istri) tanpa bantuan.", score: 1 }
+      { label: "Saling membantu tanpa rasa gengsi; siapa yang memiliki kelonggaran waktu langsung turun tangan.", score: 3 },
+      { label: "Biasa dibicarakan terlebih dahulu, meskipun inisiatif terkadang hanya dari salah satu pihak.", score: 2 },
+      { label: "Dianggap sebagai kewajiban mutlak istri semata tanpa keterlibatan pihak suami.", score: 1 }
     ]
   },
   {
@@ -32,39 +32,39 @@ const QUESTIONS: Question[] = [
     pilar: "Taradhin (Kerelaan Finansial)",
     text: "Dalam urusan pengelolaan keuangan dan nafkah keluarga:",
     options: [
-      { label: "Sangat transparan, saling terbuka penghasilan & saling menghargai kontribusi.", score: 3 },
-      { label: "Cukup tahu kebutuhan pokok, pengeluaran pribadi jarang dibahas.", score: 2 },
-      { label: "Kerap menjadi sumber perselisihan, tertutup, atau ada dominasi sepihak.", score: 1 }
+      { label: "Transparan dan terbuka mengenai penghasilan serta saling menghargai kontribusi masing-masing.", score: 3 },
+      { label: "Hanya membahas kebutuhan pokok; pengeluaran lain jarang didiskusikan secara terbuka.", score: 2 },
+      { label: "Tertutup, didominasi sepihak, atau nafkah ditahan sebagai instrumen kepatuhan.", score: 1 }
     ]
   },
   {
     id: 3,
     pilar: "Tasyawur (Musyawarah Pengambilan Keputusan)",
-    text: "Ketika menghadapi perbedaan pendapat atau rencana besar (pendidikan anak, mudik, karier):",
+    text: "Ketika menghadapi perbedaan pendapat atau keputusan krusial keluarga:",
     options: [
-      { label: "Selalu duduk bersama dan mencari jalan tengah yang melegakan kedua belah pihak.", score: 3 },
-      { label: "Kadang kompromi, tapi lebih sering salah satu mengalah agar tidak ribut.", score: 2 },
-      { label: "Keputusan didikte sepihak; keberatan pihak lain jarang didengarkan.", score: 1 }
+      { label: "Selalu berdialog dan mencari jalan tengah yang melegakan kedua belah pihak.", score: 3 },
+      { label: "Salah satu pihak lebih sering mengalah secara terpaksa demi menghindari perdebatan.", score: 2 },
+      { label: "Keputusan didikte secara sepihak tanpa mempertimbangkan masukan pasangan.", score: 1 }
     ]
   },
   {
     id: 4,
-    pilar: "Zawaj & Taradhin (Keintiman & Kehangatan Ranjang)",
-    text: "Dalam relasi keintiman dan afeksi suami-istri:",
+    pilar: "Zawaj & Taradhin (Keintiman & Kehangatan Relasi)",
+    text: "Dalam hal relasi keintiman dan afeksi suami istri:",
     options: [
-      { label: "Saling mendengarkan kenyamanan pasangan, tidak ada pemaksaan saat salah satu lelah/sakit.", score: 3 },
-      { label: "Cukup baik, meski kadang ragu mengomunikasikan preferensi atau kelelahan.", score: 2 },
-      { label: "Merasa tertekan, takut disalahkan atau dikutuk jika sedang tidak mampu melayani.", score: 1 }
+      { label: "Saling memperhatikan kenyamanan bersama; tidak ada paksaan saat salah satu sedang lelah atau sakit.", score: 3 },
+      { label: "Cukup baik, meski terkadang ragu mengomunikasikan batasan atau preferensi pribadi.", score: 2 },
+      { label: "Merasa tertekan atau diancam dengan dalih kewajiban agama ketika kondisi fisik tidak memungkinkan.", score: 1 }
     ]
   },
   {
     id: 5,
-    pilar: "Kaff al-Adza (Manajemen Emosi & Anti-KDRT)",
-    text: "Ketika pertengkaran hebat atau amarah memuncak:",
+    pilar: "Kaff al-Adza (Pengendalian Emosi & Resolusi Konflik)",
+    text: "Ketika terjadi perselisihan atau amarah memuncak:",
     options: [
-      { label: "Kami mengambil jeda (time-out), tidak ada kekerasan fisik, cacian, atau ancaman talak.", score: 3 },
-      { label: "Kadang terbawa nada tinggi atau mendiamkan (silent treatment) beberapa hari.", score: 2 },
-      { label: "Sering terjadi bentakan kasar, banting barang, atau dorongan fisik.", score: 1 }
+      { label: "Mengambil jeda (time-out); menolak kekerasan fisik, perkataan merendahkan, maupun ancaman talak.", score: 3 },
+      { label: "Terkadang terbawa nada tinggi atau melakukan silent treatment selama beberapa hari.", score: 2 },
+      { label: "Terjadi bentakan kasar, pelemparan barang, atau tindakan fisik agresif.", score: 1 }
     ]
   }
 ];
@@ -96,23 +96,23 @@ export const RelationQuizModal: React.FC<RelationQuizModalProps> = ({ onClose, o
   const getResultFeedback = () => {
     if (totalScore >= 13) {
       return {
-        level: 'Sangat Harmonis & Berkeadilan (Mubadalah Tinggi)',
-        color: 'text-emerald-700 bg-emerald-50 border-emerald-200',
-        desc: 'Alhamdulillah! Rumah tangga Anda telah mempraktikkan pilar kesalingan (Mubadalah) secara kuat. Pertahankan komunikasi terbuka dan terus jadikan keteladanan Nabi ﷺ sebagai penguat cinta.',
+        level: 'Relasi Selaras & Berkeadilan (Mubadalah Terwujud)',
+        color: 'border-l-4 border-emerald-600 bg-[#F7FAF8]',
+        desc: 'Relasi Anda telah mencerminkan pilar kesalingan (Mubadalah) secara nyata. Pertahankan komunikasi dialogis dan keteladanan akhlak Nabi ﷺ dalam dinamika rumah tangga.',
         recommendedTag: 'Apresiasi Pasangan'
       };
     } else if (totalScore >= 9) {
       return {
-        level: 'Relasi Cukup Baik (Perlu Penguatan Tasyawur & Empati)',
-        color: 'text-amber-700 bg-amber-50 border-amber-200',
-        desc: 'Fondasi kebaikan sudah ada, namun masih ada ruang yang perlu ditingkatkan, khususnya dalam pembagian peran harian atau keterbukaan emosional.',
+        level: 'Relasi Moderat (Perlu Penguatan Tasyawur & Empati)',
+        color: 'border-l-4 border-[#C6A17B] bg-[#FAF9F7]',
+        desc: 'Fondasi kebersamaan telah terbentuk, namun terdapat aspek yang perlu diperkuat, khususnya dalam pembagian beban peran harian atau transparansi komunikasi.',
         recommendedTag: 'Kerja Domestik'
       };
     } else {
       return {
-        level: 'Membutuhkan Pemulihan & Evaluasi Komunikasi',
-        color: 'text-rose-700 bg-rose-50 border-rose-200',
-        desc: 'Terdapat sinyal ketimpangan atau gesekan emosional yang butuh segera disikapi. Telusuri hadis-hadis pencegahan KDRT, hak nafkah, dan konsultasikan dengan konselor pernikahan.',
+        level: 'Perlu Evaluasi Komunikasi & Penataan Ulang Batasan',
+        color: 'border-l-4 border-rose-600 bg-rose-50/50',
+        desc: 'Terdapat indikasi ketimpangan atau gesekan emosional yang membutuhkan penyikapan segera. Pelajari prinsip kaff al-adza, pencegahan KDRT, dan bila perlu libatkan mediator/hakam yang bijaksana.',
         recommendedTag: 'Anti-KDRT'
       };
     }
@@ -121,26 +121,34 @@ export const RelationQuizModal: React.FC<RelationQuizModalProps> = ({ onClose, o
   const result = isFinished ? getResultFeedback() : null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/60 backdrop-blur-sm animate-fade-in overflow-y-auto">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/50 backdrop-blur-xs overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+    >
       <div 
-        className="bg-[#FAF8F5] w-full max-w-xl rounded-3xl border border-[#DDD6C7] shadow-2xl overflow-hidden my-auto p-6 sm:p-8"
+        className="bg-white w-full max-w-xl rounded-lg border border-[#E5E1DC] shadow-xl overflow-hidden my-auto p-6 sm:p-7"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-[#E7E2D6] mb-6">
+        <div className="flex items-center justify-between pb-3.5 border-b border-[#E5E1DC] mb-5">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-[#FBEFE3] text-[#C86D51] flex items-center justify-center">
-              <Sparkles className="w-4 h-4" />
+            <div className="w-8 h-8 rounded bg-[#F7F7F5] border border-[#E5E1DC] flex items-center justify-center text-[#795A3F]">
+              <HelpCircle className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-serif-heading text-lg font-bold text-[#1F4E3D]">
-                Kuis Refleksi Pasutri
+              <h3 className="text-base font-semibold text-[#292929]">
+                Evaluasi Mandiri 5 Pilar Sakinah
               </h3>
-              <p className="text-[11px] text-gray-500">Evaluasi Mandiri 5 Pilar Sakinah & Kesalingan</p>
+              <p className="text-xs text-[#6B7280]">Instrumen Refleksi Kesalingan Relasi Pasutri</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-1 rounded-lg text-gray-400 hover:text-gray-700">
-            <X className="w-5 h-5" />
+          <button 
+            onClick={onClose} 
+            className="p-1 rounded text-[#6B7280] hover:text-[#292929] hover:bg-[#F7F7F5]"
+            aria-label="Tutup Evaluasi"
+          >
+            <X className="w-4 h-4" />
           </button>
         </div>
 
@@ -148,35 +156,35 @@ export const RelationQuizModal: React.FC<RelationQuizModalProps> = ({ onClose, o
           <div>
             {/* Progress Bar */}
             <div className="mb-4">
-              <div className="flex items-center justify-between text-xs font-semibold text-gray-500 mb-1">
-                <span>Pertanyaan {currentIdx + 1} dari {QUESTIONS.length}</span>
+              <div className="flex items-center justify-between text-xs text-[#6B7280] mb-1.5 font-mono">
+                <span>Indikator {currentIdx + 1} / {QUESTIONS.length}</span>
                 <span>{Math.round(((currentIdx + 1) / QUESTIONS.length) * 100)}%</span>
               </div>
-              <div className="w-full bg-[#E5DFD3] h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-[#F0ECE6] h-1.5 rounded overflow-hidden">
                 <div 
-                  className="bg-[#1F4E3D] h-full transition-all duration-300"
+                  className="bg-[#C6A17B] h-full transition-all duration-300"
                   style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
                 />
               </div>
             </div>
 
             {/* Category */}
-            <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#E8EFEA] text-[#1F4E3D] inline-block mb-3">
-              {QUESTIONS[currentIdx].pilar}
+            <span className="text-[11px] font-semibold text-[#795A3F] bg-[#F7F7F5] border border-[#E5E1DC] px-2 py-0.5 rounded inline-block mb-2">
+              Pilar: {QUESTIONS[currentIdx].pilar}
             </span>
 
-            {/* Question Text */}
-            <h4 className="font-serif-heading text-base sm:text-lg font-bold text-[#1F4E3D] mb-5 leading-snug">
+            {/* Question */}
+            <h4 className="text-sm sm:text-base font-semibold text-[#292929] mb-4 leading-snug">
               {QUESTIONS[currentIdx].text}
             </h4>
 
             {/* Options */}
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               {QUESTIONS[currentIdx].options.map((opt, i) => (
                 <button
                   key={i}
                   onClick={() => handleSelectOption(opt.score)}
-                  className="w-full text-left p-4 rounded-2xl bg-white hover:bg-[#F2ECE0] border border-[#E3DCCF] hover:border-[#1F4E3D] text-xs sm:text-sm text-gray-800 transition font-medium shadow-xs"
+                  className="w-full text-left p-3.5 rounded border border-[#E5E1DC] hover:border-[#C6A17B] hover:bg-[#FAF9F7] text-xs sm:text-sm text-[#292929] transition leading-relaxed"
                 >
                   {opt.label}
                 </button>
@@ -184,41 +192,37 @@ export const RelationQuizModal: React.FC<RelationQuizModalProps> = ({ onClose, o
             </div>
           </div>
         ) : (
-          <div className="text-center py-2 space-y-5">
-            <div className="w-14 h-14 rounded-2xl bg-[#E8EFEA] text-[#1F4E3D] flex items-center justify-center mx-auto shadow-xs">
-              <Heart className="w-7 h-7 fill-[#1F4E3D]" />
-            </div>
-
-            <div>
-              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                Skor Anda: {totalScore} / 15
+          <div className="py-2 space-y-4">
+            <div className="p-4 rounded border border-[#E5E1DC] bg-[#FAF9F7]">
+              <span className="text-xs font-mono text-[#6B7280] block mb-1">
+                Hasil Evaluasi: {totalScore} / 15 Poin
               </span>
-              <h4 className="font-serif-heading text-xl font-bold text-[#1F4E3D] mt-1 mb-2">
+              <h4 className="text-base font-semibold text-[#292929] mb-2">
                 {result?.level}
               </h4>
-              <div className={`p-4 rounded-2xl border text-xs sm:text-sm leading-relaxed ${result?.color}`}>
+              <p className="text-xs text-[#4B5563] leading-relaxed">
                 {result?.desc}
-              </div>
+              </p>
             </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-center gap-2.5">
+            <div className="pt-2 flex flex-col sm:flex-row items-center gap-2">
               <button
                 onClick={() => {
                   onClose();
                   if (result?.recommendedTag) onExploreTopic(result.recommendedTag);
                 }}
-                className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-[#1F4E3D] text-white text-xs font-bold hover:bg-[#16382C] transition flex items-center justify-center gap-1.5 shadow-sm"
+                className="btn-primary w-full sm:flex-1 py-2.5 px-4 text-xs flex items-center justify-center gap-1.5"
               >
-                <span>Pelajari Hadis Terkait: #{result?.recommendedTag}</span>
+                <span>Telaah Hadis Terkait: #{result?.recommendedTag}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
 
               <button
                 onClick={resetQuiz}
-                className="w-full sm:w-auto py-3 px-4 rounded-xl bg-[#EAE4D7] text-gray-700 text-xs font-semibold hover:bg-[#DDD6C7] transition flex items-center justify-center gap-1.5"
+                className="btn-secondary w-full sm:w-auto py-2.5 px-4 text-xs flex items-center justify-center gap-1.5"
               >
-                <RefreshCw className="w-3.5 h-3.5" />
-                <span>Ulangi Kuis</span>
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Ulangi</span>
               </button>
             </div>
           </div>

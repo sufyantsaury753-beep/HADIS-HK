@@ -1,13 +1,12 @@
 import React from 'react';
-import { BookOpen, Heart, Sparkles, Scale } from 'lucide-react';
+import { BookOpen, Bookmark, HelpCircle, Layers } from 'lucide-react';
 
 interface NavbarProps {
-  activeStage: string;
-  onSelectStage: (stageId: string) => void;
   savedCount: number;
   onOpenSaved: () => void;
   onOpenQuiz: () => void;
   onScrollToPillars: () => void;
+  onScrollToCatalog: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -15,51 +14,69 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenSaved,
   onOpenQuiz,
   onScrollToPillars,
+  onScrollToCatalog,
 }) => {
   return (
-    <header className="sticky top-0 z-40 bg-[#F8F6F0]/90 backdrop-blur-md border-b border-[#E7E2D6] px-4 lg:px-8 py-3.5 transition-all">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Brand */}
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          <div className="w-10 h-10 rounded-xl bg-[#1F4E3D] text-[#F8F6F0] flex items-center justify-center shadow-sm">
-            <Scale className="w-5 h-5 text-[#E7C693]" />
+    <header className="sticky top-0 z-40 bg-white border-b border-[#E5E1DC] transition-colors">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        {/* Brand Identity */}
+        <div 
+          className="flex items-center gap-3 cursor-pointer select-none" 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <div className="w-9 h-9 rounded-md bg-[#292929] text-white flex items-center justify-center font-bold text-sm tracking-wider">
+            HK
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-serif-heading text-lg font-bold text-[#1F4E3D] tracking-tight">Hadis Keluarga</span>
-              <span className="text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#E7EFEA] text-[#1F4E3D] border border-[#CCDCD2]">Mubadalah</span>
+              <span className="font-semibold text-base text-[#292929] tracking-tight">
+                Hadis HK
+              </span>
+              <span className="text-[11px] font-medium text-[#795A3F] bg-[#F7F7F5] border border-[#E5E1DC] px-2 py-0.5 rounded">
+                Kajian Fiqh al-Usrah
+              </span>
             </div>
-            <p className="text-xs text-[#6B7280]">Fiqh al-Usrah Berbasis Kesalingan</p>
+            <p className="text-[11px] text-[#6B7280] hidden sm:block">
+              Platform Akademik Hukum Keluarga Islam Berbasis Kesalingan
+            </p>
           </div>
         </div>
 
-        {/* Action Buttons */}
+        {/* Navigation & Actions */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <button
-            onClick={onScrollToPillars}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#1F4E3D] hover:bg-[#EAE4D7] rounded-lg transition"
-          >
-            <BookOpen className="w-3.5 h-3.5 text-[#1F4E3D]" />
-            5 Pilar Sakinah
-          </button>
-
-          <button
-            onClick={onOpenQuiz}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-[#8B4513] bg-[#FBEFE3] hover:bg-[#F6E1CC] border border-[#ECD1B4] rounded-lg transition shadow-xs"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#C86D51]" />
-            Kuis Pasutri
-          </button>
+          <nav className="hidden md:flex items-center gap-1 mr-2 text-xs font-medium text-[#4B5563]">
+            <button
+              onClick={onScrollToCatalog}
+              className="px-3 py-1.5 rounded-md hover:text-[#292929] hover:bg-[#F7F7F5] transition flex items-center gap-1.5"
+            >
+              <Layers className="w-3.5 h-3.5 text-[#795A3F]" />
+              Katalog Hadis
+            </button>
+            <button
+              onClick={onScrollToPillars}
+              className="px-3 py-1.5 rounded-md hover:text-[#292929] hover:bg-[#F7F7F5] transition flex items-center gap-1.5"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-[#795A3F]" />
+              Lima Pilar
+            </button>
+            <button
+              onClick={onOpenQuiz}
+              className="px-3 py-1.5 rounded-md hover:text-[#292929] hover:bg-[#F7F7F5] transition flex items-center gap-1.5"
+            >
+              <HelpCircle className="w-3.5 h-3.5 text-[#795A3F]" />
+              Evaluasi Relasi
+            </button>
+          </nav>
 
           <button
             onClick={onOpenSaved}
-            className="relative inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#374151] hover:bg-[#EAE4D7] rounded-lg transition"
-            title="Hadis Tersimpan"
+            className="btn-secondary px-3 py-1.5 text-xs flex items-center gap-1.5"
+            title="Koleksi Hadis Tersimpan"
           >
-            <Heart className={`w-4 h-4 ${savedCount > 0 ? 'text-[#C86D51] fill-[#C86D51]' : 'text-gray-500'}`} />
-            <span className="hidden md:inline">Tersimpan</span>
+            <Bookmark className={`w-3.5 h-3.5 ${savedCount > 0 ? 'text-[#795A3F] fill-[#795A3F]' : 'text-gray-500'}`} />
+            <span className="hidden sm:inline">Tersimpan</span>
             {savedCount > 0 && (
-              <span className="w-5 h-5 rounded-full bg-[#C86D51] text-white text-[11px] font-bold flex items-center justify-center">
+              <span className="ml-0.5 px-1.5 py-0.2 rounded bg-[#C6A17B] text-[#2B2118] text-[10px] font-bold">
                 {savedCount}
               </span>
             )}

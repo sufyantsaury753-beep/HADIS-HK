@@ -1,6 +1,6 @@
 import React from 'react';
 import type { HadithItem } from '../data/hadiths';
-import { X, Heart, ArrowRight, Trash2 } from 'lucide-react';
+import { X, Bookmark, ArrowRight, Trash2 } from 'lucide-react';
 
 interface SavedHadithModalProps {
   savedHadiths: HadithItem[];
@@ -16,35 +16,45 @@ export const SavedHadithModal: React.FC<SavedHadithModalProps> = ({
   onRemoveSaved,
 }) => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/60 backdrop-blur-sm animate-fade-in overflow-y-auto">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/50 backdrop-blur-xs overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+    >
       <div 
-        className="bg-[#FAF8F5] w-full max-w-2xl rounded-3xl border border-[#DDD6C7] shadow-2xl overflow-hidden my-auto max-h-[90vh] flex flex-col"
+        className="bg-white w-full max-w-2xl rounded-lg border border-[#E5E1DC] shadow-xl overflow-hidden my-auto max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="px-6 py-4 bg-white border-b border-[#E7E2D6] flex items-center justify-between">
+        <div className="px-5 py-3.5 bg-[#F7F7F5] border-b border-[#E5E1DC] flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Heart className="w-5 h-5 text-[#C86D51] fill-[#C86D51]" />
-            <h3 className="font-serif-heading text-lg font-bold text-[#1F4E3D]">
-              Hadis Pilihan Tersimpan ({savedHadiths.length})
+            <Bookmark className="w-4 h-4 text-[#795A3F] fill-[#795A3F]" />
+            <h3 className="text-base font-semibold text-[#292929]">
+              Koleksi Hadis Tersimpan ({savedHadiths.length})
             </h3>
           </div>
-          <button onClick={onClose} className="p-1 rounded-lg text-gray-400 hover:text-gray-700">
-            <X className="w-5 h-5" />
+          <button 
+            onClick={onClose} 
+            className="p-1 rounded text-[#6B7280] hover:text-[#292929]"
+            aria-label="Tutup Koleksi"
+          >
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="overflow-y-auto p-6 space-y-3 flex-1">
+        <div className="overflow-y-auto p-5 space-y-2.5 flex-1">
           {savedHadiths.length === 0 ? (
-            <div className="text-center py-12 text-gray-400">
-              <Heart className="w-10 h-10 mx-auto mb-2 text-gray-300" />
-              <p className="text-sm font-medium">Belum ada hadis yang disimpan.</p>
-              <p className="text-xs text-gray-400 mt-1">Klik ikon hati pada hadis mana pun untuk menyimpannya di sini.</p>
+            <div className="text-center py-12 text-[#6B7280]">
+              <Bookmark className="w-8 h-8 mx-auto mb-2 text-[#D1CCC4]" />
+              <p className="text-sm font-medium text-[#292929]">Belum ada hadis yang disimpan</p>
+              <p className="text-xs text-[#6B7280] mt-1 max-w-xs mx-auto">
+                Tandai hadis yang relevan dengan menekan ikon simpan untuk menyusun catatan referensi Anda.
+              </p>
             </div>
           ) : (
             savedHadiths.map((hadith) => (
               <div 
                 key={hadith.id} 
-                className="bg-white p-4 rounded-2xl border border-[#E7E1D4] flex items-center justify-between gap-3 hover:border-[#1F4E3D] transition shadow-xs group"
+                className="bg-white p-3.5 rounded border border-[#E5E1DC] flex items-center justify-between gap-3 hover:border-[#C6A17B] transition"
               >
                 <div 
                   className="flex-1 cursor-pointer"
@@ -53,13 +63,13 @@ export const SavedHadithModal: React.FC<SavedHadithModalProps> = ({
                     onOpenDetail(hadith);
                   }}
                 >
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#E8EFEA] text-[#1F4E3D] mb-1 inline-block">
+                  <div className="text-[11px] font-mono text-[#795A3F] mb-0.5">
                     {hadith.kitab} • {hadith.noHadis}
-                  </span>
-                  <h4 className="font-serif-heading text-sm font-bold text-[#1F4E3D] group-hover:text-[#C86D51] transition">
+                  </div>
+                  <h4 className="text-sm font-semibold text-[#292929] hover:text-[#795A3F] transition">
                     {hadith.title}
                   </h4>
-                  <p className="text-xs text-gray-500 line-clamp-1 italic mt-0.5">
+                  <p className="text-xs text-[#6B7280] line-clamp-1 italic mt-0.5">
                     "{hadith.quoteSnippet}"
                   </p>
                 </div>
@@ -70,16 +80,17 @@ export const SavedHadithModal: React.FC<SavedHadithModalProps> = ({
                       onClose();
                       onOpenDetail(hadith);
                     }}
-                    className="p-2 text-xs font-semibold text-[#1F4E3D] bg-[#F3EFE6] hover:bg-[#EAE4D7] rounded-xl transition flex items-center gap-1"
-                    title="Buka Detail"
+                    className="btn-primary px-3 py-1.5 text-xs flex items-center gap-1"
+                    title="Buka Teks Hadis"
                   >
                     <span>Baca</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3 h-3" />
                   </button>
                   <button
                     onClick={() => onRemoveSaved(hadith.id)}
-                    className="p-2 text-gray-400 hover:text-rose-600 rounded-xl hover:bg-rose-50 transition"
-                    title="Hapus"
+                    className="p-1.5 text-[#6B7280] hover:text-red-700 hover:bg-red-50 rounded transition border border-transparent hover:border-red-200"
+                    title="Hapus dari koleksi"
+                    aria-label="Hapus dari koleksi"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -89,10 +100,10 @@ export const SavedHadithModal: React.FC<SavedHadithModalProps> = ({
           )}
         </div>
 
-        <div className="px-6 py-3.5 bg-[#FAF8F5] border-t border-[#E7E2D6] text-right">
+        <div className="px-5 py-3 bg-[#F7F7F5] border-t border-[#E5E1DC] text-right">
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-[#EAE4D7] text-gray-700 text-xs font-bold hover:bg-[#DDD6C7] transition"
+            className="btn-secondary px-4 py-1.5 text-xs"
           >
             Tutup
           </button>

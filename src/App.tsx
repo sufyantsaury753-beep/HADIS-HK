@@ -9,7 +9,7 @@ import { QuoteCardModal } from './components/QuoteCardModal';
 import { FivePillarsSection } from './components/FivePillarsSection';
 import { RelationQuizModal } from './components/RelationQuizModal';
 import { SavedHadithModal } from './components/SavedHadithModal';
-import { Scale, Info, ArrowUp } from 'lucide-react';
+import { Info, ArrowUp } from 'lucide-react';
 
 export function App() {
   const [selectedStageId, setSelectedStageId] = useState<string>('all');
@@ -22,7 +22,7 @@ export function App() {
   const [isOpenQuiz, setIsOpenQuiz] = useState<boolean>(false);
   const [isOpenSaved, setIsOpenSaved] = useState<boolean>(false);
 
-  // Saved Hadiths IDs (stored in localStorage if desired)
+  // Saved Hadiths IDs (stored in localStorage)
   const [savedIds, setSavedIds] = useState<string[]>(() => {
     try {
       const stored = localStorage.getItem('hadis_keluarga_saved');
@@ -84,21 +84,27 @@ export function App() {
     }
   };
 
+  const scrollToCatalog = () => {
+    const el = document.getElementById('katalog-hadis');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const currentStageInfo = STAGES.find(s => s.id === selectedStageId);
 
   return (
-    <div className="min-h-screen bg-[#F8F6F0] flex flex-col font-sans text-[#1E232A]">
-      {/* Top Navbar */}
+    <div className="min-h-screen bg-white flex flex-col font-sans text-[#292929]">
+      {/* Top Academic Navbar */}
       <Navbar
-        activeStage={selectedStageId}
-        onSelectStage={setSelectedStageId}
         savedCount={savedIds.length}
         onOpenSaved={() => setIsOpenSaved(true)}
         onOpenQuiz={() => setIsOpenQuiz(true)}
         onScrollToPillars={scrollToPillars}
+        onScrollToCatalog={scrollToCatalog}
       />
 
-      {/* Hero Section with Interactive Life-Cycle Timeline */}
+      {/* Hero Section: Academic Overview, Search & Segmented Filter */}
       <HeroSection
         selectedStageId={selectedStageId}
         onSelectStage={setSelectedStageId}
@@ -106,25 +112,26 @@ export function App() {
         onSearchChange={setSearchQuery}
         selectedTag={selectedTag}
         onSelectTag={setSelectedTag}
+        totalResults={filteredHadiths.length}
       />
 
-      {/* Main Content Area: Hadith Cards Catalog */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-8">
-        {/* Stage / Filter Status Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-[#E7E2D6]">
+      {/* Main Catalog Section */}
+      <main id="katalog-hadis" className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        {/* Catalog Subheader */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 mb-6 border-b border-[#E5E1DC]">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="font-serif-heading text-xl sm:text-2xl font-bold text-[#1F4E3D]">
-                {currentStageInfo ? currentStageInfo.title : 'Seluruh Hadis Siklus Berkeluarga'}
+              <h2 className="text-lg sm:text-xl font-semibold text-[#292929]">
+                {currentStageInfo ? currentStageInfo.title : 'Katalog Hadis Hukum Keluarga'}
               </h2>
-              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#EAE4D7] text-[#4B5563]">
-                {filteredHadiths.length} Hadis
+              <span className="text-xs font-mono font-medium text-[#795A3F] bg-[#F7F7F5] border border-[#E5E1DC] px-2 py-0.5 rounded">
+                {filteredHadiths.length} Riwayat
               </span>
             </div>
-            <p className="text-xs text-gray-500 mt-0.5">
+            <p className="text-xs text-[#6B7280] mt-0.5">
               {currentStageInfo 
                 ? currentStageInfo.tagline 
-                : 'Mencakup Pra-Nikah, Khidmah Domestik, Finansial, Keintiman, Resolusi Krisis & Pengasuhan Anak.'}
+                : 'Mencakup teks ahkam, konteks pra-nikah, kemitraan domestik, nafkah berkeadilan, hingga perlindungan keluarga.'}
             </p>
           </div>
 
@@ -135,22 +142,22 @@ export function App() {
                 setSelectedTag(null);
                 setSearchQuery('');
               }}
-              className="text-xs font-semibold text-[#C86D51] hover:underline"
+              className="text-xs font-medium text-[#795A3F] hover:underline"
             >
-              Hapus Semua Filter
+              Tampilkan Semua Hadis
             </button>
           )}
         </div>
 
         {/* Hadith Cards Grid */}
         {filteredHadiths.length === 0 ? (
-          <div className="text-center py-16 bg-white rounded-3xl border border-[#E7E1D4] p-8">
-            <Info className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-            <h3 className="font-serif-heading text-lg font-bold text-[#1F4E3D] mb-1">
-              Tidak Ada Hadis yang Cocok
+          <div className="text-center py-16 bg-[#FAF9F7] rounded-md border border-[#E5E1DC] p-8 max-w-xl mx-auto my-6">
+            <Info className="w-8 h-8 text-[#9CA3AF] mx-auto mb-2" />
+            <h3 className="text-sm font-semibold text-[#292929] mb-1">
+              Tidak Ada Hadis yang Ditemukan
             </h3>
-            <p className="text-xs text-gray-500 max-w-md mx-auto mb-4">
-              Coba gunakan kata kunci pencarian yang lain atau pilih tahapan siklus keluarga lainnya.
+            <p className="text-xs text-[#6B7280] mb-4">
+              Silakan periksa kata kunci pencarian atau bersihkan filter topik untuk menelusuri materi lain.
             </p>
             <button
               onClick={() => {
@@ -158,13 +165,13 @@ export function App() {
                 setSelectedTag(null);
                 setSearchQuery('');
               }}
-              className="px-4 py-2 rounded-xl bg-[#1F4E3D] text-white text-xs font-bold hover:bg-[#16382C] transition"
+              className="btn-primary px-4 py-2 text-xs"
             >
-              Tampilkan Semua Hadis
+              Reset Penelusuran
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredHadiths.map((hadith) => (
               <HadithCard
                 key={hadith.id}
@@ -182,40 +189,51 @@ export function App() {
       {/* 5 Pillars of Sakinah Section */}
       <FivePillarsSection />
 
-      {/* Footer */}
-      <footer className="bg-[#1F4E3D] text-[#F8F6F0] py-10 px-4 lg:px-8 border-t border-[#16382C] mt-12">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+      {/* Academic Footer */}
+      <footer className="bg-[#F7F7F5] border-t border-[#E5E1DC] py-10 px-4 sm:px-6 lg:px-8 mt-12 text-[#4B5563]">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-1">
-            <div className="flex items-center justify-center md:justify-start gap-2">
-              <Scale className="w-5 h-5 text-[#E7C693]" />
-              <span className="font-serif-heading text-lg font-bold text-[#F8F6F0]">
-                Hadis Hukum Keluarga Islam
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-sm text-[#292929]">
+                Hadis Hukum Keluarga Islam (Hadis HK)
+              </span>
+              <span className="text-[10px] font-mono text-[#795A3F] bg-white border border-[#E5E1DC] px-1.5 py-0.5 rounded">
+                v2.0 Academic
               </span>
             </div>
-            <p className="text-xs text-[#CCDCD2] font-light max-w-lg">
-              Kajian berbasis hermeneutika Mubadalah (K.H. Faqihuddin Abdul Kodir), Fiqh al-Usrah, 
-              serta selaras dengan Konsep Keluarga Maslahah NU & Modul Keluarga Sakinah Kementerian Agama RI.
+            <p className="text-xs text-[#6B7280] max-w-xl">
+              Platform studi digital hadis ahkam hukum keluarga Islam. Mengintegrasikan kerangka 
+              hermeneutika Mubadalah (*Qira'ah Mubadalah*), Fiqh al-Usrah, serta selaras dengan 
+              Kompilasi Hukum Islam (KHI) dan Konsep Keluarga Maslahah.
             </p>
           </div>
 
-          <div className="flex items-center gap-4 text-xs text-[#CCDCD2]">
-            <button onClick={scrollToPillars} className="hover:text-white transition">
+          <div className="flex items-center gap-4 text-xs">
+            <button onClick={scrollToCatalog} className="hover:text-[#292929] transition">
+              Katalog
+            </button>
+            <span>•</span>
+            <button onClick={scrollToPillars} className="hover:text-[#292929] transition">
               5 Pilar Sakinah
             </button>
             <span>•</span>
-            <button onClick={() => setIsOpenQuiz(true)} className="hover:text-white transition">
-              Kuis Pasutri
+            <button onClick={() => setIsOpenQuiz(true)} className="hover:text-[#292929] transition">
+              Kuis Evaluasi
             </button>
             <span>•</span>
-            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-white transition flex items-center gap-1">
+            <button 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+              className="hover:text-[#292929] transition flex items-center gap-1 font-medium"
+            >
               <span>Ke Atas</span>
               <ArrowUp className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto border-t border-[#2D6652] mt-6 pt-6 text-center text-[11px] text-[#A6C4B4]">
-          Proyek Edukasi Digital Hadis Hukum Keluarga Islam — Merawat Cinta, Martabat & Kesalingan dalam Rumah Tangga.
+        <div className="max-w-7xl mx-auto border-t border-[#E5E1DC] mt-6 pt-4 text-xs text-[#9CA3AF] flex flex-col sm:flex-row items-center justify-between gap-2">
+          <span>Repositori Pembelajaran & Riset Hadis Hukum Keluarga Islam.</span>
+          <span className="font-mono text-[11px]">sufyantsaury753-beep.github.io/HADIS-HK/</span>
         </div>
       </footer>
 
@@ -231,7 +249,7 @@ export function App() {
         onToggleSave={toggleSaveHadith}
       />
 
-      {/* Quote Card Generator Modal (Story 9:16 / Post 1:1) */}
+      {/* Quote Card Generator Modal */}
       <QuoteCardModal
         hadith={activeQuoteHadith}
         onClose={() => setActiveQuoteHadith(null)}
